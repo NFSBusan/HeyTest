@@ -59,7 +59,7 @@ def test_future_poisoning_changes_nothing_before_cutoff(world, basis, score, thr
     pd.testing.assert_series_equal(ra.equity, rb.equity)
     sa, sb = a.signals(cfg), b.signals(cfg)
     sa, sb = sa[sa.exec_ts < T].reset_index(drop=True), sb[sb.exec_ts < T].reset_index(drop=True)
-    cols = ["exec_ts", "market_id", "wallet", "our_dir", "q", "edge_hat", "n_calib", "wscore"]
+    cols = ["exec_ts", "market_id", "wallet", "our_dir", "q", "edge_hat", "n_calib", "wscore", "settle_ts"]
     pd.testing.assert_frame_equal(sa[cols], sb[cols])
 
 
@@ -81,5 +81,23 @@ def test_execution_never_at_their_price(world):
     ctx = Context(markets, trades)
     s = ctx.signals(cfg)
     assert (s["exec_ts"] - s["ts"] == cfg.latency_s).all()
-    # our cost is mid + exec_cost, so q - side_mid == exec_cost
-    assert np.allclose(s["q"] - s["side_mid"], cfg.exec_cost)
+    # our cost is mid + exec_cost rounded UP to the tick: never better than that
+    assert (s["q"] - s["side_mid"] >= cfg.exec_cost - 1e-9).all()
+    assert (s["q"] - s["side_mid"] < cfg.exec_cost + cfg.tick + 1e-9).all()
+
+
+@pytest.mark.parametrize("extra", [dict(exit_h=6.0), dict(first_only=True, flow_h=24.0, min_flow=50.0), dict(calib_linear=True)])
+def test_future_poisoning_with_exits_and_flow(world, extra):
+    markets, trades = world
+    T, start = 140 * DAY, 60 * DAY
+    # Unrealistic negative exec_cost makes the estimated edge positive so bets happen and the
+    # test can't pass vacuously. It only checks information flow, not profitability.
+    cfg = StratConfig(basis="mo1d", score="tstat", threshold=-1.0, min_res=10, min_mkts=2, calib_min=20,
+                      calib_n0=5, exec_cost=-0.02, exit_cost=-0.02, **extra)
+    a = Context(markets, trades)
+    b = Context(*_poison(markets, trades, T))
+    ra = backtest(cfg, a.signals(cfg), a.book, start, T)
+    rb = backtest(cfg, b.signals(cfg), b.book, start, T)
+    assert ra.metrics["n_bets"] > 0
+    pd.testing.assert_frame_equal(ra.positions, rb.positions)
+    pd.testing.assert_series_equal(ra.equity, rb.equity)

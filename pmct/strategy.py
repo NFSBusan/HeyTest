@@ -45,7 +45,17 @@ class StratConfig:
     calib_n0: float = 300.0       # shrinkage pseudo-count toward zero edge
     calib_min: int = 200          # min resolved prior signals before betting
     calib_buckets: bool = True
+    calib_linear: bool = False    # edge_hat = a + b * badness, walk-forward ridge (overrides buckets)
     min_edge: float = 0.005       # need p - q_fill above this
+    first_only: bool = False      # only the first flagged trade per (wallet, market)
+    flow_h: float = 0.0           # if > 0: require net flagged ("bad") money in the market over the
+    min_flow: float = 0.0         #   last flow_h hours, in their direction, to be >= min_flow USD
+    exit_h: float = 0.0           # if > 0: cash out after exit_h hours by selling into the bid (else hold to resolution)
+    # --- Polymarket execution rules (see RESEARCH_LOG "Realistic trading rules") ---
+    tick: float = 0.01            # price grid; buys round up, sells round down
+    exit_cost: float = 0.015      # below mid we receive when cashing out (bid side, thinner books)
+    min_shares: float = 5.0       # CLOB minimum order size
+    settle_delay_s: int = 7200    # UMA liveness window: cash usable this long after resolution
 
     def key(self) -> str:
         return ",".join(f"{k}={v}" for k, v in asdict(self).items())
@@ -88,15 +98,55 @@ def make_signals(cfg: StratConfig, markets: pd.DataFrame, trades: pd.DataFrame,
     s["resolved_ts"] = mk.loc[s["market_id"], "resolved_ts"].to_numpy()
     s["outcome"] = mk.loc[s["market_id"], "outcome"].to_numpy()
     s = s[s["exec_ts"] < s["end_ts"]]
+    if cfg.first_only:
+        s = s.drop_duplicates(["wallet", "market_id"], keep="first")
+    if cfg.flow_h > 0:
+        s["bad_flow"] = _rolling_flow(s, cfg.flow_h * 3600)
+        s = s[s["dir"] * s["bad_flow"] >= cfg.min_flow]
     s["our_dir"] = -s["dir"]
     mid = book.at(s["market_id"].to_numpy(), s["exec_ts"].to_numpy())
     s["side_mid"] = np.where(s["our_dir"] == 1, mid, 1 - mid)
-    s["q"] = s["side_mid"] + cfg.exec_cost
+    s["q"] = _round_up(s["side_mid"] + cfg.exec_cost, cfg.tick)
     s = s[(s["q"] >= cfg.px_lo) & (s["q"] <= cfg.px_hi)].copy()
-    s["win"] = np.where(s["our_dir"] == 1, s["outcome"], 1 - s["outcome"])   # NaN if unresolved
+    win = np.where(s["our_dir"] == 1, s["outcome"], 1 - s["outcome"])   # NaN if unresolved
+    # settlement: hold to resolution, or exit early at mid - exec_cost
+    s["settle_ts"] = s["resolved_ts"] + cfg.settle_delay_s   # redemption at $1/$0 is fee-free
+    s["settle_px"] = win
+    if cfg.exit_h > 0:
+        xt = s["exec_ts"] + int(cfg.exit_h * 3600)
+        early = (xt < s["end_ts"]).to_numpy()
+        xm = book.at(s["market_id"].to_numpy()[early], xt.to_numpy()[early])
+        xs = np.where(s["our_dir"].to_numpy()[early] == 1, xm, 1 - xm)
+        bid = np.clip(_round_down(xs - cfg.exit_cost, cfg.tick), 0, 1)
+        # taker fee on the sale too: early cash-outs pay spread + fee twice, holding pays once
+        s.loc[early, "settle_ts"] = xt[early]
+        s.loc[early, "settle_px"] = bid - cfg.fee_rate * np.minimum(bid, 1 - bid)
+    # Kelly should see edge net of the entry fee as well
+    s["fee_ps"] = cfg.fee_rate * np.minimum(s["q"], 1 - s["q"])
     s["bucket"] = np.clip(np.searchsorted(EDGES, s["q"].to_numpy(), side="right") - 1, 0, len(EDGES) - 2)
     s = s.sort_values(["exec_ts", "market_id"], kind="mergesort").reset_index(drop=True)
     return add_edge_estimates(s, cfg)
+
+
+def _round_up(x, tick):
+    return np.ceil(np.round(np.asarray(x, float) / tick, 6)) * tick
+
+
+def _round_down(x, tick):
+    return np.floor(np.round(np.asarray(x, float) / tick, 6)) * tick
+
+
+def _rolling_flow(s: pd.DataFrame, window_s: float) -> np.ndarray:
+    """Net signed USD of flagged trades in the same market over (ts - window, ts], incl. this one."""
+    o = s.sort_values(["market_id", "ts"], kind="mergesort")
+    mk = o["market_id"].to_numpy(np.int64)
+    ts = o["ts"].to_numpy(np.int64)
+    key = mk * (1 << 34) + ts
+    cum = np.cumsum((o["dir"] * o["usd"]).to_numpy())
+    lo = np.searchsorted(key, mk * (1 << 34) + np.maximum(ts - int(window_s), 0), side="right")
+    hi = np.searchsorted(key, key, side="right") - 1
+    flow = cum[hi] - np.where(lo > 0, cum[np.maximum(lo - 1, 0)], 0.0)
+    return pd.Series(flow, index=o.index).reindex(s.index).to_numpy()
 
 
 def _asof_cum(s: pd.DataFrame, done: pd.DataFrame, by: str | None) -> tuple[np.ndarray, np.ndarray]:
@@ -120,9 +170,9 @@ def _asof_cum(s: pd.DataFrame, done: pd.DataFrame, by: str | None) -> tuple[np.n
 def add_edge_estimates(s: pd.DataFrame, cfg: StratConfig) -> pd.DataFrame:
     """edge_hat for each signal from earlier signals of the same config that resolved before it.
     Hierarchical shrinkage: bucket -> global -> 0."""
-    done = s.dropna(subset=["win"]).copy()
-    done["r"] = done["win"] - done["q"]
-    done["avail_ts"] = done["resolved_ts"]
+    done = s.dropna(subset=["settle_px"]).copy()
+    done["r"] = done["settle_px"] - done["q"] - done["fee_ps"]
+    done["avail_ts"] = done["settle_ts"]
     n_g, r_g = _asof_cum(s, done, None) if len(done) else (np.zeros(len(s)), np.zeros(len(s)))
     g_edge = r_g / (n_g + cfg.calib_n0)
     if cfg.calib_buckets and len(done):
@@ -131,9 +181,35 @@ def add_edge_estimates(s: pd.DataFrame, cfg: StratConfig) -> pd.DataFrame:
         edge = (r_b + k * g_edge) / (n_b + k)
     else:
         edge = g_edge
+    if cfg.calib_linear and len(done):
+        edge = _linear_edge(s, done, cfg)
     s["n_calib"] = n_g
     s["edge_hat"] = edge
     return s
+
+
+def _badness(wscore: np.ndarray, threshold: float) -> np.ndarray:
+    """How far past the threshold the wallet is, in units of |threshold|, capped at 3."""
+    return np.clip((threshold - wscore) / max(abs(threshold), 1e-9), 0, 3)
+
+
+def _linear_edge(s: pd.DataFrame, done: pd.DataFrame, cfg: StratConfig) -> np.ndarray:
+    """Walk-forward ridge fit of realized edge r on badness x, using only signals settled
+    strictly before each signal's exec time. Prior pulls a and b to zero with weight calib_n0."""
+    d = done.sort_values("avail_ts", kind="mergesort")
+    x = _badness(d["wscore"].to_numpy(), cfg.threshold)
+    r = d["r"].to_numpy()
+    cum = pd.DataFrame({"avail_ts": d["avail_ts"].to_numpy(), "n": np.arange(1, len(d) + 1),
+                        "sx": np.cumsum(x), "sxx": np.cumsum(x * x), "sr": np.cumsum(r), "sxr": np.cumsum(x * r)})
+    q = pd.DataFrame({"exec_ts": s["exec_ts"].to_numpy(), "_o": np.arange(len(s))})
+    m = pd.merge_asof(q, cum, left_on="exec_ts", right_on="avail_ts", allow_exact_matches=False).sort_values("_o")
+    n, sx, sxx, sr, sxr = (m[c].fillna(0).to_numpy() for c in ["n", "sx", "sxx", "sr", "sxr"])
+    lam = cfg.calib_n0
+    a11, a12, a22 = n + lam, sx, sxx + lam
+    det = a11 * a22 - a12 * a12
+    a = (a22 * sr - a12 * sxr) / det
+    b = (a11 * sxr - a12 * sr) / det
+    return a + b * _badness(s["wscore"].to_numpy(), cfg.threshold)
 
 
 # ---------------------------------------------------------------- backtest
@@ -156,14 +232,14 @@ def backtest(cfg: StratConfig, sig: pd.DataFrame, book: MidBook, start_ts: int, 
     mkt_exp: dict[int, float] = {}
     rec = []
     cols = [s[c].to_numpy() for c in ["exec_ts", "market_id", "our_dir", "q", "edge_hat", "n_calib", "usd",
-                                       "resolved_ts", "win"]]
+                                       "settle_ts", "settle_px"]]
     for ets, mid_, od, q, eh, nc, their, rts, win in zip(*cols):
         while heap and heap[0][0] < ets:
             _, i = heapq.heappop(heap)
             r = rec[i]
             if r["settled"]:
                 continue
-            payoff = r["shares"] * r["win"]
+            payoff = r["shares"] * r["settle_px"]
             cash += payoff
             open_cost -= r["stake"]
             mkt_exp[r["market_id"]] -= r["stake"]
@@ -180,7 +256,9 @@ def backtest(cfg: StratConfig, sig: pd.DataFrame, book: MidBook, start_ts: int, 
                     cfg.max_mkt_frac * cap - mkt_exp.get(mid_, 0.0), cash * 0.999)
         if stake < 1.0:
             continue
-        qf = q + cfg.impact * stake / (stake + their)
+        qf = float(_round_up(q + cfg.impact * stake / (stake + their), cfg.tick))
+        if stake / qf < cfg.min_shares:
+            continue
         if qf >= 0.999 or p - qf <= cfg.min_edge:
             continue
         shares = stake / qf
@@ -192,7 +270,7 @@ def backtest(cfg: StratConfig, sig: pd.DataFrame, book: MidBook, start_ts: int, 
         mkt_exp[mid_] = mkt_exp.get(mid_, 0.0) + stake
         i = len(rec)
         rec.append(dict(exec_ts=ets, market_id=mid_, our_dir=od, q=qf, p=p, stake=stake, fee=fee,
-                        shares=shares, resolved_ts=rts, win=win, settled=False, payoff=np.nan))
+                        shares=shares, settle_ts=rts, settle_px=win, settled=False, payoff=np.nan))
         if rts < end_ts and not np.isnan(win):
             heapq.heappush(heap, (rts, i))
     # settle what resolves before end
@@ -200,16 +278,16 @@ def backtest(cfg: StratConfig, sig: pd.DataFrame, book: MidBook, start_ts: int, 
         _, i = heapq.heappop(heap)
         r = rec[i]
         r["settled"] = True
-        r["payoff"] = r["shares"] * r["win"]
+        r["payoff"] = r["shares"] * r["settle_px"]
     pos = pd.DataFrame(rec, columns=["exec_ts", "market_id", "our_dir", "q", "p", "stake", "fee", "shares",
-                                     "resolved_ts", "win", "settled", "payoff"])
+                                     "settle_ts", "settle_px", "settled", "payoff"])
     if len(pos):
         op = ~pos["settled"]
-        pos.loc[op, "win"] = np.nan   # outcome not knowable at end_ts; don't carry it in the output
+        pos.loc[op, "settle_px"] = np.nan   # outcome not knowable at end_ts; don't carry it in the output
         if op.any():
             mid = book.at(pos.loc[op, "market_id"].to_numpy(), np.full(op.sum(), end_ts), inclusive=False)
             side = np.where(pos.loc[op, "our_dir"] == 1, mid, 1 - mid)
-            pos.loc[op, "payoff"] = pos.loc[op, "shares"] * np.clip(side - cfg.exec_cost, 0, 1)
+            pos.loc[op, "payoff"] = pos.loc[op, "shares"] * np.clip(side - cfg.exit_cost, 0, 1)
         pos["pnl"] = pos["payoff"] - pos["stake"] - pos["fee"]
     else:
         pos["pnl"] = []
@@ -225,7 +303,7 @@ def equity_curve(pos: pd.DataFrame, book: MidBook, start_ts: int, end_ts: int, c
     if len(pos) == 0:
         return pd.Series(capital, index=days)
     e = pos["exec_ts"].to_numpy()
-    r = np.where(pos["settled"].to_numpy(), pos["resolved_ts"].to_numpy(), np.iinfo(np.int64).max)
+    r = np.where(pos["settled"].to_numpy(), pos["settle_ts"].to_numpy(), np.iinfo(np.int64).max)
     pnl_final = pos["pnl"].to_numpy()
     cost = (pos["stake"] + pos["fee"]).to_numpy()
     out = np.empty(len(days))
@@ -272,10 +350,10 @@ def metrics(pos: pd.DataFrame, eq: pd.Series, capital: float) -> dict:
 def signal_quality(sig: pd.DataFrame, start_ts: int, end_ts: int) -> dict:
     """Sizing-free check: realized edge per signal (net of exec_cost, before impact),
     with a t-stat clustered by market. Only signals resolved before end_ts count."""
-    s = sig[(sig["exec_ts"] >= start_ts) & (sig["exec_ts"] < end_ts) & (sig["resolved_ts"] < end_ts)].dropna(subset=["win"])
+    s = sig[(sig["exec_ts"] >= start_ts) & (sig["exec_ts"] < end_ts) & (sig["settle_ts"] < end_ts)].dropna(subset=["settle_px"])
     if len(s) < 10:
         return dict(n_sig=len(s), n_mkt=0, edge=np.nan, t=np.nan)
-    r = s["win"] - s["q"]
+    r = s["settle_px"] - s["q"] - s["fee_ps"]
     by_m = r.groupby(s["market_id"]).mean()
     t = by_m.mean() / (by_m.std(ddof=1) / np.sqrt(len(by_m))) if len(by_m) > 2 else np.nan
     return dict(n_sig=int(len(s)), n_mkt=int(len(by_m)), edge=float(r.mean()), t=float(t))
@@ -285,7 +363,7 @@ def with_(cfg: StratConfig, **kw) -> StratConfig:
     return replace(cfg, **kw)
 
 
-SIZING_FIELDS = {"kelly", "max_bet_frac", "max_mkt_frac", "max_stake_vs_their", "min_edge", "impact", "fee_rate"}
+SIZING_FIELDS = {"kelly", "max_bet_frac", "max_mkt_frac", "max_stake_vs_their", "min_edge", "impact"}
 
 
 class Context:
@@ -304,6 +382,12 @@ class Context:
             hist = self._wh(self.markets, self.trades, basis, self.book)
             self._scores[basis] = scores_at(hist, self.trades)
         return self._scores[basis]
+
+    def set_oracle(self, wallets: pd.DataFrame) -> None:
+        """DIAGNOSTIC ONLY: basis 'oracle' scores every wallet by its hidden true skill (simulator)."""
+        sk = wallets.set_index("wallet").loc[self.trades["wallet"], "skill"].to_numpy()
+        big = np.full(len(sk), 1e9)
+        self._scores["oracle"] = pd.DataFrame(dict(n_res=big, n_mkts=big, pnl=sk, roi=sk, edge=sk, tstat=sk))
 
     def signals(self, cfg: StratConfig) -> pd.DataFrame:
         k = tuple((f, v) for f, v in asdict(cfg).items() if f not in SIZING_FIELDS)
