@@ -20,6 +20,11 @@ import pandas as pd
 from .schema import DAY
 from .scoring import scores_at
 
+# Polymarket international taker feeRates by category (Fee Structure V2, 2026). Makers pay 0.
+# Re-check docs.polymarket.com/trading/fees before trading; these change.
+PM_FEE_RATES = {"crypto": 0.07, "sports": 0.05, "economics": 0.05, "culture": 0.05, "weather": 0.05,
+                "other": 0.05, "politics": 0.04, "finance": 0.04, "tech": 0.04, "mentions": 0.04,
+                "geopolitics": 0.0}
 EDGES = np.array([0.0, 0.15, 0.35, 0.65, 0.85, 1.0])   # price buckets for calibration
 
 
@@ -37,7 +42,8 @@ class StratConfig:
     assumed_half_spread: float = 0.01   # to back out mid from a print
     exec_cost: float = 0.01       # what we pay over mid
     impact: float = 0.02          # extra price per unit of stake/(stake+their_usd)
-    fee_rate: float = 0.0         # Polymarket-style taker fee: rate * min(q,1-q) per share
+    fee_rate: float = 0.0         # flat taker feeRate; fee per share = feeRate * p * (1 - p) (Polymarket formula)
+    fee_schedule: str = "pm2026"  # "pm2026": per-category feeRates from Polymarket's 2026 schedule; "flat": fee_rate
     kelly: float = 0.25
     max_bet_frac: float = 0.05
     max_mkt_frac: float = 0.10
@@ -51,6 +57,9 @@ class StratConfig:
     flow_h: float = 0.0           # if > 0: require net flagged ("bad") money in the market over the
     min_flow: float = 0.0         #   last flow_h hours, in their direction, to be >= min_flow USD
     exit_h: float = 0.0           # if > 0: cash out after exit_h hours by selling into the bid (else hold to resolution)
+    maker: bool = False           # post a limit order (0 fee) instead of crossing the spread
+    maker_ttl_s: int = 900        # cancel if not filled within this many seconds
+    maker_offset: float = 0.01    # limit price = side mid - offset (rounded down to tick)
     # --- Polymarket execution rules (see RESEARCH_LOG "Realistic trading rules") ---
     tick: float = 0.01            # price grid; buys round up, sells round down
     exit_cost: float = 0.015      # below mid we receive when cashing out (bid side, thinner books)
@@ -71,6 +80,26 @@ class MidBook:
         self.key = t["market_id"].to_numpy(np.int64) * (1 << 34) + t["ts"].to_numpy(np.int64)
         self.mid = np.clip(t["yes_price"].to_numpy() - t["dir"].to_numpy() * assumed_half_spread, 0.001, 0.999)
         self.mkt = t["market_id"].to_numpy(np.int64)
+        self.ts = t["ts"].to_numpy(np.int64)
+        self.px = t["yes_price"].to_numpy()
+
+    def first_through(self, market_id, start_ts, ttl, our_dir, limit) -> np.ndarray:
+        """Time of the first print in (start_ts, start_ts + ttl] that trades strictly through our
+        resting buy at `limit` (side terms). That is the conservative fill rule: a print exactly at
+        our price may have filled someone ahead of us in the queue. -1 if no fill."""
+        out = np.full(len(market_id), -1, np.int64)
+        k0 = np.asarray(market_id, np.int64) * (1 << 34) + np.asarray(start_ts, np.int64)
+        i0 = np.searchsorted(self.key, k0, side="right")
+        i1 = np.searchsorted(self.key, k0 + ttl, side="right")
+        for j in range(len(out)):
+            if i1[j] <= i0[j]:
+                continue
+            px = self.px[i0[j]:i1[j]]
+            side = px if our_dir[j] == 1 else 1 - px
+            hit = np.flatnonzero(side < limit[j] - 1e-9)
+            if hit.size:
+                out[j] = self.ts[i0[j] + hit[0]]
+        return out
 
     def at(self, market_id, ts, inclusive=True) -> np.ndarray:
         """Last mid at or before ts (or strictly before if not inclusive). NaN if none."""
@@ -97,6 +126,9 @@ def make_signals(cfg: StratConfig, markets: pd.DataFrame, trades: pd.DataFrame,
     s["end_ts"] = mk.loc[s["market_id"], "end_ts"].to_numpy()
     s["resolved_ts"] = mk.loc[s["market_id"], "resolved_ts"].to_numpy()
     s["outcome"] = mk.loc[s["market_id"], "outcome"].to_numpy()
+    cat = mk.loc[s["market_id"], "category"].astype(str).str.lower()
+    s["fee_rate"] = (cat.map(PM_FEE_RATES).fillna(0.05).to_numpy() if cfg.fee_schedule == "pm2026"
+                     else np.full(len(s), cfg.fee_rate))
     s = s[s["exec_ts"] < s["end_ts"]]
     if cfg.first_only:
         s = s.drop_duplicates(["wallet", "market_id"], keep="first")
@@ -106,8 +138,17 @@ def make_signals(cfg: StratConfig, markets: pd.DataFrame, trades: pd.DataFrame,
     s["our_dir"] = -s["dir"]
     mid = book.at(s["market_id"].to_numpy(), s["exec_ts"].to_numpy())
     s["side_mid"] = np.where(s["our_dir"] == 1, mid, 1 - mid)
-    s["q"] = _round_up(s["side_mid"] + cfg.exec_cost, cfg.tick)
-    s = s[(s["q"] >= cfg.px_lo) & (s["q"] <= cfg.px_hi)].copy()
+    if cfg.maker:
+        s["q"] = _round_down(s["side_mid"] - cfg.maker_offset, cfg.tick)
+        s = s[(s["q"] >= cfg.px_lo) & (s["q"] <= cfg.px_hi)].copy()
+        ft = book.first_through(s["market_id"].to_numpy(), s["exec_ts"].to_numpy(), cfg.maker_ttl_s,
+                                s["our_dir"].to_numpy(), s["q"].to_numpy())
+        s["post_ts"] = s["exec_ts"]
+        s["exec_ts"] = ft          # the position exists from the fill time
+        s = s[(s["exec_ts"] > 0) & (s["exec_ts"] < s["end_ts"])].copy()
+    else:
+        s["q"] = _round_up(s["side_mid"] + cfg.exec_cost, cfg.tick)
+        s = s[(s["q"] >= cfg.px_lo) & (s["q"] <= cfg.px_hi)].copy()
     win = np.where(s["our_dir"] == 1, s["outcome"], 1 - s["outcome"])   # NaN if unresolved
     # settlement: hold to resolution, or exit early at mid - exec_cost
     s["settle_ts"] = s["resolved_ts"] + cfg.settle_delay_s   # redemption at $1/$0 is fee-free
@@ -120,9 +161,9 @@ def make_signals(cfg: StratConfig, markets: pd.DataFrame, trades: pd.DataFrame,
         bid = np.clip(_round_down(xs - cfg.exit_cost, cfg.tick), 0, 1)
         # taker fee on the sale too: early cash-outs pay spread + fee twice, holding pays once
         s.loc[early, "settle_ts"] = xt[early]
-        s.loc[early, "settle_px"] = bid - cfg.fee_rate * np.minimum(bid, 1 - bid)
+        s.loc[early, "settle_px"] = bid - s.loc[early, "fee_rate"].to_numpy() * bid * (1 - bid)
     # Kelly should see edge net of the entry fee as well
-    s["fee_ps"] = cfg.fee_rate * np.minimum(s["q"], 1 - s["q"])
+    s["fee_ps"] = 0.0 if cfg.maker else s["fee_rate"] * s["q"] * (1 - s["q"])   # makers pay no fee
     s["bucket"] = np.clip(np.searchsorted(EDGES, s["q"].to_numpy(), side="right") - 1, 0, len(EDGES) - 2)
     s = s.sort_values(["exec_ts", "market_id"], kind="mergesort").reset_index(drop=True)
     return add_edge_estimates(s, cfg)
@@ -232,8 +273,8 @@ def backtest(cfg: StratConfig, sig: pd.DataFrame, book: MidBook, start_ts: int, 
     mkt_exp: dict[int, float] = {}
     rec = []
     cols = [s[c].to_numpy() for c in ["exec_ts", "market_id", "our_dir", "q", "edge_hat", "n_calib", "usd",
-                                       "settle_ts", "settle_px"]]
-    for ets, mid_, od, q, eh, nc, their, rts, win in zip(*cols):
+                                       "settle_ts", "settle_px", "fee_rate"]]
+    for ets, mid_, od, q, eh, nc, their, rts, win, frate in zip(*cols):
         while heap and heap[0][0] < ets:
             _, i = heapq.heappop(heap)
             r = rec[i]
@@ -247,7 +288,7 @@ def backtest(cfg: StratConfig, sig: pd.DataFrame, book: MidBook, start_ts: int, 
             r["payoff"] = payoff
         if nc < cfg.calib_min:
             continue
-        p = min(max(q + eh, 0.001), 0.999)
+        p = min(max(q + eh, 0.001), 0.999)   # eh is already net of the entry fee
         if p - q <= cfg.min_edge:
             continue
         cap = cash + open_cost
@@ -256,13 +297,14 @@ def backtest(cfg: StratConfig, sig: pd.DataFrame, book: MidBook, start_ts: int, 
                     cfg.max_mkt_frac * cap - mkt_exp.get(mid_, 0.0), cash * 0.999)
         if stake < 1.0:
             continue
-        qf = float(_round_up(q + cfg.impact * stake / (stake + their), cfg.tick))
+        # maker: price is fixed at our limit; size is capped by the print that filled us (approx. by their size)
+        qf = q if cfg.maker else float(_round_up(q + cfg.impact * stake / (stake + their), cfg.tick))
         if stake / qf < cfg.min_shares:
             continue
         if qf >= 0.999 or p - qf <= cfg.min_edge:
             continue
         shares = stake / qf
-        fee = cfg.fee_rate * min(qf, 1 - qf) * shares
+        fee = 0.0 if cfg.maker else frate * qf * (1 - qf) * shares
         if stake + fee > cash:
             continue
         cash -= stake + fee

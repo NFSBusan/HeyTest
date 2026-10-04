@@ -17,13 +17,14 @@ BASE = StratConfig(basis="res_mid", score="roi", threshold=-0.3, min_res=100, px
 
 def main():
     rows = []
-    for fee in [0.0, 0.01, 0.02]:
+    for fee in ["flat0", "pm2026", "flat0.07"]:
         for exit_cost in [0.015, 0.03]:
             for xh in [0.0, 6.0, 24.0, 72.0]:
                 if xh == 0 and exit_cost != 0.015:
                     continue   # exit book depth is irrelevant when holding to resolution
-                cfg = with_(BASE, fee_rate=fee, exit_cost=exit_cost, exit_h=xh)
-                row = dict(fee_rate=fee, exit_cost=exit_cost, exit=("hold" if xh == 0 else f"{xh:.0f}h"))
+                sched, rate = ("pm2026", 0.0) if fee == "pm2026" else ("flat", float(fee[4:]))
+                cfg = with_(BASE, fee_schedule=sched, fee_rate=rate, exit_cost=exit_cost, exit_h=xh)
+                row = dict(fees=fee, exit_cost=exit_cost, exit=("hold" if xh == 0 else f"{xh:.0f}h"))
                 for s in DEV_SEEDS:
                     ctx, (dev0, hold0, _) = WORLDS[f"s{s}"]
                     sig = ctx.signals(cfg)

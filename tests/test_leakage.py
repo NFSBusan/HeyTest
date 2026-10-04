@@ -86,7 +86,7 @@ def test_execution_never_at_their_price(world):
     assert (s["q"] - s["side_mid"] < cfg.exec_cost + cfg.tick + 1e-9).all()
 
 
-@pytest.mark.parametrize("extra", [dict(exit_h=6.0), dict(first_only=True, flow_h=24.0, min_flow=50.0), dict(calib_linear=True)])
+@pytest.mark.parametrize("extra", [dict(exit_h=6.0), dict(first_only=True, flow_h=24.0, min_flow=50.0), dict(calib_linear=True), dict(maker=True)])
 def test_future_poisoning_with_exits_and_flow(world, extra):
     markets, trades = world
     T, start = 140 * DAY, 60 * DAY

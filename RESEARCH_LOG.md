@@ -29,15 +29,15 @@ What that means:
 
 | Step | What | Status |
 |---|---|---|
-| 1 | Data layer: simulated market done (`pmct/synthetic.py`); real fetcher | sim done, fetcher todo |
+| 1 | Data layer: simulator (`pmct/synthetic.py`); real fetcher (`pmct/fetch.py`, offline-tested only) | done |
 | 2 | Point-in-time trader scoring (`pmct/scoring.py`), 5 bases × 4 scores | done |
 | 3 | Counter-signal + walk-forward probability calibration + Kelly sizing (`pmct/strategy.py`) | done |
 | 4 | Event-driven backtester (latency, spread, impact, fees, caps, cash limits) | done |
 | 5 | Leakage tests (`tests/test_leakage.py`, 6 pass); null world runs in research script | done |
-| 6 | Iterations: parameter search on dev period only, deflated Sharpe for multiple testing | todo |
-| 7 | Front test: one run on the untouched holdout period, all Kelly fractions | todo |
-| 8 | Live paper-trading script for Polymarket (dry run, no real orders) | todo |
-| 9 | List of what's missing before going live | todo |
+| 6 | Iterations on dev only (`scripts/iterate.py`, `scripts/run_research.py`) + realistic Polymarket rules | done |
+| 7 | Final test on untouched data, all Kelly fractions (`scripts/final_test.py`) | done: **failed** |
+| 8 | Live paper-trading script (`scripts/paper_trade.py`, never places orders) | done, untested (network) |
+| 9 | What's missing before going live (bottom of this file) | done |
 
 ## Design decisions (leakage controls)
 
@@ -126,3 +126,110 @@ edge in ¢/share, clustered t):
 roughly 2.5–6¢ per share (spread + tick + fee twice), while the edge is about 1¢. Fees alone push
 the trade-weighted edge to ~0. With the 1¢ tick rounding, the Kelly calibrator often finds no
 bet worth making. That's the honest outcome for a thin edge.
+
+**It 11–12 (realistic rules, rerun of all iterations).** With Polymarket's 2026 fee formula and the 1¢ tick,
+**taker** versions place zero bets, even the oracle. Fees plus spread exceed the edge. A **maker** version
+(post a limit 1¢ below mid on the counter side, cancel after 1h, fill only if a later print trades *through*
+our price, 0 fee, rebates ignored) was the first config positive on both dev worlds and flat on the null world:
+dev growth +6.6% / +13.4% at Kelly 0.25. The automatic pick was Kelly 1.0 (best *average*). I froze **Kelly 0.25**
+instead (best *worst case* across worlds), and wrote that rule down before running the final test.
+
+## Final test (frozen config, run once): `results/final_test.csv`
+
+Frozen: `res_mid` ROI ≤ −30% over ≥100 resolved trades (≥5 markets); first flagged trade per wallet-market;
+our price 0.30–0.95; maker limit = mid − 1¢, TTL 1h; global walk-forward calibration (n0=100);
+Kelly 0.25, ≤5% per bet, ≤10% per market; Polymarket 2026 fees; hold to resolution.
+
+Kelly 0.25, untouched data:
+
+| world / window | growth | Sharpe | max DD | bets | signal t |
+|---|---|---|---|---|---|
+| seed 7 holdout | −6.5% | −1.87 | 10.6% | 208 | −0.15 |
+| seed 11 holdout | +9.6% | +1.45 | 6.4% | 183 | +0.57 |
+| seed 101 holdout | +3.8% | +0.92 | 4.5% | 119 | +1.10 |
+| seed 101 dev-window | −1.2% | −0.64 | 1.9% | 49 | +0.96 |
+| seed 102 holdout | −1.5% | −0.38 | 5.6% | 231 | −0.34 |
+| seed 102 dev-window | −0.8% | −0.26 | 2.7% | 183 | −0.25 |
+| seed 103 both windows | 0 | – | – | 0 | −0.4 / −0.7 |
+| null world (both windows) | 0 | – | – | 0 | +0.26 / −0.95 |
+
+All Kelly fractions, 8 out-of-sample windows:
+
+| Kelly | mean growth | median | worst | % windows positive | worst max DD |
+|---|---|---|---|---|---|
+| 0.10 | −0.0% | −0.2% | −5.1% | 25% | 6.3% |
+| 0.25 | +0.4% | −0.4% | −6.5% | 25% | 10.6% |
+| 0.50 | +0.6% | 0.0% | −6.4% | 38% | 14.2% |
+| 0.75 | +1.2% | 0.0% | −7.4% | 38% | 16.6% |
+| 1.00 | +1.6% | 0.0% | −8.2% | 38% | 18.3% |
+| 1.50 | +2.3% | 0.0% | −7.4% | 38% | 19.5% |
+
+**Verdict: the strategy does not survive out of sample in the simulated world.** No window has a
+significant signal (|t| ≤ 1.1). Deflated Sharpe (1,300 trials) is 0.01–0.44, nowhere near the 0.95 bar.
+Bigger Kelly fractions raise the mean only through a few lucky windows (the median stays at 0) while
+drawdowns roughly double. The dev results were selection luck. No leakage showed up: the null world never
+traded, and all 11 leakage/conversion tests pass.
+
+I stopped iterating here on purpose. More tuning against the same simulated worlds would just fit noise
+again; their holdouts are now spent. **The next iterations must run on real Polymarket data:**
+`python scripts/fetch_data.py` → `python scripts/run_research.py --data real` → `python scripts/final_test.py`
+(edit it to load real data with a fresh, never-touched final period) → weeks of
+`python scripts/paper_trade.py run` + `reconcile`.
+
+## Rules and regulation that apply (researched 2026-10-04; verify yourself, this is not legal advice)
+
+1. **Where you can trade.** The international site (polymarket.com) blocks OFAC-sanctioned places (Iran, Syria,
+   Cuba, North Korea, occupied Ukrainian regions) and puts 30+ countries (e.g. France, Germany, Australia,
+   Brazil, Singapore) in **close-only** mode. Some (Ireland, Japan, Netherlands; Malta for sports) are reported
+   as frontend-blocked with API access open. **Using a VPN to get around a geoblock breaks the Terms of Use**
+   and can get the account put into close-only mode or closed. Check your own country's status at
+   help.polymarket.com before building anything.
+2. **US persons** must use **Polymarket US** (CFTC-regulated exchange via the QCEX acquisition, with KYC). It has a
+   different fee schedule (taker 0.05, maker rebate). **Accounts there are not public wallets, so you cannot see
+   other traders' fills. The core input of this strategy (who the bad traders are) does not exist on the US
+   venue.** The strategy only works where trades are on-chain with public proxy wallets (the international CLOB).
+   CFTC proposed a formal event-contract rule in June 2026, so expect more change.
+3. **Fees (international, Fee Structure V2, 2026).** Takers pay `shares × feeRate × p × (1−p)`. feeRate by
+   category: crypto 0.07; sports/economics/culture/weather/other 0.05; politics/finance/tech/mentions 0.04;
+   geopolitics 0. Makers pay nothing and get a share of taker fees as rebates. Redemption at resolution is free.
+   Now modelled in `pmct/strategy.py` (`PM_FEE_RATES`).
+4. **Resolution (UMA).** A proposal plus a 2-hour challenge window (a $500 bond to dispute); a dispute adds a
+   second round, and a second dispute goes to a UMA vote (~48h plus a debate period). Ambiguous events can
+   resolve 50/50 ($0.50 per share). Capital stays locked meanwhile. Modelled as a 2h delay; a 3-day stress
+   barely changed results.
+5. **Market integrity rules (updated March 2026).** Prohibited: trading on stolen/confidential information,
+   trading on illegal tips, and trading by people who can influence the outcome; also wash trading and
+   spoofing. Polymarket says it has referred 90+ accounts to law enforcement. **Counter-trading wallets based on
+   public on-chain data is not insider trading.** But don't post-and-cancel orders to move prices, and don't
+   trade against yourself across wallets.
+6. **Bots/API.** Automated trading through the CLOB API is allowed. Reported limits are about 100 req/min on
+   public endpoints and 60 orders/min. Order minimum is about 5 shares; the tick is 1¢ (finer near 0/1).
+7. **Tax (US example).** No 1099 is issued. Treatment is unsettled (other income, capital gains, or gambling).
+   If it is gambling, 2026 rules (OBBBA) cap loss deductions at 90% of losses, and only against winnings.
+   High-turnover strategies need per-trade records; the ledger in `paper_trade.py` is a start.
+   Talk to a tax professional where you live.
+
+Sources: datawallet.com/crypto/polymarket-restricted-countries, help.polymarket.com/en/articles/13364163,
+docs.polymarket.com/trading/fees, docs.polymarket.us/fees, congress.gov/crs-product/LSB11441,
+integrity.polymarket.com, venable.com (2026/04 insider trading), docs.polymarket.com/concepts/resolution,
+startpolymarket.com/learn/how-markets-resolve, keepertax.com and marketmath.io (prediction-market taxes),
+quantvps.com (automated trading on Polymarket).
+
+## What's missing / before going live
+
+1. **Real data.** Everything above is simulated. Allow the Polymarket hosts (environment network settings) or run
+   locally. Prefer the Goldsky orderbook subgraph for complete fills; the Data API has offset caps.
+2. **Order-book data.** Maker fills are inferred from prints, with no queue position or depth. Record CLOB book
+   snapshots (websocket) during paper trading to measure real fill rates and adverse selection.
+3. **The leaderboard trap.** Never pick "worst traders" from today's leaderboard and backtest them in the past.
+   That is lookahead plus survivorship bias. Scores here are strictly point-in-time.
+4. **Wallet identity.** One person can run many proxy wallets, and bad wallets go broke and disappear. Consider
+   clustering wallets by funding source.
+5. **Correlated markets.** Neg-risk groups (multi-outcome events) share outcomes. Cap exposure per *event*, not
+   just per market.
+6. **Kelly inputs.** Edge estimates are noisy. Keep Kelly ≤ 0.25 until real out-of-sample data shows a stable
+   edge. Even the oracle lost growth above Kelly 0.5.
+7. **Operational risk.** Polygon/USDC custody, key security (use a dedicated wallet), API outages, and Polymarket
+   rule changes (fees changed three times in 2026).
+8. **Kill switch.** Before any real money: at least 4–8 weeks of paper trading, a hard drawdown stop (e.g. −10%),
+   per-day loss limits, and a pre-registered rule for what counts as success.

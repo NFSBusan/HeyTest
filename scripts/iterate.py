@@ -118,10 +118,23 @@ def main():
     for k in [0.1, 0.25, 0.5, 0.75, 1.0, 1.5]:
         for mb in [0.05, 0.10]:
             run("I9", with_(c, kelly=k, max_bet_frac=mb), f"kelly={k} max_bet={mb}")
-    # I10: cost sensitivity of the I9 winner (not a selection step)
     c = best_of("I9")
+    # I11: maker execution (post limit on the counter side; 0 fee; fill only if a print trades through)
+    for base in [c, with_(c, threshold=-0.2), with_(c, threshold=-0.1, min_res=30), with_(c, px_lo=0.05)]:
+        for ttl in [300, 900, 3600]:
+            for off in [0.0, 0.01]:
+                run("I11", with_(base, maker=True, maker_ttl_s=ttl, maker_offset=off),
+                    f"maker thr={base.threshold} n>={base.min_res} lo={base.px_lo} ttl={ttl}s offset={off}")
+    c = best_of("I")
+    # I12: Kelly fraction again for the overall winner
+    for k in [0.1, 0.25, 0.5, 1.0]:
+        run("I12", with_(c, kelly=k), f"kelly={k}")
+    c = best_of("I")
+    # I10: cost sensitivity of the winner (not a selection step)
     for ec, lat in [(0.015, 60), (0.02, 60), (0.01, 600), (0.01, 3600)]:
         run("I10", with_(c, exec_cost=ec, latency_s=lat), f"stress exec_cost={ec} latency={lat}s")
+    run("I10", with_(c, fee_schedule="flat", fee_rate=0.07), "stress: crypto-level fees everywhere")
+    run("I10", with_(c, settle_delay_s=3 * 86400), "stress: 3-day dispute delay on every market")
     pd.DataFrame(ROWS).to_csv(OUT / "iterations.csv", index=False)
     print("FINAL DEV PICK:", c.key())
 

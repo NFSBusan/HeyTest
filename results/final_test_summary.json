@@ -1,0 +1,110 @@
+{
+  "frozen": {
+    "basis": "res_mid",
+    "score": "roi",
+    "threshold": -0.3,
+    "min_res": 100,
+    "min_mkts": 5,
+    "min_usd": 0.0,
+    "px_lo": 0.3,
+    "px_hi": 0.95,
+    "latency_s": 60,
+    "assumed_half_spread": 0.01,
+    "exec_cost": 0.01,
+    "impact": 0.02,
+    "fee_rate": 0.0,
+    "fee_schedule": "pm2026",
+    "kelly": 0.25,
+    "max_bet_frac": 0.05,
+    "max_mkt_frac": 0.1,
+    "max_stake_vs_their": 1.0,
+    "calib_n0": 100.0,
+    "calib_min": 200,
+    "calib_buckets": false,
+    "calib_linear": false,
+    "min_edge": 0.0,
+    "first_only": true,
+    "flow_h": 0.0,
+    "min_flow": 0.0,
+    "exit_h": 0.0,
+    "maker": true,
+    "maker_ttl_s": 3600,
+    "maker_offset": 0.01,
+    "tick": 0.01,
+    "exit_cost": 0.015,
+    "min_shares": 5.0,
+    "settle_delay_s": 7200
+  },
+  "by_kelly": [
+    {
+      "kelly": 0.1,
+      "mean_growth": -0.0001,
+      "median_growth": -0.0018,
+      "worst_growth": -0.0505,
+      "pct_positive": 0.25,
+      "mean_sharpe": -0.259,
+      "worst_dd": 0.063,
+      "null_growth": 0.0
+    },
+    {
+      "kelly": 0.25,
+      "mean_growth": 0.0043,
+      "median_growth": -0.0038,
+      "worst_growth": -0.0653,
+      "pct_positive": 0.25,
+      "mean_sharpe": -0.0993,
+      "worst_dd": 0.1063,
+      "null_growth": 0.0
+    },
+    {
+      "kelly": 0.5,
+      "mean_growth": 0.0057,
+      "median_growth": 0.0,
+      "worst_growth": -0.0635,
+      "pct_positive": 0.375,
+      "mean_sharpe": -0.0366,
+      "worst_dd": 0.1421,
+      "null_growth": 0.0
+    },
+    {
+      "kelly": 0.75,
+      "mean_growth": 0.0117,
+      "median_growth": 0.0,
+      "worst_growth": -0.0743,
+      "pct_positive": 0.375,
+      "mean_sharpe": 0.0361,
+      "worst_dd": 0.1664,
+      "null_growth": 0.0
+    },
+    {
+      "kelly": 1.0,
+      "mean_growth": 0.0161,
+      "median_growth": 0.0,
+      "worst_growth": -0.0823,
+      "pct_positive": 0.375,
+      "mean_sharpe": 0.0661,
+      "worst_dd": 0.1829,
+      "null_growth": 0.0
+    },
+    {
+      "kelly": 1.5,
+      "mean_growth": 0.0229,
+      "median_growth": 0.0,
+      "worst_growth": -0.0741,
+      "pct_positive": 0.375,
+      "mean_sharpe": 0.1209,
+      "worst_dd": 0.1948,
+      "null_growth": 0.0
+    }
+  ],
+  "dsr_per_test_at_frozen_kelly": {
+    "seed7/holdout": 0.008,
+    "seed11/holdout": 0.438,
+    "seed101/holdout": 0.315,
+    "seed101/dev-window": 0.023,
+    "seed102/holdout": 0.091,
+    "seed102/dev-window": 0.046,
+    "seed103/holdout": 0.138,
+    "seed103/dev-window": 0.073
+  }
+}

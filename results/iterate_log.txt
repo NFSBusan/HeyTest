@@ -1,0 +1,109 @@
+I0   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.47 s11: g=+0.000 sr=+0.00 n=   0 t=+2.05 null7: g=+nan sr=+nan n=   0 t=+nan  | oracle skill<=-1.0
+I0   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.21 s11: g=+0.000 sr=+0.00 n=   0 t=+3.43 null7: g=+nan sr=+nan n=   0 t=+nan  | oracle skill<=-0.6
+I1   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-10.30 s11: g=+0.011 sr=+0.03 n= 396 t=-6.29 null7: g=+0.000 sr=+0.00 n=   0 t=-12.48  | baseline raw-PnL t-stat
+I2   obj=-inf s7: g=+0.013 sr=+0.33 n=  31 t=+0.67 s11: g=+0.000 sr=+0.00 n=   0 t=-1.32 null7: g=+0.000 sr=+0.00 n=   0 t=+0.44  | quick-grid winner
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-15.11 s11: g=+0.000 sr=+0.00 n=   0 t=-12.73 null7: g=+0.000 sr=+0.00 n=   0 t=-15.93  | res roi<=-0.05 n>=30 min_edge=0.0
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-15.11 s11: g=+0.000 sr=+0.00 n=   0 t=-12.73 null7: g=+0.000 sr=+0.00 n=   0 t=-15.93  | res roi<=-0.05 n>=30 min_edge=0.005
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-14.00 s11: g=+0.000 sr=+0.00 n=   0 t=-12.11 null7: g=+0.000 sr=+0.00 n=   0 t=-14.86  | res roi<=-0.05 n>=100 min_edge=0.0
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-14.00 s11: g=+0.000 sr=+0.00 n=   0 t=-12.11 null7: g=+0.000 sr=+0.00 n=   0 t=-14.86  | res roi<=-0.05 n>=100 min_edge=0.005
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-14.74 s11: g=+0.000 sr=+0.00 n=   0 t=-11.60 null7: g=+0.000 sr=+0.00 n=   0 t=-15.51  | res roi<=-0.1 n>=30 min_edge=0.0
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-14.74 s11: g=+0.000 sr=+0.00 n=   0 t=-11.60 null7: g=+0.000 sr=+0.00 n=   0 t=-15.51  | res roi<=-0.1 n>=30 min_edge=0.005
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-13.91 s11: g=+0.000 sr=+0.00 n=   0 t=-10.98 null7: g=+0.000 sr=+0.00 n=   0 t=-14.61  | res roi<=-0.1 n>=100 min_edge=0.0
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-13.91 s11: g=+0.000 sr=+0.00 n=   0 t=-10.98 null7: g=+0.000 sr=+0.00 n=   0 t=-14.61  | res roi<=-0.1 n>=100 min_edge=0.005
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-9.41 s11: g=+0.000 sr=+0.00 n=   0 t=-7.82 null7: g=+0.000 sr=+0.00 n=   0 t=-9.73  | res roi<=-0.2 n>=30 min_edge=0.0
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-9.41 s11: g=+0.000 sr=+0.00 n=   0 t=-7.82 null7: g=+0.000 sr=+0.00 n=   0 t=-9.73  | res roi<=-0.2 n>=30 min_edge=0.005
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-8.12 s11: g=+0.000 sr=+0.00 n=   0 t=-7.07 null7: g=+0.000 sr=+0.00 n=   0 t=-7.85  | res roi<=-0.2 n>=100 min_edge=0.0
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-8.12 s11: g=+0.000 sr=+0.00 n=   0 t=-7.07 null7: g=+0.000 sr=+0.00 n=   0 t=-7.85  | res roi<=-0.2 n>=100 min_edge=0.005
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-2.49 s11: g=+0.000 sr=+0.00 n=   0 t=-2.33 null7: g=+0.000 sr=+0.00 n=   0 t=-4.53  | res roi<=-0.3 n>=30 min_edge=0.0
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-2.49 s11: g=+0.000 sr=+0.00 n=   0 t=-2.33 null7: g=+0.000 sr=+0.00 n=   0 t=-4.53  | res roi<=-0.3 n>=30 min_edge=0.005
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-1.30 s11: g=+0.000 sr=+0.00 n=   0 t=-0.86 null7: g=+0.000 sr=+0.00 n=   0 t=-2.39  | res roi<=-0.3 n>=100 min_edge=0.0
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-1.30 s11: g=+0.000 sr=+0.00 n=   0 t=-0.86 null7: g=+0.000 sr=+0.00 n=   0 t=-2.39  | res roi<=-0.3 n>=100 min_edge=0.005
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-13.98 s11: g=+0.000 sr=+0.00 n=   0 t=-11.44 null7: g=+0.000 sr=+0.00 n=   0 t=-15.50  | res_mid roi<=-0.05 n>=30 min_edge=0.0
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-13.98 s11: g=+0.000 sr=+0.00 n=   0 t=-11.44 null7: g=+0.000 sr=+0.00 n=   0 t=-15.50  | res_mid roi<=-0.05 n>=30 min_edge=0.005
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-13.23 s11: g=+0.000 sr=+0.00 n=   0 t=-10.64 null7: g=+0.000 sr=+0.00 n=   0 t=-14.53  | res_mid roi<=-0.05 n>=100 min_edge=0.0
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-13.23 s11: g=+0.000 sr=+0.00 n=   0 t=-10.64 null7: g=+0.000 sr=+0.00 n=   0 t=-14.53  | res_mid roi<=-0.05 n>=100 min_edge=0.005
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-9.52 s11: g=+0.000 sr=+0.00 n=   0 t=-8.40 null7: g=+0.000 sr=+0.00 n=   0 t=-10.67  | res_mid roi<=-0.1 n>=30 min_edge=0.0
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-9.52 s11: g=+0.000 sr=+0.00 n=   0 t=-8.40 null7: g=+0.000 sr=+0.00 n=   0 t=-10.67  | res_mid roi<=-0.1 n>=30 min_edge=0.005
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-8.21 s11: g=+0.000 sr=+0.00 n=   0 t=-7.40 null7: g=+0.000 sr=+0.00 n=   0 t=-8.56  | res_mid roi<=-0.1 n>=100 min_edge=0.0
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-8.21 s11: g=+0.000 sr=+0.00 n=   0 t=-7.40 null7: g=+0.000 sr=+0.00 n=   0 t=-8.56  | res_mid roi<=-0.1 n>=100 min_edge=0.005
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-3.17 s11: g=+0.000 sr=+0.00 n=   0 t=-2.43 null7: g=+0.000 sr=+0.00 n=   0 t=-4.81  | res_mid roi<=-0.2 n>=30 min_edge=0.0
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-3.17 s11: g=+0.000 sr=+0.00 n=   0 t=-2.43 null7: g=+0.000 sr=+0.00 n=   0 t=-4.81  | res_mid roi<=-0.2 n>=30 min_edge=0.005
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-2.12 s11: g=+0.000 sr=+0.00 n=   0 t=-0.67 null7: g=+0.000 sr=+0.00 n=   0 t=-2.42  | res_mid roi<=-0.2 n>=100 min_edge=0.0
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-2.12 s11: g=+0.000 sr=+0.00 n=   0 t=-0.67 null7: g=+0.000 sr=+0.00 n=   0 t=-2.42  | res_mid roi<=-0.2 n>=100 min_edge=0.005
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+0.14 s11: g=+0.000 sr=+0.00 n=   0 t=-1.01 null7: g=+0.000 sr=+0.00 n=   0 t=-1.13  | res_mid roi<=-0.3 n>=30 min_edge=0.0
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+0.14 s11: g=+0.000 sr=+0.00 n=   0 t=-1.01 null7: g=+0.000 sr=+0.00 n=   0 t=-1.13  | res_mid roi<=-0.3 n>=30 min_edge=0.005
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.19 s11: g=+0.000 sr=+0.00 n=   0 t=+0.25 null7: g=+0.000 sr=+0.00 n=   0 t=+0.16  | res_mid roi<=-0.3 n>=100 min_edge=0.0
+I3   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.19 s11: g=+0.000 sr=+0.00 n=   0 t=+0.25 null7: g=+0.000 sr=+0.00 n=   0 t=+0.16  | res_mid roi<=-0.3 n>=100 min_edge=0.005
+I4   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.12 s11: g=+0.000 sr=+0.00 n=   0 t=+0.70 null7: g=+0.000 sr=+0.00 n=   0 t=-0.07  | first trade per wallet-market only
+I5   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.13 s11: g=+0.000 sr=+0.00 n=   0 t=+0.57 null7: g=+0.000 sr=+0.00 n=   0 t=-0.07  | flow 6.0h >= $0.0
+I5   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+0.10 s11: g=+0.000 sr=+0.00 n=   0 t=-0.10 null7: g=+0.000 sr=+0.00 n=   0 t=-0.18  | flow 6.0h >= $100.0
+I5   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-1.53 s11: g=+0.000 sr=+0.00 n=   0 t=+0.16 null7: g=+0.000 sr=+0.00 n=   0 t=-0.99  | flow 6.0h >= $500.0
+I5   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+0.87 s11: g=+0.000 sr=+0.00 n=   0 t=+0.83 null7: g=+0.000 sr=+0.00 n=   0 t=+0.11  | flow 24.0h >= $0.0
+I5   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+0.04 s11: g=+0.000 sr=+0.00 n=   0 t=-0.03 null7: g=+0.000 sr=+0.00 n=   0 t=-0.13  | flow 24.0h >= $100.0
+I5   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-1.92 s11: g=+0.000 sr=+0.00 n=   0 t=-0.18 null7: g=+0.000 sr=+0.00 n=   0 t=-0.99  | flow 24.0h >= $500.0
+I6   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-18.55 s11: g=+0.000 sr=+0.00 n=   0 t=-25.13 null7: g=+0.000 sr=+0.00 n=   0 t=-13.47  | exit after 6.0h
+I6   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-10.99 s11: g=+0.000 sr=+0.00 n=   0 t=-12.42 null7: g=+0.000 sr=+0.00 n=   0 t=-8.03  | exit after 24.0h
+I6   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-4.68 s11: g=+0.000 sr=+0.00 n=   0 t=-6.80 null7: g=+0.000 sr=+0.00 n=   0 t=-4.65  | exit after 72.0h
+I7   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+0.80 s11: g=+0.000 sr=+0.00 n=   0 t=+0.61 null7: g=+0.000 sr=+0.00 n=   0 t=-0.07  | band 0.2-0.8
+I7   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+0.69 s11: g=+0.000 sr=+0.00 n=   0 t=+1.31 null7: g=+0.000 sr=+0.00 n=   0 t=-0.15  | band 0.1-0.9
+I7   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=+0.000 sr=+0.00 n=   0 t=+0.50  | band 0.3-0.95
+I8   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=+0.000 sr=+0.00 n=   0 t=+0.50  | calib n0=100.0 buckets=False
+I8   obj=-inf s7: g=-0.053 sr=-0.67 n=  63 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=-0.035 sr=-0.95 n=  11 t=+0.50  | calib n0=100.0 buckets=True
+I8   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=+0.000 sr=+0.00 n=   0 t=+0.50  | calib n0=300.0 buckets=False
+I8   obj=-inf s7: g=-0.087 sr=-1.48 n=  54 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=-0.014 sr=-1.39 n=   4 t=+0.50  | calib n0=300.0 buckets=True
+I8   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=+0.000 sr=+0.00 n=   0 t=+0.50  | calib n0=1000.0 buckets=False
+I8   obj=-inf s7: g=-0.028 sr=-1.79 n=  12 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=+0.000 sr=+0.00 n=   0 t=+0.50  | calib n0=1000.0 buckets=True
+I8b  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=+0.000 sr=+0.00 n=   0 t=+0.50  | linear calib n0=100.0
+I8b  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=+0.000 sr=+0.00 n=   0 t=+0.50  | linear calib n0=300.0
+I8b  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=+0.000 sr=+0.00 n=   0 t=+0.50  | linear calib n0=1000.0
+I8c  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+0.24 s11: g=+0.000 sr=+0.00 n=   0 t=+2.88 null7: g=+0.000 sr=+0.00 n=   0 t=-0.50  | linear calib thr=-0.2 n0=300.0
+I8c  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+0.24 s11: g=+0.000 sr=+0.00 n=   0 t=+2.88 null7: g=+0.000 sr=+0.00 n=   0 t=-0.50  | linear calib thr=-0.2 n0=1000.0
+I8c  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+0.07 s11: g=+0.000 sr=+0.00 n=   0 t=+1.79 null7: g=+0.000 sr=+0.00 n=   0 t=-1.10  | linear calib thr=-0.1 n0=300.0
+I8c  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+0.07 s11: g=+0.000 sr=+0.00 n=   0 t=+1.79 null7: g=+0.000 sr=+0.00 n=   0 t=-1.10  | linear calib thr=-0.1 n0=1000.0
+I9   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=+0.000 sr=+0.00 n=   0 t=+0.50  | kelly=0.1 max_bet=0.05
+I9   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=+0.000 sr=+0.00 n=   0 t=+0.50  | kelly=0.1 max_bet=0.1
+I9   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=+0.000 sr=+0.00 n=   0 t=+0.50  | kelly=0.25 max_bet=0.05
+I9   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=+0.000 sr=+0.00 n=   0 t=+0.50  | kelly=0.25 max_bet=0.1
+I9   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=+0.000 sr=+0.00 n=   0 t=+0.50  | kelly=0.5 max_bet=0.05
+I9   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=+0.000 sr=+0.00 n=   0 t=+0.50  | kelly=0.5 max_bet=0.1
+I9   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=+0.000 sr=+0.00 n=   0 t=+0.50  | kelly=0.75 max_bet=0.05
+I9   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=+0.000 sr=+0.00 n=   0 t=+0.50  | kelly=0.75 max_bet=0.1
+I9   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=+0.000 sr=+0.00 n=   0 t=+0.50  | kelly=1.0 max_bet=0.05
+I9   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=+0.000 sr=+0.00 n=   0 t=+0.50  | kelly=1.0 max_bet=0.1
+I9   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=+0.000 sr=+0.00 n=   0 t=+0.50  | kelly=1.5 max_bet=0.05
+I9   obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.73 s11: g=+0.000 sr=+0.00 n=   0 t=+2.09 null7: g=+0.000 sr=+0.00 n=   0 t=+0.50  | kelly=1.5 max_bet=0.1
+I11  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.09 s11: g=+0.000 sr=+0.00 n=   0 t=+0.04 null7: g=+0.000 sr=+0.00 n=   0 t=+nan  | maker thr=-0.3 n>=100 lo=0.3 ttl=300s offset=0.0
+I11  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+1.08 s11: g=+0.000 sr=+0.00 n=   0 t=+0.35 null7: g=+0.000 sr=+0.00 n=   0 t=+nan  | maker thr=-0.3 n>=100 lo=0.3 ttl=300s offset=0.01
+I11  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+0.25 s11: g=+0.000 sr=+0.00 n=   0 t=+0.92 null7: g=+0.000 sr=+0.00 n=   0 t=+1.44  | maker thr=-0.3 n>=100 lo=0.3 ttl=900s offset=0.0
+I11  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+0.23 s11: g=+0.000 sr=+0.00 n=   0 t=+1.58 null7: g=+0.000 sr=+0.00 n=   0 t=+nan  | maker thr=-0.3 n>=100 lo=0.3 ttl=900s offset=0.01
+I11  obj=+0.012 s7: g=+0.018 sr=+0.76 n= 159 t=+1.04 s11: g=+0.007 sr=+0.33 n= 130 t=+1.74 null7: g=+0.000 sr=+0.00 n=   0 t=+0.21  | maker thr=-0.3 n>=100 lo=0.3 ttl=3600s offset=0.0
+I11  obj=+0.068 s7: g=+0.046 sr=+1.53 n=  89 t=+1.22 s11: g=+0.091 sr=+2.42 n= 176 t=+3.29 null7: g=+0.000 sr=+0.00 n=   0 t=+0.58  | maker thr=-0.3 n>=100 lo=0.3 ttl=3600s offset=0.01
+I11  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-0.07 s11: g=+0.000 sr=+0.00 n=   0 t=+0.74 null7: g=+0.000 sr=+0.00 n=   0 t=+0.94  | maker thr=-0.2 n>=100 lo=0.3 ttl=300s offset=0.0
+I11  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+0.09 s11: g=+0.000 sr=+0.00 n=   0 t=+1.29 null7: g=+0.000 sr=+0.00 n=   0 t=+0.66  | maker thr=-0.2 n>=100 lo=0.3 ttl=300s offset=0.01
+I11  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-0.79 s11: g=+0.000 sr=+0.02 n=  45 t=+1.55 null7: g=+0.000 sr=+0.00 n=   0 t=+0.21  | maker thr=-0.2 n>=100 lo=0.3 ttl=900s offset=0.0
+I11  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-0.94 s11: g=+0.008 sr=+0.38 n= 127 t=+2.27 null7: g=+0.000 sr=+0.00 n=   0 t=-0.56  | maker thr=-0.2 n>=100 lo=0.3 ttl=900s offset=0.01
+I11  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+0.70 s11: g=+0.020 sr=+0.69 n= 558 t=+2.19 null7: g=-0.002 sr=-0.32 n= 100 t=-0.66  | maker thr=-0.2 n>=100 lo=0.3 ttl=3600s offset=0.0
+I11  obj=-inf s7: g=-0.000 sr=-1.61 n=   3 t=+0.78 s11: g=+0.127 sr=+2.26 n= 692 t=+3.07 null7: g=-0.003 sr=-0.35 n=  98 t=-0.64  | maker thr=-0.2 n>=100 lo=0.3 ttl=3600s offset=0.01
+I11  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-0.86 s11: g=+0.000 sr=+0.12 n=   9 t=-0.00 null7: g=-0.005 sr=-0.77 n=  24 t=+0.12  | maker thr=-0.1 n>=30 lo=0.3 ttl=300s offset=0.0
+I11  obj=-inf s7: g=+0.000 sr=+0.00 n=  50 t=+0.01 s11: g=+0.000 sr=+0.00 n=   0 t=+0.03 null7: g=+0.012 sr=+1.41 n=  28 t=+0.78  | maker thr=-0.1 n>=30 lo=0.3 ttl=300s offset=0.01
+I11  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-1.52 s11: g=-0.009 sr=-0.79 n= 224 t=+0.93 null7: g=-0.013 sr=-1.81 n=  69 t=-1.10  | maker thr=-0.1 n>=30 lo=0.3 ttl=900s offset=0.0
+I11  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-0.95 s11: g=-0.027 sr=-1.69 n= 179 t=+1.56 null7: g=-0.024 sr=-1.58 n=  83 t=-0.90  | maker thr=-0.1 n>=30 lo=0.3 ttl=900s offset=0.01
+I11  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-0.03 s11: g=+0.000 sr=+0.00 n=   0 t=+2.61 null7: g=+0.000 sr=+0.00 n=   0 t=-0.92  | maker thr=-0.1 n>=30 lo=0.3 ttl=3600s offset=0.0
+I11  obj=-inf s7: g=-0.000 sr=-0.24 n=   4 t=+0.64 s11: g=+0.000 sr=+1.37 n=   1 t=+2.52 null7: g=+0.000 sr=+0.00 n=   0 t=-0.26  | maker thr=-0.1 n>=30 lo=0.3 ttl=3600s offset=0.01
+I11  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+0.51 s11: g=+0.000 sr=+0.00 n=   0 t=-0.09 null7: g=+0.000 sr=+0.00 n=   0 t=+nan  | maker thr=-0.3 n>=100 lo=0.05 ttl=300s offset=0.0
+I11  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+0.52 s11: g=+0.000 sr=+0.00 n=   0 t=+0.29 null7: g=+0.000 sr=+0.00 n=   0 t=+nan  | maker thr=-0.3 n>=100 lo=0.05 ttl=300s offset=0.01
+I11  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=-0.25 s11: g=+0.000 sr=+0.00 n=   0 t=+0.36 null7: g=+0.000 sr=+0.00 n=   0 t=+0.72  | maker thr=-0.3 n>=100 lo=0.05 ttl=900s offset=0.0
+I11  obj=-inf s7: g=+0.000 sr=+0.00 n=   0 t=+0.03 s11: g=+0.000 sr=+0.00 n=   0 t=+1.28 null7: g=+0.000 sr=+0.00 n=   0 t=-0.11  | maker thr=-0.3 n>=100 lo=0.05 ttl=900s offset=0.01
+I11  obj=-inf s7: g=+0.009 sr=+0.51 n= 207 t=+0.23 s11: g=-0.005 sr=-0.57 n= 109 t=+0.97 null7: g=+0.000 sr=+0.00 n=   0 t=+0.47  | maker thr=-0.3 n>=100 lo=0.05 ttl=3600s offset=0.0
+I11  obj=+0.030 s7: g=+0.017 sr=+0.43 n= 149 t=+0.45 s11: g=+0.043 sr=+1.28 n= 176 t=+2.79 null7: g=+0.000 sr=+0.00 n=   0 t=+0.97  | maker thr=-0.3 n>=100 lo=0.05 ttl=3600s offset=0.01
+I12  obj=+0.068 s7: g=+0.046 sr=+1.53 n=  89 t=+1.22 s11: g=+0.091 sr=+2.42 n= 176 t=+3.29 null7: g=+0.000 sr=+0.00 n=   0 t=+0.58  | kelly=0.1
+I12  obj=+0.100 s7: g=+0.066 sr=+1.19 n=  89 t=+1.22 s11: g=+0.134 sr=+2.04 n= 178 t=+3.29 null7: g=+0.000 sr=+0.00 n=   0 t=+0.58  | kelly=0.25
+I12  obj=+0.113 s7: g=+0.053 sr=+0.77 n=  89 t=+1.22 s11: g=+0.172 sr=+1.86 n= 179 t=+3.29 null7: g=+0.000 sr=+0.00 n=   0 t=+0.58  | kelly=0.5
+I12  obj=+0.141 s7: g=+0.036 sr=+0.45 n=  89 t=+1.22 s11: g=+0.247 sr=+1.92 n= 179 t=+3.29 null7: g=+0.000 sr=+0.00 n=   0 t=+0.58  | kelly=1.0
+I10  obj=+0.141 s7: g=+0.036 sr=+0.45 n=  89 t=+1.22 s11: g=+0.247 sr=+1.92 n= 179 t=+3.29 null7: g=+0.000 sr=+0.00 n=   0 t=+0.58  | stress exec_cost=0.015 latency=60s
+I10  obj=+0.141 s7: g=+0.036 sr=+0.45 n=  89 t=+1.22 s11: g=+0.247 sr=+1.92 n= 179 t=+3.29 null7: g=+0.000 sr=+0.00 n=   0 t=+0.58  | stress exec_cost=0.02 latency=60s
+I10  obj=+0.121 s7: g=+0.048 sr=+0.55 n=  99 t=+1.83 s11: g=+0.194 sr=+1.59 n= 185 t=+2.59 null7: g=+0.000 sr=+0.00 n=   0 t=+0.04  | stress exec_cost=0.01 latency=600s
+I10  obj=-inf s7: g=+0.022 sr=+0.40 n=  93 t=+0.77 s11: g=+0.001 sr=+1.59 n=   1 t=+1.40 null7: g=+0.000 sr=+0.00 n=   0 t=-1.41  | stress exec_cost=0.01 latency=3600s
+I10  obj=+0.141 s7: g=+0.036 sr=+0.45 n=  89 t=+1.22 s11: g=+0.247 sr=+1.92 n= 179 t=+3.29 null7: g=+0.000 sr=+0.00 n=   0 t=+0.58  | stress: crypto-level fees everywhere
+I10  obj=+0.132 s7: g=+0.037 sr=+0.47 n=  87 t=+1.10 s11: g=+0.228 sr=+1.80 n= 177 t=+3.25 null7: g=+0.000 sr=+0.00 n=   0 t=+0.58  | stress: 3-day dispute delay on every market
+FINAL DEV PICK: basis=res_mid,score=roi,threshold=-0.3,min_res=100,min_mkts=5,min_usd=0.0,px_lo=0.3,px_hi=0.95,latency_s=60,assumed_half_spread=0.01,exec_cost=0.01,impact=0.02,fee_rate=0.0,fee_schedule=pm2026,kelly=1.0,max_bet_frac=0.05,max_mkt_frac=0.1,max_stake_vs_their=1.0,calib_n0=100.0,calib_min=200,calib_buckets=False,calib_linear=False,min_edge=0.0,first_only=True,flow_h=0.0,min_flow=0.0,exit_h=0.0,maker=True,maker_ttl_s=3600,maker_offset=0.01,tick=0.01,exit_cost=0.015,min_shares=5.0,settle_delay_s=7200
