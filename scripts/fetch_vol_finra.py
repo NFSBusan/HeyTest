@@ -35,34 +35,71 @@ def tickers():
     return sorted(f.stem for f in (ROOT / "data" / "prices").glob("*.csv"))
 
 
-def dolt_query(sql: str) -> list[dict]:
-    for i in range(5):
-        r = S.get(DOLT, params={"q": sql}, timeout=60)
-        if r.status_code == 200:
-            j = r.json()
-            if j.get("query_execution_status") not in (None, "Success", "RowLimit"):
-                raise RuntimeError(j.get("query_execution_message"))
+def dolt_query(sql: str, tries=4) -> list[dict]:
+    """Run one SQL query on DoltHub. Timeouts are retried; the caller splits the window if they persist."""
+    for i in range(tries):
+        try:
+            r = S.get(DOLT, params={"q": sql}, timeout=90)
+        except requests.RequestException:
+            time.sleep(2 ** i)
+            continue
+        if r.status_code != 200:
+            time.sleep(2 ** i)
+            continue
+        j = r.json()
+        if j.get("query_execution_status") in (None, "Success", "RowLimit"):
+            if j.get("query_execution_status") == "RowLimit":
+                raise OverflowError("row limit hit")
             return j.get("rows", [])
+        msg = j.get("query_execution_message", "")
+        if "deadline" not in msg:
+            raise RuntimeError(msg)
         time.sleep(2 ** i)
-    r.raise_for_status()
+    raise TimeoutError(sql)
 
 
-def fetch_vol(syms):
+def _window(syms, a: date, b: date) -> list[dict]:
+    """All symbols for dates [a, b]. Filtering by date first uses the table's index; split on timeout."""
+    names = ",".join(f"'{x}'" for x in syms)
+    sql = (f"SELECT * FROM volatility_history WHERE date BETWEEN '{a}' AND '{b}' "
+           f"AND act_symbol IN ({names}) ORDER BY date")
+    try:
+        return dolt_query(sql)
+    except (TimeoutError, OverflowError):
+        if (b - a).days < 2:
+            print(f"  giving up on {a}..{b}")
+            return []
+        mid = a + (b - a) / 2
+        return _window(syms, a, mid) + _window(syms, mid + timedelta(days=1), b)
+
+
+def fetch_vol(syms, start=date(2019, 1, 1)):
     out = ROOT / "data" / "vol"
     out.mkdir(parents=True, exist_ok=True)
     cols = dolt_query("SHOW COLUMNS FROM volatility_history")
     print("volatility_history columns:", [c.get("Field") for c in cols])
-    for s in syms:
-        rows = []
-        for y in range(2019, date.today().year + 1):   # one year per query, stays under the API row cap
-            rows += dolt_query(f"SELECT * FROM volatility_history WHERE act_symbol = '{s}' "
-                               f"AND date BETWEEN '{y}-01-01' AND '{y}-12-31' ORDER BY date")
-        df = pd.DataFrame(rows)
-        if df.empty:
-            print(f"{s}: no rows")
-            continue
-        df.to_csv(out / f"{s}.csv", index=False)
-        print(f"{s}: {len(df)} rows {df['date'].min()} .. {df['date'].max()}")
+    part = out / "_all_partial.csv"
+    done = pd.read_csv(part) if part.exists() else pd.DataFrame()
+    a = (pd.to_datetime(done["date"]).max().date() + timedelta(days=1)) if len(done) else start
+    rows = []
+    while a <= date.today():
+        b = min((a.replace(day=1) + timedelta(days=32)).replace(day=1) - timedelta(days=1), date.today())
+        got = _window(syms, a, b)
+        rows += got
+        print(f"vol {a:%Y-%m}: {len(got)} rows")
+        if got:   # save progress so a rerun resumes here
+            pd.concat([done, pd.DataFrame(rows)]).to_csv(part, index=False)
+        a = b + timedelta(days=1)
+    df = pd.concat([done, pd.DataFrame(rows)], ignore_index=True)
+    if df.empty:
+        print("no vol rows at all")
+        return
+    for s, g in df.groupby("act_symbol"):
+        g.drop_duplicates("date").sort_values("date").to_csv(out / f"{s}.csv", index=False)
+        print(f"{s}: {len(g)} rows {g['date'].min()} .. {g['date'].max()}")
+    missing = sorted(set(syms) - set(df["act_symbol"]))
+    if missing:
+        print("not in dataset:", missing)
 
 
 def fetch_finra(syms, start=date(2021, 10, 1)):
@@ -87,5 +124,8 @@ def fetch_finra(syms, start=date(2021, 10, 1)):
 
 if __name__ == "__main__":
     syms = sys.argv[1:] or tickers()
-    fetch_vol(syms)
+    try:
+        fetch_vol(syms)
+    except Exception as e:   # keep going: the FINRA part doesn't depend on DoltHub
+        print("DoltHub step failed:", repr(e))
     fetch_finra(syms)
