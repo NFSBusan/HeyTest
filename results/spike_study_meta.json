@@ -1,0 +1,21 @@
+{
+ "tickers": [
+  "APLD",
+  "ASTS",
+  "GME",
+  "IBRX",
+  "IREN",
+  "MSTR",
+  "MU",
+  "NBIS",
+  "NVDA",
+  "ONDS",
+  "PLTR",
+  "RKLB",
+  "SOFI",
+  "TSLA",
+  "WULF"
+ ],
+ "n_spikes": 302,
+ "holdout_reported": true
+}
