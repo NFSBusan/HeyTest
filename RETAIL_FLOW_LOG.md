@@ -67,3 +67,49 @@ Extra trials: thresholds 2× and 5× (dev only), plus a volatility-ratio test ad
 - Add a real retail measure: FINRA off-exchange volume (free; needs the network allowed) or Reddit mention history.
 - Widen the universe to 100+ names, chosen by a rule (e.g. top options volume each month, point-in-time),
   to remove the survivorship bias.
+
+## Study 2: implied vol after spikes (`scripts/iv_spike_study.py`), 2026-10-17
+
+Data: DoltHub `volatility_history` (30-day IV) for GME, TSLA, NVDA, MU, PLTR (the mid-tier names
+aren't in the dataset; MSTR stops in 2021). FINRA Reg SHO daily files for off-exchange volume, all 16 tickers.
+IV readings are about 3 per week until 2024, then daily. Rules fixed before running (see the docstring).
+No parameters were tuned.
+
+**VRP** = ln(IV at the spike) − ln(realized vol over the next 21 trading days). Above 0 means options were
+priced for more movement than happened. **Straddle** = buy a 21-day ATM straddle, hold to expiry, return on premium.
+
+| 3× threshold | n | VRP | t | straddle net | t |
+|---|---|---|---|---|---|
+| all days (baseline) | 5014 | +0.067 | 5.8 | −0.7% | −0.3 |
+| up spike | 19 | +0.112 | 1.1 | −31.6% | −1.7 |
+| any spike | 47 | **+0.175** | **2.8** | **−22.1%** | −1.9 |
+| 2× threshold, any spike | 110 | **+0.132** | **3.5** | −3.8% | −0.4 |
+
+By ticker (2× threshold): GME VRP +0.32 (straddle −22%), NVDA +0.15, TSLA −0.02, MU −0.02 (straddle +21%), PLTR −0.06.
+By period, up spikes: 2021–24 VRP +0.22 / +0.34 (3× / 2×), but 2025–26 VRP −0.06 / −0.09.
+
+**Study 2b**: is a spike "retail-heavy" (FINRA off-exchange share above the stock's own 60-day median)?
+After up spikes, realized vol is 1.33× normal for retail-heavy spikes (t 4.2, n 53) and 1.31× for the
+others (t 3.7, n 40). Off-exchange share **doesn't separate** the two, and neither group predicts 5-day returns.
+
+### Conclusions
+
+1. **Options normally cost a bit more than the movement that follows** (VRP +0.07, t 5.8). That's the usual
+   volatility risk premium: on an ordinary day a straddle buyer about breaks even before costs and loses
+   slightly after them.
+2. **After spikes, options get even richer.** Realized vol does jump (Study 1), but implied vol jumps more,
+   so buying straddles after a spike lost money on average. Selling premium after a spike is the side the
+   data favors.
+3. **But it's mostly GME.** It holds for GME (and weakly NVDA). It's flat to reversed for MU, PLTR and TSLA,
+   and up spikes in 2025–26 went the other way. With 47–110 spikes, five tickers and several cuts, this is
+   a **lead, not a proven edge**.
+4. **FINRA off-exchange share didn't add information** in this form.
+
+### What to do next
+
+- **Test "sell premium after a spike" properly** on meme-type names, with defined risk (iron condors or call
+  spreads, not naked) and real option prices (ThetaData) including the skew. The straddle approximation
+  ignores the skew and the bid/ask on each strike.
+- **Get IV for the mid-tier names** (ASTS, RKLB, IREN, ONDS…): ThetaData's free tier, or daily IBKR snapshots
+  from now on.
+- **Don't trade on this yet.** Sample: 27 GME spikes drive most of the effect.

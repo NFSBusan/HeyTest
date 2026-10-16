@@ -1,0 +1,7 @@
+split,type,n,vol_ratio_vs_base,t,ar5_pct,t_ar5
+retail-heavy (offex > own 60d median),up,53,1.33,4.16,-2.79,-0.99
+retail-heavy (offex > own 60d median),down,30,1.06,0.88,0.15,0.05
+retail-heavy (offex > own 60d median),any,163,1.07,1.64,0.4,0.27
+other,up,40,1.31,3.7,1.75,1.03
+other,down,30,1.22,2.27,-1.48,-0.78
+other,any,131,1.16,3.4,0.91,0.65
