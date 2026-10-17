@@ -113,3 +113,52 @@ others (t 3.7, n 40). Off-exchange share **doesn't separate** the two, and neith
 - **Get IV for the mid-tier names** (ASTS, RKLB, IREN, ONDS…): ThetaData's free tier, or daily IBKR snapshots
   from now on.
 - **Don't trade on this yet.** Sample: 27 GME spikes drive most of the effect.
+
+## Study 3: option strategy scan (`scripts/option_strategy_scan.py`), 2026-10-17
+
+Ten standard ~30-day strategies on GME, TSLA, NVDA, MU, PLTR (SPY as benchmark), entered on every day with
+an IV reading and held to expiry. Black-Scholes at 30-day IV with **no skew**, entry costs (4% of each leg's
+premium, min $0.02, plus commission). 4,126 entries; 100 strategy/filter/ticker rows = 100 trials.
+Results: `results/option_scan_pooled.csv`, `results/option_scan_by_ticker.csv`.
+
+Pooled, all entries (return per trade on the capital each strategy ties up):
+
+| strategy | mean/trade | t | win | worst | Sharpe |
+|---|---|---|---|---|---|
+| cash-secured short put (1 sd OTM) | +0.63% | **4.1** | 91% | −30% | 1.32 |
+| covered call (1 sd) | +3.07% | 3.3 | 59% | −42% | 0.88 |
+| stock (reference) | +4.30% | 3.4 | 55% | −45% | 0.86 |
+| long call spread | +12.4% | 1.5 | 41% | −100% | 0.28 |
+| long straddle | −0.1% | 0.0 | 38% | −100% | −0.01 |
+| short straddle (naked, 20% margin) | −3.8% | −1.1 | 58% | −1837% | −0.12 |
+| short strangle (naked) | −3.7% | −1.6 | 77% | −1779% | −0.26 |
+| iron condor | −3.4% | −2.3 | 76% | −100% | −0.38 |
+| short call spread | −4.8% | −3.2 | 82% | −100% | −0.69 |
+| long put spread | −29.1% | −4.8 | 30% | −100% | −1.06 |
+
+### Conclusions
+
+1. **Bullish strategies "won" because the sample is a bull market in hand-picked winners** (MU up about 13×,
+   NVDA 10×, PLTR 8×). Stock, long call spreads, covered calls, short puts winning and put spreads losing is
+   mostly that, not an option edge.
+2. **The one candidate that beats simply owning the stock on a risk-adjusted basis: cash-secured short puts**
+   (Sharpe 1.32 vs 0.86; t 4.1, which survives 100 trials; positive in both 2021–24, which includes the 2022
+   crash, and 2025–26). It beat the stock on GME, PLTR, MU and SPY, not on NVDA, and tied on TSLA. Selling
+   puts when IV rank ≥ 0.7 raised the return per trade from 0.6% to 1.6% (n = 334, clustered). This matches
+   the long-documented put-write premium (CBOE PUT index). Small and steady: about 0.6–1.6% a month on cash,
+   with a worst month of −30%.
+3. **Selling volatility without a view loses on these single stocks after costs** (short straddles,
+   strangles and iron condors are all negative). The exceptions are SPY and GME. Big trending moves blow
+   through the strikes.
+4. **After spikes**, short straddles made +14.9% on margin (t 1.9), consistent with Study 2, but iron
+   condors didn't (−1.4%). That's a lead, not significant.
+5. **Covered calls ≈ owning the stock** (Sharpe 0.88 vs 0.86). They just trade upside for income; no edge.
+6. Sharpe ratios for the filtered rows come from very few non-overlapping months and are unreliable (e.g. 10.7).
+
+### Biggest caveats
+
+- **No skew.** NVDA, MU and TSLA usually have normal put skew (OTM puts cost more), which understates the
+  short-put result. Meme names like GME often have call skew (OTM puts cost less), so the GME short-put
+  result is probably overstated. Needs real chain prices (ThetaData).
+- **Survivorship.** The tickers were picked because they are popular now, i.e. after they went up.
+- Physical settlement and assignment, margin calls and gap risk aren't modeled.
