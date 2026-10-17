@@ -8,3 +8,10 @@ split-adjusted, pulled 2026-10-16 (15-minute delayed feed). Converted with `scri
 - CRWV is missing (listed 2025-03-28; the IBKR result was not saved to a file). Re-pull it.
 - Prices only. No mentions, off-exchange volume or options data yet.
 - IBKR market data is for your own use; check their terms before sharing it publicly.
+
+## Added 2026-10-17 (small/mid-cap expansion)
+
+SOUN, BBAI, QBTS, RGTI, LUNR, OKLO, ACHR, JOBY, CIFR, CLSK, MARA, RIOT, AMC, PLUG, BMEA, NAK, INDI.
+Same source and window. SPAC shell periods removed (price pinned near the trust value before the merger):
+LUNR before 2023-02-14, OKLO before 2024-05-10, QBTS before 2022-08-08.
+BDRX was skipped: it has no listed options.
