@@ -5,7 +5,7 @@ Updated as we go. Newest results are in section 5. Full technical detail: RETAIL
 
 Repo:   https://github.com/NFSBusan/HeyTest
 Branch: claude/admiring-brown-tol4xd   (all work is here; nothing merged into main yet)
-Last updated: 2026-10-18 (Study 7)
+Last updated: 2026-10-18 (Study 8)
 
 
 1. GOAL
@@ -144,6 +144,19 @@ Study 7 (robustness / overfitting / bias checks on the Study 6 strategy):  <-- l
     chance of a losing year in a market crash.
   - Cannot be fixed with current data: only one year, no big market crash in the sample, hand-picked stocks.
 
+Study 8 (searching for improvements, each checked on both halves of the year):  <-- latest
+  - Tried: ranking stocks against each other (famous Goyal-Saretto method), straddles, selling only the
+    pricier side, shorter-dated options, the academic long-short version, and buying squeeze insurance.
+    NONE reliably beat the base strategy. Squeeze insurance costs more than it saves.
+  - Found two real improvements (not patterns, so no overfitting risk):
+     1) Interest on idle cash: IBKR pays ~3.1% on cash above $10k. Adds ~2.6%/yr I hadn't counted.
+     2) More positions at once. The real danger is one meme stock squeezing (e.g. BBAI +301% in one
+        week, Jan 2023). Spreading across more stocks allows safely using more margin:
+           8 positions -> ~14% of account in margin -> ~15.6%/yr before haircuts (~8%/yr realistic)
+          16 positions -> ~21% of account in margin -> ~22.5%/yr before haircuts (~11%/yr realistic)
+  - To get 16 positions: expand to a bigger list of retail-heavy stocks with liquid options, chosen by
+    a rule (this also removes my hand-picking bias). Ranking (top third) gives ~2x more positions.
+
 
 6. CURRENT BEST GUESS AT A STRATEGY (NOT proven; do not trade real money yet)
 -----------------------------------------------------------------------------
@@ -159,6 +172,9 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
 -------------
 [x] Delta-hedged test (Study 5): call spreads failed; hedged short strangles when IV is rich passed.
 [x] Realistic margin + weekly hedging + capped-risk version (Study 6).
+[x] Robustness checks (Study 7) and improvement search (Study 8).
+[ ] Expand universe by rule to ~50-80 retail-heavy stocks with liquid options (ThetaData on the Mac +
+    IBKR prices), so ~16 positions qualify each month. Re-test on that universe.
 [~] PAPER TRADE started. Month 1 list (prices 2026-10-16, Nov 20 2026 expiry): IREN JOBY MARA RIOT
     SOFI SOUN WULF -> results/paper_trades/2026-10-16_list.md, tracked in paper_ledger.csv.
     Each Friday: refresh prices (IBKR), adjust hedge shares, log P&L. After Nov 20: settle, build next list.
@@ -183,3 +199,4 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
             Study 6: realistic margin; weekly hedging works best; iron condors don't.
             Built paper-trade list #1 (7 stocks, Nov 20 expiry). IREN/WULF need re-pricing (Oct 15 quotes).
             Study 7 robustness: holds up; realistic ~11%/yr at paper size before haircuts, plan on ~5-6%.
+            Study 8: no strategy tweak helps; interest on cash + more positions do (~8-11%/yr realistic).

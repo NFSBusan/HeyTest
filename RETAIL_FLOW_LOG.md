@@ -343,3 +343,48 @@ Most realistic per-trade return ≈ +5% on margin. With the paper-trade sizing (
 capped so a 50% gap in every name costs ≤ 25%), that's about **+0.9% a month on the whole account (≈ 11%/yr)
 before haircuts**. Halving it for regime risk, selection bias and real-world frictions gives a planning figure of
 **≈ 5–6% a year**, with a real chance of a losing year if a market-wide crash hits while positions are open.
+
+## Study 8: searching for improvements (`scripts/improvements.py`), 2026-10-18
+
+Literature checked: Goyal & Saretto (2009) cross-sectional IV−RV sorts; the short-dated/retail VRP evidence;
+earnings IV-crush studies (gap risk usually offsets the crush, and we have no earnings dates). IBKR pays about
+3.1% on USD cash above $10k (BM − 0.5%). Realistic execution throughout (next-day entry, bid − 25% of spread,
+traded legs only, weekly hedge, Reg-T margin). A variant "counts" only if it beats the base in BOTH halves.
+
+| variant | 1st half | 2nd half | full | verdict |
+|---|---|---|---|---|
+| V0 base (1 sd strangle, IV/RV ≥ 1.3) | +4.0% | +6.7% | +5.3% (t 4.6) | — |
+| no filter, all days | +5.6% | +3.7% | +4.7% | mixed |
+| V1 top third by IV/RV each day (Goyal–Saretto style) | +5.2% | +5.6% | +5.4% (t 5.6), 2.2× the trades | similar per trade, more positions |
+| V2 ATM straddle | −2.9% | +2.4% | −0.3% | worse |
+| V3 sell only the richer side | +3.0% | +4.0% | +3.5% | worse |
+| V4 short-dated (~14 DTE) | +9.6% | +2.2% | +5.3% | unstable, fails |
+| V5 Goyal–Saretto long-short (long leg: hedged long straddles) | −1.8% | −0.5% | −1.2% | fails (buying vol loses after costs) |
+| V6 strangle + 2.5 sd call as squeeze insurance | +3.1% | +0.9% | +2.1% (vs +5.1% unprotected on the same trades) | insurance costs more than it saves |
+
+**Tail risk, measured properly.** Historical replay of 5-day joint moves (2021–2026, IV +50% shock, each stock's
+first 65 trading days skipped): meme squeezes dominate (BBAI +301% in 5 days in Jan 2023, QBTS +245%, GME and APLD
+about +200%). The first version of this stress was wrong twice: it included LUNR's pre-options SPAC week (+717%),
+and it averaged over all 24 names, which understates a single-name squeeze in an 8-position book. Fixed version:
+1,000 random books, sized so the 90th-percentile book's worst week costs ≤ 20% of the account.
+
+| positions in the book | unlucky worst week (per $ margin) | margin use | est. annual return incl. 3% interest (in-sample) |
+|---|---|---|---|
+| 4 | −225% | 9% | 11.0% |
+| 8 | −145% | 14% | 15.6% |
+| 12 | −113% | 18% | 19.4% |
+| 16 | −96% | 21% | 22.5% |
+| 24 | −76% | 26% | 28.3% |
+
+### Conclusions
+
+1. **No trade-structure tweak reliably improves the return.** The famous academic long-short version fails
+   here after costs, which matches published doubts about transaction costs (Do, Foster & Gray 2016).
+2. **Two real improvements, neither a "pattern":**
+   - **interest on idle cash** (~85% of the account): +2.6%/yr that was missing from earlier figures;
+   - **more simultaneous positions.** The binding constraint is single-name squeeze risk, so diversification is
+     the main lever: 8 → 16 positions raises safe margin use from 14% to 21% (est. 15.6% → 22.5%/yr before haircuts).
+     The ranking rule (V1) gives about twice as many positions at the same per-trade return.
+3. Getting 16 positions needs a bigger universe of retail-heavy names with liquid options, chosen by a rule.
+   That also removes the hand-picking bias.
+4. **Updated realistic figures (after the same ~50% haircut as Study 7):** 8 positions ≈ 8%/yr; 16 positions ≈ 11%/yr.

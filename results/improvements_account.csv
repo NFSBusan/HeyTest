@@ -1,0 +1,5 @@
+variant,worst_week_8name_book,worst_week_all_names,worst_week_date,p99_week_per_margin,margin_use,acct_avg_month,acct_annualized,acct_worst_month,acct_max_dd,without_interest
+V0 base,-146.3%,-75.8%,2023-01-12,-52.3%,14%,1.21%,15.5%,0.05%,0.0%,12.6%
+V1 top third,-141.9%,-71.8%,2023-01-12,-48.7%,14%,0.91%,11.5%,-0.31%,0.3%,8.7%
+V4 short-dated,-253.8%,-110.8%,2023-01-12,-51.0%,8%,0.73%,9.2%,-0.44%,0.4%,6.2%
+V6 squeeze-protected,-81.9%,-55.3%,2023-01-13,-38.6%,24%,1.39%,18.0%,-1.02%,1.0%,15.4%
