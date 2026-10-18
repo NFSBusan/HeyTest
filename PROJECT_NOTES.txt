@@ -145,7 +145,11 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
 -------------
 [x] Delta-hedged test (Study 5): call spreads failed; hedged short strangles when IV is rich passed.
 [x] Realistic margin + weekly hedging + capped-risk version (Study 6).
-[ ] PAPER TRADE: each month, list the stocks where IV/RV >= 1.3 and track the trades without real money.
+[~] PAPER TRADE started. Month 1 list (prices 2026-10-16, Nov 20 2026 expiry): IREN JOBY MARA RIOT
+    SOFI SOUN WULF -> results/paper_trades/2026-10-16_list.md, tracked in paper_ledger.csv.
+    Each Friday: refresh prices (IBKR), adjust hedge shares, log P&L. After Nov 20: settle, build next list.
+    Build a list:  python3 scripts/paper_trade_list.py 100000
+    Sizing: margin <= 50% of account, and a 50% gap in every stock at once loses <= 25% of the account.
 [ ] More option history (ThetaData paid tier) to test 2020-2025 too.
 [ ] Re-pull CRWV prices from IBKR.
 [ ] Pick stocks by a rule (e.g. most option volume each month), not by hand, to remove bias.
@@ -162,4 +166,5 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
 2026-10-18  Option data pushed (after fixing GitHub token auth). Study 4 on real quotes.
             Created this notes file. Study 5 (delta-hedged): call-spread idea dropped; hedged short
             strangles when options are expensive are now the lead.
-            Study 6: realistic margin; weekly hedging works best; iron condors don't. Next: paper trading.
+            Study 6: realistic margin; weekly hedging works best; iron condors don't.
+            Built paper-trade list #1 (7 stocks, Nov 20 expiry). IREN/WULF need re-pricing (Oct 15 quotes).
