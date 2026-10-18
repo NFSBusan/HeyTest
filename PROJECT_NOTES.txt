@@ -62,6 +62,11 @@ Push data to GitHub (needs a GitHub token, the "classic" kind, starting ghp_, wi
 
 Keep the Mac awake for a long run: put "caffeinate -i" in front of the python3 command.
 
+Build the rule-based universe + download its data (Theta Terminal must be running):
+    cd ~/HeyTest && caffeinate -i python3 scripts/build_universe.py
+    Rule: top 80 stocks by FINRA off-exchange (retail-routed) dollar volume in Sept 2025, with listed
+    options, price $2-$150, no ETFs, no S&P 100 mega caps. Fixed BEFORE the test year (no hindsight).
+
 
 4. KEY IDEAS (in plain words)
 -----------------------------
@@ -173,8 +178,8 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
 [x] Delta-hedged test (Study 5): call spreads failed; hedged short strangles when IV is rich passed.
 [x] Realistic margin + weekly hedging + capped-risk version (Study 6).
 [x] Robustness checks (Study 7) and improvement search (Study 8).
-[ ] Expand universe by rule to ~50-80 retail-heavy stocks with liquid options (ThetaData on the Mac +
-    IBKR prices), so ~16 positions qualify each month. Re-test on that universe.
+[~] Expand universe by rule (scripts/build_universe.py, written 2026-10-18; to run on the Mac),
+    then re-test with stress-based sizing and a cap per cluster of correlated stocks.
 [~] PAPER TRADE started. Month 1 list (prices 2026-10-16, Nov 20 2026 expiry): IREN JOBY MARA RIOT
     SOFI SOUN WULF -> results/paper_trades/2026-10-16_list.md, tracked in paper_ledger.csv.
     Each Friday: refresh prices (IBKR), adjust hedge shares, log P&L. After Nov 20: settle, build next list.
