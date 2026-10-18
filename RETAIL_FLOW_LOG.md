@@ -162,3 +162,58 @@ Pooled, all entries (return per trade on the capital each strategy ties up):
   result is probably overstated. Needs real chain prices (ThetaData).
 - **Survivorship.** The tickers were picked because they are popular now, i.e. after they went up.
 - Physical settlement and assignment, margin calls and gap risk aren't modeled.
+
+## Study 4: real option quotes, small/mid caps (`scripts/real_options_backtest.py`), 2026-10-18
+
+Data: ThetaData end-of-day bid/ask for every strike, monthly expirations, Oct 2025 – Oct 2026, for 26
+small/mid caps plus GME and NVDA. CRWV was skipped (no IBKR price file); BMEA, INDI and NAK have chains too
+thin for most structures. Entry every day at the ~30-day monthly expiry, hold to expiry. **Sell at the bid,
+buy at the ask** (a mid-price version is the optimistic bound). Legs with spreads over 50% of mid are skipped.
+106 rows = 106 trials. Rules fixed before running. Trades: `results/real_options_trades.csv.gz`.
+
+**Regime warning:** this was a violent, net-down year for these names. Their average 21-day forward return
+swung between −33% and +26% depending on the entry month, and averaged −1.8%. One year is one regime.
+
+### What held up
+
+1. **Options on retail small/mid caps are priced well above the movement that follows.** ATM IV exceeded
+   the next 21 days' realized vol by **+16% (log), t = 10**, across 5,123 ticker-days. After volume spikes
+   it was +14% (t 2.8): no extra richness after spikes in this sample, unlike GME in Study 2.
+2. **Buying options lost.** Long straddles −8% per trade, long call spreads −23% (bid/ask fills).
+3. **Retail call skew is real in meme names.** 1 sd OTM calls were priced at a higher IV than ATM: AMC +21%,
+   BMEA +24%, GME +19%, BBAI +9%, IBRX +10%. NVDA had normal (negative) call skew. Put skew was mild
+   (0–13%) on most names.
+
+### Strategy results (small/mid caps, bid/ask fills, mean return per trade on capital at risk)
+
+| strategy | all days | IV rich (IV/RV20 ≥ 1.3) | after spike |
+|---|---|---|---|
+| cash-secured short put | −0.3% (t −0.4) | +0.3% | +1.8% (t 3.0, n 66) |
+| short call spread 1/2 sd | +0.4% | +1.9% (t 2.4) | +3.2% (t 7.8, n 39) |
+| short strangle (naked, 20% margin) | +4.5% (t 1.6), worst −747% | **+11.8% (t 4.0)**, worst −284% | +0.4% |
+| iron condor | −3.8% (t −1.9) | +1.9% | too few |
+| long straddle | −8.1% | −13.1% | −11.1% |
+| stock (reference) | −1.8% | −0.7% | −0.9% |
+
+GME + NVDA, for comparison: short puts +0.95% (t 6.4), put credit spreads +8.2% (t 17), consistent with Study 3.
+
+### Reading it honestly
+
+- **The edge is the volatility premium (point 1), not direction.** Selling options is the right side, but:
+  - **naked** short strangles/straddles had −747% / −838% worst trades. One gap can wipe out a year;
+  - **defined-risk** versions (iron condors, put credit spreads) often can't be filled: the far wings are
+    illiquid or have >50% spreads (only 487 condors and 780 put spreads out of ~5,400 entries), and the
+    bid/ask on the rest eats 1–3% per trade.
+- **Short call spreads look best**, especially after spikes (+3.2%, worst −6%) and when IV is rich. But
+  (a) only 39 after-spike trades over 20 weeks and 13 tickers, (b) the stocks *fell* 3.2% on average in those
+  trades and the sample year was net down, so some of it is direction, not volatility premium, and (c) it
+  lost badly on the names that rallied (RKLB −18%, NBIS −6%, RIOT −6%).
+- **Cash-secured puts did NOT work on small/mid caps this year** (−0.3%), unlike the large-cap 5-year
+  result (Study 3). In a falling year, short puts get assigned.
+
+### Next
+
+- **Delta-hedged** short-vol test (hedge daily with stock) to separate the volatility premium from direction.
+  If short calls/strangles still pay after hedging, the edge is real; if not, it was the down year.
+- More history: ThetaData free tier is 1 year only. Either a paid tier for 2020–2025, or keep recording.
+- Get CRWV's IBKR price file and re-run.

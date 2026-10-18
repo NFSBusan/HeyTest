@@ -1,0 +1,107 @@
+fill,group,filter,strategy,n,tickers,mean_pct,t,win_pct,worst_pct
+ask_bid,small/mid,all,short_put,3627,25,-0.29,-0.42,78,-48
+ask_bid,small/mid,all,put_credit_spread,780,22,-4.64,-1.5,78,-100
+ask_bid,small/mid,all,covered_call,4445,26,-2.13,-0.86,44,-64
+ask_bid,small/mid,all,stock,5399,26,-1.81,-0.62,41,-70
+ask_bid,small/mid,all,short_call_spread,1900,24,0.36,0.39,90,-100
+ask_bid,small/mid,all,iron_condor,487,20,-3.78,-1.91,67,-100
+ask_bid,small/mid,all,short_strangle,3438,24,4.48,1.55,75,-747
+ask_bid,small/mid,all,short_straddle,4808,26,-0.08,-0.01,55,-838
+ask_bid,small/mid,all,long_straddle,4808,26,-8.07,-1.57,39,-100
+ask_bid,small/mid,all,long_call_spread,4395,26,-23.39,-2.14,28,-100
+ask_bid,small/mid,all,long_put_spread,3607,25,5.35,0.42,45,-100
+ask_bid,small/mid,after spike,short_put,66,17,1.75,3.04,95,-28
+ask_bid,small/mid,after spike,covered_call,83,20,-1.57,-0.41,41,-63
+ask_bid,small/mid,after spike,stock,120,20,-0.88,-0.17,36,-70
+ask_bid,small/mid,after spike,short_call_spread,39,13,3.24,7.75,90,-6
+ask_bid,small/mid,after spike,short_strangle,60,17,0.39,0.02,88,-747
+ask_bid,small/mid,after spike,short_straddle,101,20,-3.27,-0.21,58,-838
+ask_bid,small/mid,after spike,long_straddle,101,20,-11.07,-0.96,34,-95
+ask_bid,small/mid,after spike,long_call_spread,80,18,-17.65,-0.82,29,-100
+ask_bid,small/mid,after spike,long_put_spread,66,17,-18.21,-1.14,38,-100
+ask_bid,small/mid,IV rich,short_put,618,25,0.32,0.44,81,-24
+ask_bid,small/mid,IV rich,put_credit_spread,87,17,0.65,0.17,85,-91
+ask_bid,small/mid,IV rich,covered_call,938,26,-0.36,-0.12,51,-48
+ask_bid,small/mid,IV rich,stock,1406,26,-0.66,-0.2,47,-57
+ask_bid,small/mid,IV rich,short_call_spread,387,19,1.86,2.4,87,-72
+ask_bid,small/mid,IV rich,iron_condor,58,10,1.88,0.69,83,-62
+ask_bid,small/mid,IV rich,short_strangle,587,24,11.84,4.0,79,-284
+ask_bid,small/mid,IV rich,short_straddle,1040,26,2.43,0.32,55,-542
+ask_bid,small/mid,IV rich,long_straddle,1040,26,-13.07,-2.0,36,-100
+ask_bid,small/mid,IV rich,long_call_spread,914,26,-18.52,-1.39,33,-100
+ask_bid,small/mid,IV rich,long_put_spread,610,25,-15.11,-0.86,35,-100
+ask_bid,GME+NVDA,all,short_put,344,2,0.95,6.38,94,-8
+ask_bid,GME+NVDA,all,put_credit_spread,218,2,8.21,17.27,99,-44
+ask_bid,GME+NVDA,all,covered_call,412,2,2.17,2.6,59,-18
+ask_bid,GME+NVDA,all,stock,418,2,2.16,1.98,55,-20
+ask_bid,GME+NVDA,all,short_call_spread,378,2,-3.89,-1.67,86,-100
+ask_bid,GME+NVDA,all,iron_condor,216,2,4.09,1.2,88,-100
+ask_bid,GME+NVDA,all,short_strangle,341,2,6.19,3.78,85,-94
+ask_bid,GME+NVDA,all,short_straddle,416,2,6.46,1.59,68,-179
+ask_bid,GME+NVDA,all,long_straddle,416,2,-16.28,-2.28,30,-100
+ask_bid,GME+NVDA,all,long_call_spread,411,2,-2.56,-0.22,33,-100
+ask_bid,GME+NVDA,all,long_put_spread,344,2,-31.06,-3.2,30,-100
+ask_bid,GME+NVDA,IV rich,short_put,90,2,0.83,2.98,91,-8
+ask_bid,GME+NVDA,IV rich,put_credit_spread,32,2,7.49,3.89,97,-44
+ask_bid,GME+NVDA,IV rich,covered_call,119,2,2.95,1.6,62,-18
+ask_bid,GME+NVDA,IV rich,stock,120,2,3.28,1.25,58,-20
+ask_bid,GME+NVDA,IV rich,short_call_spread,106,2,-5.58,-1.03,89,-100
+ask_bid,GME+NVDA,IV rich,iron_condor,31,2,8.68,2.08,97,-100
+ask_bid,GME+NVDA,IV rich,short_strangle,89,2,7.25,2.53,88,-94
+ask_bid,GME+NVDA,IV rich,short_straddle,120,2,5.08,0.51,66,-179
+ask_bid,GME+NVDA,IV rich,long_straddle,120,2,-14.16,-0.95,32,-100
+ask_bid,GME+NVDA,IV rich,long_call_spread,119,2,7.14,0.27,35,-100
+ask_bid,GME+NVDA,IV rich,long_put_spread,90,2,-26.78,-1.35,30,-100
+mid,small/mid,all,short_put,3627,25,0.07,0.09,78,-47
+mid,small/mid,all,put_credit_spread,780,22,-2.89,-0.91,78,-100
+mid,small/mid,all,covered_call,4445,26,-1.85,-0.74,44,-63
+mid,small/mid,all,stock,5399,26,-1.81,-0.62,41,-70
+mid,small/mid,all,short_call_spread,1900,24,1.63,1.76,93,-100
+mid,small/mid,all,iron_condor,487,20,-2.22,-1.1,67,-100
+mid,small/mid,all,short_strangle,3438,24,7.0,2.39,76,-739
+mid,small/mid,all,short_straddle,4808,26,6.06,0.97,58,-830
+mid,small/mid,all,long_straddle,4808,26,-3.33,-0.61,42,-100
+mid,small/mid,all,long_call_spread,4395,26,-16.56,-1.41,29,-100
+mid,small/mid,all,long_put_spread,3607,25,13.85,1.01,46,-100
+mid,small/mid,after spike,short_put,66,17,2.15,3.7,95,-28
+mid,small/mid,after spike,covered_call,83,20,-1.17,-0.31,41,-62
+mid,small/mid,after spike,stock,120,20,-0.88,-0.17,36,-70
+mid,small/mid,after spike,short_call_spread,39,13,5.16,11.47,97,-1
+mid,small/mid,after spike,short_strangle,60,17,3.35,0.17,88,-739
+mid,small/mid,after spike,short_straddle,101,20,6.1,0.38,60,-830
+mid,small/mid,after spike,long_straddle,101,20,-4.98,-0.41,39,-95
+mid,small/mid,after spike,long_call_spread,80,18,-8.85,-0.38,29,-100
+mid,small/mid,after spike,long_put_spread,66,17,-11.88,-0.69,38,-100
+mid,small/mid,IV rich,short_put,618,25,0.7,0.96,82,-24
+mid,small/mid,IV rich,put_credit_spread,87,17,2.63,0.66,86,-91
+mid,small/mid,IV rich,covered_call,938,26,-0.01,-0.0,51,-46
+mid,small/mid,IV rich,stock,1406,26,-0.66,-0.2,47,-57
+mid,small/mid,IV rich,short_call_spread,387,19,3.14,3.84,94,-72
+mid,small/mid,IV rich,iron_condor,58,10,3.38,1.29,83,-60
+mid,small/mid,IV rich,short_strangle,587,24,14.44,4.82,80,-278
+mid,small/mid,IV rich,short_straddle,1040,26,10.82,1.42,59,-520
+mid,small/mid,IV rich,long_straddle,1040,26,-6.94,-0.98,39,-100
+mid,small/mid,IV rich,long_call_spread,914,26,-10.36,-0.72,34,-100
+mid,small/mid,IV rich,long_put_spread,610,25,-7.1,-0.37,36,-100
+mid,GME+NVDA,all,short_put,344,2,1.03,6.82,94,-8
+mid,GME+NVDA,all,put_credit_spread,218,2,8.51,18.2,99,-44
+mid,GME+NVDA,all,covered_call,412,2,2.26,2.71,59,-18
+mid,GME+NVDA,all,stock,418,2,2.16,1.98,55,-20
+mid,GME+NVDA,all,short_call_spread,378,2,-3.09,-1.32,86,-100
+mid,GME+NVDA,all,iron_condor,216,2,4.51,1.33,88,-100
+mid,GME+NVDA,all,short_strangle,341,2,6.89,4.17,85,-94
+mid,GME+NVDA,all,short_straddle,416,2,8.19,2.02,69,-175
+mid,GME+NVDA,all,long_straddle,416,2,-12.98,-1.74,31,-100
+mid,GME+NVDA,all,long_call_spread,411,2,4.5,0.36,34,-100
+mid,GME+NVDA,all,long_put_spread,344,2,-26.11,-2.54,32,-100
+mid,GME+NVDA,IV rich,short_put,90,2,0.96,3.42,91,-8
+mid,GME+NVDA,IV rich,put_credit_spread,32,2,7.75,4.06,97,-44
+mid,GME+NVDA,IV rich,covered_call,119,2,3.1,1.67,63,-18
+mid,GME+NVDA,IV rich,stock,120,2,3.28,1.25,58,-20
+mid,GME+NVDA,IV rich,short_call_spread,106,2,-4.38,-0.8,89,-100
+mid,GME+NVDA,IV rich,iron_condor,31,2,9.04,2.16,97,-100
+mid,GME+NVDA,IV rich,short_strangle,89,2,8.43,2.95,88,-94
+mid,GME+NVDA,IV rich,short_straddle,120,2,7.66,0.78,68,-175
+mid,GME+NVDA,IV rich,long_straddle,120,2,-9.64,-0.61,32,-100
+mid,GME+NVDA,IV rich,long_call_spread,119,2,19.55,0.65,37,-100
+mid,GME+NVDA,IV rich,long_put_spread,90,2,-21.15,-1.0,31,-100
