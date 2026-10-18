@@ -217,3 +217,41 @@ GME + NVDA, for comparison: short puts +0.95% (t 6.4), put credit spreads +8.2% 
   If short calls/strangles still pay after hedging, the edge is real; if not, it was the down year.
 - More history: ThetaData free tier is 1 year only. Either a paid tier for 2020–2025, or keep recording.
 - Get CRWV's IBKR price file and re-run.
+
+## Study 5: delta-hedged (`scripts/hedged_backtest.py`), 2026-10-18
+
+Same entries and bid/ask fills as Study 4, plus a daily close-to-close stock hedge (Black-Scholes delta at
+that day's ATM IV) with 5 bps of cost on every share traded. This separates volatility premium from direction.
+29 rows = 29 trials.
+
+| small/mid caps | unhedged | **hedged** | hedged worst |
+|---|---|---|---|
+| short call spread, all | +0.4% | **−1.2% (t −4.2)** | −48% |
+| short call spread, after spike | +3.2% | **−2.1% (t −2.4)** | −12% |
+| short put | −0.3% | +0.2% (t 1.4) | −10% |
+| short strangle, all | +4.5% | **+2.8% (t 3.2)** | −134% |
+| short strangle, IV rich | +11.8% | **+5.8% (t 6.2)** | −46% |
+| short straddle, IV rich | +2.4% | +5.1% (t 2.4) | −140% |
+| long straddle | −8.1% | −14.9% (t −10.9) | −76% |
+
+(returns per trade: strangle/straddle on 20% of spot as margin; spreads on max loss; puts on strike)
+
+### Conclusions
+
+1. **The short call spread fails the test.** Its profit was the stocks falling, not overpriced calls. Hedged,
+   it loses. Study 4's "best candidate" was a disguised bearish bet. Drop it as a retail-premium strategy.
+2. **The volatility premium is real and survives hedging:** delta-hedged short strangles made +2.8% per
+   trade (t 3.2), and **+5.8% (t 6.2) when IV was ≥ 1.3× the last 20 days' realized vol.** The mirror
+   image (hedged long straddles) lost −15% (t −11).
+3. It worked on most of the retail meme names (SOUN, PLUG, BBAI, AMC, RGTI, JOBY, NAK, ACHR, SOFI, IREN,
+   MARA) and **lost on the big-jump names** (ASTS, LUNR, NBIS, RKLB, QBTS, RIOT).
+4. **Spike timing didn't help** once hedged (−3% to −4.5%). The useful timing signal is "IV rich vs recent
+   movement", not "volume spike".
+
+### Caveats
+
+- **Margin:** brokers require far more than 20% for naked options on very volatile small caps. Real
+  returns on capital will be lower, perhaps by half or more.
+- **Hedging:** close-to-close hedging in a model; real hedging needs daily stock trades, and overnight gaps
+  still hurt (hedged worst trade −134% of the assumed margin).
+- One year, 26 hand-picked names, 135 trials across Studies 4–5.
