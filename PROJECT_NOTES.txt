@@ -5,7 +5,7 @@ Updated as we go. Newest results are in section 5. Full technical detail: RETAIL
 
 Repo:   https://github.com/NFSBusan/HeyTest
 Branch: claude/admiring-brown-tol4xd   (all work is here; nothing merged into main yet)
-Last updated: 2026-10-18 (Study 6)
+Last updated: 2026-10-18 (Study 7)
 
 
 1. GOAL
@@ -130,6 +130,20 @@ Study 6 (realistic broker margin, weekly vs daily hedging, capped-risk version):
   - WARNING: these numbers look too good to trust yet (11 months, one market regime, hand-picked
     stocks, end-of-day quotes, no margin calls modeled). Next step is paper trading, not real money.
 
+Study 7 (robustness / overfitting / bias checks on the Study 6 strategy):  <-- latest
+  - Settings don't matter much: changing the threshold, strike distance, expiry or hedge frequency gives
+    similar results (a broad plateau). Good sign: not overfit to one magic setting.
+  - Trading the NEXT day (no lookahead), with worse fills, only in options that traded that day:
+    still about +5.2% per trade (was +6.2%).
+  - Both halves of the year were positive. Dropping the 3 best stocks still gives +5.2%. 20 of 24 stocks positive.
+  - BUT the "options expensive" filter (IV/RV >= 1.3) barely beats random picking. The real edge is the
+    general overpricing of options on these names, not the timing filter.
+  - About 1.5% of trades would have had an interim loss bigger than the margin (margin-call risk).
+  - MOST REALISTIC FIGURE: about +0.9% a month on the whole account (about 11% a year) at the paper-trade
+    size, before haircuts. PLANNING FIGURE after halving for unknowns: about 5-6% a year, with a real
+    chance of a losing year in a market crash.
+  - Cannot be fixed with current data: only one year, no big market crash in the sample, hand-picked stocks.
+
 
 6. CURRENT BEST GUESS AT A STRATEGY (NOT proven; do not trade real money yet)
 -----------------------------------------------------------------------------
@@ -168,3 +182,4 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
             strangles when options are expensive are now the lead.
             Study 6: realistic margin; weekly hedging works best; iron condors don't.
             Built paper-trade list #1 (7 stocks, Nov 20 expiry). IREN/WULF need re-pricing (Oct 15 quotes).
+            Study 7 robustness: holds up; realistic ~11%/yr at paper size before haircuts, plan on ~5-6%.

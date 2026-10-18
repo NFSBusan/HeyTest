@@ -297,3 +297,49 @@ weekly +5.1% / +5.8%, +97%. 50 bps: daily +0.3% / +1.2%, +18%; weekly +4.3% / +5
 4. **These results look too good to trust yet:** 11 months, one regime, hand-picked stocks, ~150 trials
    across Studies 4–6, end-of-day quotes (real fills at the bid on size may be worse), and no margin calls
    between entry and expiry are modeled. Treat this as the candidate to paper-trade, not as an expected return.
+
+## Study 7: robustness / bias checks (`scripts/robustness.py`), 2026-10-18
+
+Base = paper-trade rule (1 sd strangle, ~30 DTE, IV/RV20 ≥ 1.3, hedge every 5 days, sell at bid, Reg-T margin).
+Results: `results/robustness_summary.csv`. 22 more trials (≈180 in total).
+
+| check | per trade | t | account avg month | losing months |
+|---|---|---|---|---|
+| base | +6.2% | 5.5 | +6.7% | 1/11 |
+| threshold 0 / 1.0 / 1.2 / 1.4 / 1.5 | +5.5 / 5.4 / 5.7 / 6.2 / 6.7% | 3.6–6.4 | 5.1–6.6% | 1–3/11 |
+| strikes 0.75 / 1.25 sd | +4.0 / 6.0% | 2.6 / 4.0 | 5.1 / 7.9% | 3 / 1 |
+| DTE 45 (DTE 20 = same expiries as base) | +6.5% | 6.1 | 6.2% | 1/11 |
+| hedge every 1 / 3 / 10 days | +3.4 / 5.8 / 6.5% | 6.3 / 7.0 / 3.6 | 4.0 / 6.4 / 5.9% | 1 / 1 / 3 |
+| **enter next day** (no same-close lookahead) | +6.0% | 5.1 | 8.0% | 1/11 |
+| sell at bid − 25% of spread | +5.3% | 4.8 | 5.8% | 1/11 |
+| only options that traded that day | +6.2% | 5.4 | 6.7% | 1/11 |
+| **next day + worse fills + traded only (most realistic)** | **+5.2%** | **4.6** | 7.1% | 3/11 |
+| first half (Oct–Mar) / second half (Apr–Oct) | +5.2% / +7.2% | 2.7 / 6.9 | 6.7 / 6.8% | 1/7, 0/5 |
+| drop the 3 best tickers (AMC, ONDS, ACHR) | +5.2% | 4.2 | 6.5% | 1/11 |
+
+- Placebo: random picks of the same number of trades averaged +5.5% (95% range 4.5–6.4%) vs +6.2% for
+  IV-rich. Only 6% of random draws matched it, so **the IV/RV filter adds little and isn't statistically proven.**
+- Path risk: 1.5% of trades (9/587) had an interim loss larger than the initial margin (a margin call /
+  forced close). The 5th-percentile worst interim P&L was −25% of capital.
+- Deflated Sharpe (160 trials, 112 non-overlapping trades): the probability that the true Sharpe is above 0
+  is high, but with one year of data this test has little power against regime risk.
+- 20 of 24 tickers were positive.
+
+### Conclusions
+
+1. **No sign of overfitting to a parameter.** Results form a broad plateau across thresholds, strikes,
+   expiries and hedge frequencies. The edge doesn't hinge on the exact settings chosen.
+2. **No lookahead or fill artifact.** Next-day entry and worse fills cut it from +6.2% to +5.2% per trade.
+3. **The edge is the general volatility premium on these names, not the timing filter.** IV/RV ≥ 1.3
+   barely beats random selection. Keep it for the paper trade (it was fixed in advance), but don't count on it.
+4. **Weekly hedging was a post-hoc choice.** Hedging every 3, 5 or 10 days all beat daily, and 3 days was
+   about as good with smaller tails. The gain from hedging less often is real in this sample but unexplained.
+5. **What these checks can't fix:** one year, one regime (no 2008/2020-style market crash), a hand-picked
+   universe, end-of-day quotes, and IBKR margin above Reg-T.
+
+### Most realistic figure
+
+Most realistic per-trade return ≈ +5% on margin. With the paper-trade sizing (≈13% of the account in margin,
+capped so a 50% gap in every name costs ≤ 25%), that's about **+0.9% a month on the whole account (≈ 11%/yr)
+before haircuts**. Halving it for regime risk, selection bias and real-world frictions gives a planning figure of
+**≈ 5–6% a year**, with a real chance of a losing year if a market-wide crash hits while positions are open.
