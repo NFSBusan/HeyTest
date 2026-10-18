@@ -1,0 +1,135 @@
+RETAIL-FLOW OPTIONS PROJECT: RUNNING NOTES
+==========================================
+Plain-language record of what we've done, what we found, and how to run things.
+Updated as we go. Newest results are in section 5. Full technical detail: RETAIL_FLOW_LOG.md.
+
+Repo:   https://github.com/NFSBusan/HeyTest
+Branch: claude/admiring-brown-tol4xd   (all work is here; nothing merged into main yet)
+Last updated: 2026-10-18
+
+
+1. GOAL
+-------
+Find stocks with heavy (or rising) retail-investor activity, predict what happens around those
+retail waves, and trade options to profit from it. Focus: small and mid-cap stocks.
+
+
+2. DATA WE HAVE (all in the repo, under data/)
+----------------------------------------------
+data/prices/          5 years of daily prices (IBKR), 33 stocks + SPY, to 2026-10-16.
+                      Original 15: ASTS RKLB IREN ONDS NBIS APLD WULF IBRX SOFI GME MSTR NVDA TSLA MU PLTR
+                      Added 17:    SOUN BBAI QBTS RGTI LUNR OKLO ACHR JOBY CIFR CLSK MARA RIOT AMC PLUG
+                                   BMEA NAK INDI
+                      Notes: NBIS starts Oct 2024 (Yandex trading halt removed). LUNR, OKLO and QBTS
+                      start at their SPAC mergers. CRWV is MISSING (needs a re-pull). BDRX was
+                      skipped (no options).
+data/vol/             Daily 30-day implied vol history (DoltHub, free) for GME TSLA NVDA MU PLTR SPY.
+                      DoltHub does NOT cover the small/mid caps.
+data/finra/           Daily off-exchange volume (FINRA, free) for the original 16 tickers, Oct 2021 – Oct 2026.
+                      Off-exchange volume is a rough stand-in for retail orders.
+data/options/         REAL option quotes (ThetaData free tier): bid/ask for every strike, monthly
+                      expirations, Oct 2025 – Oct 2026, 29 stocks (26 small/mid + GME + NVDA + CRWV).
+results/              Output tables from each study.
+
+Sources that DON'T work / limits:
+- The cloud session can't reach market websites directly (blocked network). Downloads run on the Mac.
+- IBKR (connected) gives stock price history and LIVE option quotes, but NO option price history.
+- Reddit / X / Facebook / Instagram / TikTok mention history: not available for free.
+- ThetaData free tier = only 1 year of option history. A paid tier would give 2020+.
+
+
+3. HOW TO RUN THINGS ON THE MAC
+-------------------------------
+Folder: ~/HeyTest     (use python3, not python)
+
+Get latest code from GitHub:
+    cd ~/HeyTest && git pull
+
+Java (needed for the Theta Terminal) is installed in ~/java (Java 21).
+
+ThetaData option download:
+    Window 1:  cd ~/Downloads && java -jar ThetaTerminal*.jar      (leave it open)
+    Window 2:  cd ~/HeyTest && python3 scripts/fetch_thetadata.py TICKER1 TICKER2 ...
+    It resumes if stopped. Problems get written to data/options/_debug.txt.
+
+Push data to GitHub (needs a GitHub token, the "classic" kind, starting ghp_, with "repo" scope):
+    Make a token: https://github.com/settings/tokens/new?scopes=repo&description=HeyTest
+    1) Paste this command into Terminal but DON'T press Enter yet
+    2) Copy the token on the GitHub page
+    3) Press Enter
+    cd ~/HeyTest && T=$(pbpaste) && git add data && git commit -m "data" ; git pull --no-rebase --no-edit "https://NFSBusan:$T@github.com/NFSBusan/HeyTest.git" claude/admiring-brown-tol4xd && git push "https://NFSBusan:$T@github.com/NFSBusan/HeyTest.git" claude/admiring-brown-tol4xd
+    NEVER paste the token itself into the chat.
+
+Keep the Mac awake for a long run: put "caffeinate -i" in front of the python3 command.
+
+
+4. KEY IDEAS (in plain words)
+-----------------------------
+- Implied vol (IV): how much movement the option price "expects". If IV is higher than the
+  movement that actually happens, options were overpriced, so sellers win and buyers lose.
+- Volume spike: a day with 3x or more normal volume. Our stand-in for a retail pile-in.
+- Cash-secured put: sell a put, keep cash to buy the stock if it falls. You earn the premium
+  INSTEAD OF the stock's gains (not on top of them).
+- Covered call: own the stock and sell a call. Extra income, but the upside is capped.
+- Credit spread / iron condor: sell an option and buy a cheaper one further out, so the
+  maximum loss is capped.
+- Naked short options: no cap on losses. In our tests these had single trades losing 7x the margin.
+- We always fix the test rules BEFORE looking at results, and check on data not used for tuning,
+  to avoid fooling ourselves.
+
+
+5. RESULTS SO FAR (newest last)
+-------------------------------
+Study 1 (prices only, 15 stocks, 5 years):
+  - Volume spikes do NOT predict direction (up or down). No reliable price-prediction edge.
+  - After a big up-move volume spike, the stock moves about 30-40% MORE than usual for the next
+    10 days. Held on fresh data (t = 4.5).
+
+Study 2 (implied vol history, GME TSLA NVDA MU PLTR):
+  - Normally options cost ~7% more than the movement that follows.
+  - After spikes, options get even pricier (~13-18%), so buying options after a spike lost money.
+  - Mostly driven by GME. FINRA off-exchange share did not help.
+
+Study 3 (approximate option pricing, 5 large/meme names, 5 years):
+  - Only cash-secured puts beat owning the stock risk-adjusted: ~0.6-1.6% a month on cash
+    (about 5-25% a year depending on the stock), worst month about -30%. Buying options lost.
+  - Leverage: 2x roughly doubles both gains and losses. Stay at 1-1.5x, or use put credit
+    spreads with 20-30% of the account at risk. The test period had no 2008/2020-style crash.
+
+Study 4 (REAL option quotes, 26 small/mid caps + GME/NVDA, Oct 2025 - Oct 2026):  <-- latest
+  - Options on retail small/mid caps were priced ~16% above the movement that followed
+    (very strong, t = 10). Buying options lost (straddles -8%, call spreads -23% per trade).
+  - Meme names have pricier upside calls (AMC, BMEA, GME, BBAI, IBRX): retail call buying.
+  - Best-looking trade: SELL CALL SPREADS on these names, especially after a volume spike
+    (+3.2% per trade, worst -6%, but only 39 trades) or when options are already expensive.
+  - Selling naked strangles paid on average but had catastrophic worst trades.
+  - Iron condors / put spreads: often can't be filled (wide, illiquid far-out options).
+  - Cash-secured puts did NOT work on small/mid caps this year (it was a falling year).
+  - Big caveat: one wild, net-down year. Part of the short-call profit may just be the stocks falling.
+
+
+6. CURRENT BEST GUESS AT A STRATEGY (NOT proven; do not trade real money yet)
+-----------------------------------------------------------------------------
+Sell defined-risk call spreads (~1 sd / 2 sd out, ~30 days) on retail-heavy small/mid caps
+right after a retail volume spike, or when options are expensive versus recent movement.
+Never sell naked options on these names.
+
+
+7. NEXT STEPS
+-------------
+[ ] Delta-hedged test: check that the profit is from overpriced options, not just the down year.
+[ ] More option history (ThetaData paid tier) to test 2020-2025 too.
+[ ] Re-pull CRWV prices from IBKR.
+[ ] Pick stocks by a rule (e.g. most option volume each month), not by hand, to remove bias.
+[ ] Paper-trade for several weeks before any real money.
+
+
+8. LOG OF SESSIONS / ACTIONS
+----------------------------
+2026-10-16  Built scanner/model scaffold (rflow/). Web-search scan of retail-popular stocks
+            (results/retail_scan_2026-10-16.md). Pulled IBKR prices for 15 stocks. Study 1.
+2026-10-17  DoltHub IV + FINRA downloaded on the Mac. Studies 2 and 3. Leverage analysis.
+            Installed Java, set up the Theta Terminal, downloaded ThetaData option quotes.
+            Pulled 17 more small/mid-cap price histories from IBKR.
+2026-10-18  Option data pushed (after fixing GitHub token auth). Study 4 on real quotes.
+            Created this notes file.
