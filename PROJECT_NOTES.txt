@@ -5,7 +5,7 @@ Updated as we go. Newest results are in section 5. Full technical detail: RETAIL
 
 Repo:   https://github.com/NFSBusan/HeyTest
 Branch: claude/admiring-brown-tol4xd   (all work is here; nothing merged into main yet)
-Last updated: 2026-10-18 (Study 5)
+Last updated: 2026-10-18 (Study 6)
 
 
 1. GOAL
@@ -118,20 +118,34 @@ Study 5 (same as Study 4 but DELTA-HEDGED daily with stock, to remove the effect
   - Caveats: real broker margin on naked small-cap options is much higher than the 20% assumed (lower
     real returns); daily hedging is work and overnight gaps still hurt; still only one year.
 
+Study 6 (realistic broker margin, weekly vs daily hedging, capped-risk version):  <-- latest
+  - With real margin rules, hedged short strangles opened only when options are expensive:
+      hedged DAILY:  about +3.4% per trade; account sim +51% over 11 months, worst month -4.4%
+      hedged WEEKLY: about +6.2% per trade; account sim +105%, worst month -4.6%, 1 losing month
+    (with double margin for volatile stocks: roughly 25-35% less)
+  - Weekly hedging held up even with high trading costs (50 bps): still about +80% in the account sim.
+    Daily hedging fell to +18% at that cost.
+  - Unhedged strangles: one month lost -72%. NOT acceptable.
+  - Capped-risk iron condors did NOT capture the edge (the protective options cost too much).
+  - WARNING: these numbers look too good to trust yet (11 months, one market regime, hand-picked
+    stocks, end-of-day quotes, no margin calls modeled). Next step is paper trading, not real money.
+
 
 6. CURRENT BEST GUESS AT A STRATEGY (NOT proven; do not trade real money yet)
 -----------------------------------------------------------------------------
 (Updated after Study 5. The earlier "sell call spreads after spikes" idea FAILED the hedged test.)
 Harvest the volatility premium on retail meme small/mid caps: when 30-day implied vol is at least
-1.3x the last 20 days' realized vol, sell ~30-day options (strangle about 1 sd out) and delta-hedge
-daily with stock. Avoid big-jump names (space/AI/quantum). Needs a margin account with naked-option
-approval, careful sizing, and a hard loss limit. A safer, simpler variant still needs testing.
+1.3x the last 20 days' realized vol, sell a ~30-day strangle (call and put about 1 sd out) and
+delta-hedge with stock about once a week. Spread across ~8-10 stocks per month, equal size.
+Needs a margin account with naked-option approval, sizing by worst case, and a hard loss limit.
+The capped-risk iron condor version did not work, so the hedge is what controls the risk.
 
 
 7. NEXT STEPS
 -------------
 [x] Delta-hedged test (Study 5): call spreads failed; hedged short strangles when IV is rich passed.
-[ ] Test with realistic broker margin (IBKR naked-option margin) and a safer capped-risk version.
+[x] Realistic margin + weekly hedging + capped-risk version (Study 6).
+[ ] PAPER TRADE: each month, list the stocks where IV/RV >= 1.3 and track the trades without real money.
 [ ] More option history (ThetaData paid tier) to test 2020-2025 too.
 [ ] Re-pull CRWV prices from IBKR.
 [ ] Pick stocks by a rule (e.g. most option volume each month), not by hand, to remove bias.
@@ -148,3 +162,4 @@ approval, careful sizing, and a hard loss limit. A safer, simpler variant still 
 2026-10-18  Option data pushed (after fixing GitHub token auth). Study 4 on real quotes.
             Created this notes file. Study 5 (delta-hedged): call-spread idea dropped; hedged short
             strangles when options are expensive are now the lead.
+            Study 6: realistic margin; weekly hedging works best; iron condors don't. Next: paper trading.

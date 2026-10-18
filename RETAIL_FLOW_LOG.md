@@ -255,3 +255,45 @@ that day's ATM IV) with 5 bps of cost on every share traded. This separates vola
 - **Hedging:** close-to-close hedging in a model; real hedging needs daily stock trades, and overnight gaps
   still hurt (hedged worst trade −134% of the assumed margin).
 - One year, 26 hand-picked names, 135 trials across Studies 4–5.
+
+## Study 6: realistic margin, practical hedging, capped-risk version (`scripts/practical_backtest.py`), 2026-10-18
+
+Small/mid caps only, bid/ask fills, 1 sd short strangles at ~30 days. Returns are on the real capital tied up:
+the Reg-T naked-option margin (20%/10% rule), or a "high-vol" margin at double that, plus 50% Reg-T margin on
+the largest stock hedge. 21 rows + 4 cost-stress rows.
+
+Per trade (IV rich = ATM IV / RV20 ≥ 1.3):
+
+| | all days | IV rich | worst trade |
+|---|---|---|---|
+| strangle, hedged daily, Reg-T | +2.5% (t 4.6) | +3.4% (t 6.4) | −44% / −21% |
+| strangle, hedged daily, high-vol margin | +1.8% | +2.6% | |
+| strangle, hedged weekly, Reg-T | +5.5% (t 5.8) | +6.2% (t 5.4) | −79% / −60% |
+| strangle, unhedged, Reg-T | +5.4% (t 1.4) | +15.4% (t 3.8) | −923% / −407% |
+| iron condor, liquid wings (capped risk) | −4.9% (t −2.3) | +0.9% (t 0.3) | −100% |
+
+Account simulation: IV rich only, one trade per stock per monthly cycle, equal capital, 103 trades over 11 months:
+
+| | total | avg month | worst month | max drawdown | losing months |
+|---|---|---|---|---|---|
+| hedged daily, Reg-T | +51% | +3.9% | −4.4% | 4.4% | 2 of 11 |
+| hedged daily, high-vol margin | +37% | +3.0% | −3.5% | 3.5% | 2 |
+| hedged weekly, Reg-T | +105% | +6.9% | −4.6% | 4.6% | 1 |
+| unhedged, Reg-T | +34% | +10.0% | **−71.6%** | **73%** | 3 |
+| iron condor, liquid wings | +24% | +2.7% | −24.6% | 29% | 3 |
+
+Hedge-cost stress (per trade, all days / IV rich; account total): 20 bps: daily +1.7% / +2.7%, +39%;
+weekly +5.1% / +5.8%, +97%. 50 bps: daily +0.3% / +1.2%, +18%; weekly +4.3% / +5.0%, +80%.
+
+### Conclusions
+
+1. **The volatility premium survives realistic margin and costs** when the strangle is delta-hedged and
+   only opened when IV is rich. Weekly hedging did better than daily and is far less sensitive to costs.
+   One likely reason: these names often snap back within days, and daily hedging locks in losses on each
+   swing. That's a hypothesis, not a proven fact.
+2. **Unhedged is a disaster waiting to happen:** −72% in a single month (Jan 2026).
+3. **The capped-risk version (iron condor) doesn't capture the premium.** The protective wings cost about
+   as much as the premium collected, because of the skew.
+4. **These results look too good to trust yet:** 11 months, one regime, hand-picked stocks, ~150 trials
+   across Studies 4–6, end-of-day quotes (real fills at the bid on size may be worse), and no margin calls
+   between entry and expiry are modeled. Treat this as the candidate to paper-trade, not as an expected return.

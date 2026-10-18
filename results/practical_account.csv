@@ -1,0 +1,8 @@
+strategy,margin,months,trades,avg_month_pct,total_pct,worst_month_pct,max_drawdown_pct,losing_months
+strangle_hedged_daily,Reg-T,11,103,3.87,50.7,-4.4,4.4,2
+strangle_hedged_daily,high-vol,11,103,2.95,37.0,-3.5,3.5,2
+strangle_hedged_weekly,Reg-T,11,103,6.92,105.4,-4.6,4.6,1
+strangle_hedged_weekly,high-vol,11,103,4.97,69.0,-3.5,3.5,1
+strangle_unhedged,Reg-T,11,103,10.02,34.3,-71.6,73.0,3
+strangle_unhedged,high-vol,11,103,6.71,68.2,-41.3,42.7,3
+condor_liquid,Reg-T,11,41,2.68,24.4,-24.6,29.3,3

@@ -1,0 +1,15 @@
+filter,strategy,margin,n,tickers,mean_pct,t,win_pct,worst_pct
+all,condor_liquid,Reg-T,1357,22,-4.92,-2.26,70,-100
+all,strangle_hedged_daily,Reg-T,3439,24,2.48,4.61,65,-44
+all,strangle_hedged_daily,high-vol,3439,24,1.76,4.37,65,-37
+all,strangle_hedged_weekly,Reg-T,3439,24,5.51,5.83,69,-79
+all,strangle_hedged_weekly,high-vol,3439,24,3.68,5.42,69,-72
+all,strangle_unhedged,Reg-T,3439,24,5.39,1.39,75,-923
+all,strangle_unhedged,high-vol,3439,24,3.41,1.49,75,-516
+IV rich,condor_liquid,Reg-T,158,18,0.91,0.28,80,-99
+IV rich,strangle_hedged_daily,Reg-T,586,24,3.4,6.37,70,-21
+IV rich,strangle_hedged_daily,high-vol,586,24,2.56,6.29,70,-17
+IV rich,strangle_hedged_weekly,Reg-T,586,24,6.23,5.44,72,-60
+IV rich,strangle_hedged_weekly,high-vol,586,24,4.43,5.3,72,-42
+IV rich,strangle_unhedged,Reg-T,586,24,15.36,3.82,78,-407
+IV rich,strangle_unhedged,high-vol,586,24,9.45,4.12,78,-237
