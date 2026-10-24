@@ -44,7 +44,11 @@ ETFS = set("""SPY QQQ IWM DIA TQQQ SQQQ SOXL SOXS SPXL SPXS SPXU UPRO TNA TZA UV
 NVDL NVDQ NVDX NVDU NVD MSTU MSTX MSTZ CONL AMDL FNGU FNGD LABU LABD YINN YANG FAS FAZ TMF TMV TLT HYG LQD XLF XLE XLK XLV
 XLI XLY XLP XLU XLB XLRE XLC GDX GDXJ NUGT DUST JNUG JDST SLV GLD USO UNG UCO SCO BOIL KOLD ARKK ARKG ARKW EEM EFA FXI KWEB
 EWZ IBIT BITO BITX ETHA ETHU GBTC FBTC BITU SBIT SMH SOXX XBI XOP KRE KBE IYR VNQ VOO VTI VEA VWO BND AGG SHY IEF SGOV
-BIL TBT SH PSQ SDS QID SPDN TSLY NVDY MSTY CONY YMAX ULTY QQQI JEPI JEPQ SCHD DGRO RSP MAGS SSO QLD USD ROM BITI ETHE""".split())
+BIL TBT SH PSQ SDS QID SPDN TSLY NVDY MSTY CONY YMAX ULTY QQQI JEPI JEPQ SCHD DGRO RSP MAGS SSO QLD USD ROM BITI ETHE
+IONZ IONX IONL RGTX RGTZ RGTU QBTX QBTZ SOUX OKLL OKLS RKLX RKLZ ASTX ASTN CRWU CWVX CRWG CORD NVDU NVDD NVDS NVDG TSLR TSLG
+TSDD CONL CONI MSTZ AMDL AMDD PLTU PLTD PTIR PLTG METU AAPU AAPD GGLL AMZU AMZD BITX ETHT SOLT XRPT HOOX HOOG SMCX SMCL
+AVL AVS NUKK IREX IREZ IREG NEBX NBIZ APLX APLZ WULX CIFU CIFG CLSX MRAL RIOX OKLC JOBX ARCX ONDL ONDG ONDU SOFX SOXX BULZ
+TECL TECS SPXU SDOW UDOW URTY SRTY DPST DRN DRV ERX ERY GUSH DRIP UTSL MIDU WEBL WEBS HIBL RETL NAIL CURE DFEN""".split())
 
 
 def finra_sept2025() -> pd.Series:
@@ -128,17 +132,22 @@ def main():
         vol = finra_sept2025()
         opt = option_symbols(base, ver)
         cand = [s for s in vol.index if s in opt and s not in SP100 and s not in ETFS and s.isalpha()][:400]
+        failed = 0
         print(f"{len(cand)} optionable candidates by off-exchange share volume; pricing them (Sept 2025)...")
         rows = []
         for i, s in enumerate(cand):
             px = stock_eod(base, ver, s, date(2025, 9, 1), date(2025, 9, 30))
             if px is None or px.empty:
+                failed += 1
                 continue
             p = px.close.mean()
             rows.append(dict(symbol=s, finra_shares=int(vol[s]), avg_price=round(p, 2),
                              offex_dollar_vol=round(vol[s] * p), avg_total_volume=px.volume.mean()))
             if i % 25 == 0:
                 print(f"  priced {i}/{len(cand)}")
+        if failed > 0.5 * len(cand):
+            sys.exit(f"Could not price {failed} of {len(cand)} candidates. The Theta Terminal is probably not working "
+                     "properly. Restart it and rerun; the universe was NOT saved.")
         df = pd.DataFrame(rows)
         df = df[(df.avg_price >= 2) & (df.avg_price <= 150)].sort_values("offex_dollar_vol", ascending=False)
         uni = df.head(TOP_N).reset_index(drop=True)
