@@ -4,3 +4,5 @@ data/*.csv
 __pycache__/
 *.pyc
 .pytest_cache/
+!data/universe_*.csv
+data/options/_debug.txt

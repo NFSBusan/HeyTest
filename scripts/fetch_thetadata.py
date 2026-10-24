@@ -49,6 +49,9 @@ def get(url, params):
         time.sleep(PAUSE)
         if r.status_code == 200:
             return r
+        if r.status_code == 478:
+            sys.exit("\nTheta Terminal session is invalid (HTTP 478). Close EVERY Theta Terminal window, start ONE "
+                     "again, wait for 'Starting server', then rerun the same command. Progress is kept.")
         if r.status_code in (429, 570, 571, 474) or r.status_code >= 500:   # rate limit / busy / disconnected
             time.sleep(10 * (i + 1))
             continue
