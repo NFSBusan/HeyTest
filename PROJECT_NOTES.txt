@@ -5,7 +5,7 @@ Updated as we go. Newest results are in section 5. Full technical detail: RETAIL
 
 Repo:   https://github.com/NFSBusan/HeyTest
 Branch: claude/admiring-brown-tol4xd   (all work is here; nothing merged into main yet)
-Last updated: 2026-10-25 (Study 10)
+Last updated: 2026-10-25 (paper-trade list v2)
 
 
 1. GOAL
@@ -188,10 +188,12 @@ Study 10 (can it go higher? standard exit rules + how much risk to accept):  <--
 
 6. CURRENT BEST GUESS AT A STRATEGY (NOT proven; do not trade real money yet)
 -----------------------------------------------------------------------------
-(Updated after Study 5. The earlier "sell call spreads after spikes" idea FAILED the hedged test.)
-Harvest the volatility premium on retail meme small/mid caps: when 30-day implied vol is at least
-1.3x the last 20 days' realized vol, sell a ~30-day strangle (call and put about 1 sd out) and
-delta-hedge with stock about once a week. Spread across ~8-10 stocks per month, equal size.
+(Updated after Studies 9-10.)
+Harvest the volatility premium on retail-heavy small/mid caps (71-stock rule-based universe). Each day rank
+by 30-day implied vol / 20-day realized vol and keep the top third; sell a ~30-day strangle (call and put
+about 1 sd out) and delta-hedge with stock about once a week; hold to expiry (stops and profit-taking hurt).
+~45 positions per month, max 3 per sector, ~1% of the account in margin each (~43% total), sized so the
+worst stress week costs <= 20% of the account. Backtest ~20%/yr; plan on ~10%/yr.
 Needs a margin account with naked-option approval, sizing by worst case, and a hard loss limit.
 The capped-risk iron condor version did not work, so the hedge is what controls the risk.
 
@@ -202,15 +204,22 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
 [x] Realistic margin + weekly hedging + capped-risk version (Study 6).
 [x] Robustness checks (Study 7) and improvement search (Study 8).
 [x] Rule-based universe built and tested (Study 9): 71 stocks, out-of-sample confirmed.
-[ ] Decide paper-trading rule for the 71-stock universe (top third, cluster cap 3, ~40% margin use).
-[~] PAPER TRADE started. Month 1 list (prices 2026-10-16, Nov 20 2026 expiry): IREN JOBY MARA RIOT
-    SOFI SOUN WULF -> results/paper_trades/2026-10-16_list.md, tracked in paper_ledger.csv.
-    Each Friday: refresh prices (IBKR), adjust hedge shares, log P&L. After Nov 20: settle, build next list.
-    Build a list:  python3 scripts/paper_trade_list.py 100000
-    Sizing: margin <= 50% of account, and a 50% gap in every stock at once loses <= 25% of the account.
+[x] Paper-trading rule decided (2026-10-25): 20% worst-week stress budget on the 71-stock universe.
+[~] PAPER TRADE, list v2 (replaces list #1, which was never entered). Prices 2026-10-23, expiry Nov 20 2026.
+    File: results/paper_trades/2026-10-23_list_v2.md (also .csv), tracked in paper_ledger.csv (status "planned").
+    Rule: each day rank the 71 stocks by implied vol / last-20-day realized vol, keep the top third,
+    sell the ~1 sd call + put (~30 days), at most 3 per sector, hedge with stock every Friday, hold to expiry.
+    Size: ~1% of the account in margin per position (43% / ~45 positions), skip a stock if 1 contract is
+    more than 2x that. Stress check on the actual book: worst 5-day move of the last year (IV +50%) plus a
+    worst-ever squeeze on the biggest position must be <= 20% of the account.
+    First day: 8 positions (RIVN LYFT NVO TTD SNAP HIMS HOOD CRCL), $8.3k margin, $2.0k credit on $100k,
+    stress 16%. 11 more top-third names had no trade on the exact strike that day; VRT too big per contract.
+    The book GROWS: a stock joins on the first day it qualifies while the expiry is >= 20 days away
+    (until ~Oct 31 for Nov 20). Re-run daily:  python3 scripts/paper_trade_list2.py 100000
+    Each Friday: refresh prices (IBKR), adjust hedge shares, log P&L. After Nov 20: settle, next cycle.
+    Old rule script (26 names): scripts/paper_trade_list.py, kept for the record only.
 [ ] More option history (ThetaData paid tier) to test 2020-2025 too.
 [ ] Re-pull CRWV prices from IBKR.
-[ ] Pick stocks by a rule (e.g. most option volume each month), not by hand, to remove bias.
 [ ] Paper-trade for several weeks before any real money.
 
 
@@ -232,3 +241,5 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
 2026-10-25  80-name universe downloaded (71 after removing ETFs). Study 9: out-of-sample confirmed;
             planning figure ~9-10%/yr with 22-45 positions.
 2026-10-25  Study 10: exit rules don't add return; risk budget table (8-15%/yr planning for 15-30% stress loss).
+2026-10-25  Paper-trade list v2 built for the chosen rule (20% stress budget): 8 positions on day one,
+            more added as they qualify over the next week. Old list #1 marked superseded in the ledger.
