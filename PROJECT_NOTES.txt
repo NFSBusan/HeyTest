@@ -215,8 +215,14 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
     First day: 8 positions (RIVN LYFT NVO TTD SNAP HIMS HOOD CRCL), $8.3k margin, $2.0k credit on $100k,
     stress 16%. 11 more top-third names had no trade on the exact strike that day; VRT too big per contract.
     The book GROWS: a stock joins on the first day it qualifies while the expiry is >= 20 days away
-    (until ~Oct 31 for Nov 20). Re-run daily:  python3 scripts/paper_trade_list2.py 100000
-    Each Friday: refresh prices (IBKR), adjust hedge shares, log P&L. After Nov 20: settle, next cycle.
+    (until ~Oct 30 for Nov 20; from ~Nov 2 the Dec 18 cycle starts, as in the backtest).
+    AUTOMATIC since 2026-10-25: Claude runs every weekday ~3:40pm ET (scheduled task in the Claude session):
+    IBKR quotes for all 71 stocks -> scripts/paper_tracker.py plan -> option quotes -> paper_tracker.py apply,
+    then commits and pushes. Step-by-step: PAPER_RUNBOOK.md. Read-only data; never places orders.
+    What it does: fills planned entries, adds new qualifying names, Fridays resets hedge shares and marks
+    P&L, settles after expiry, starts the next cycle, keeps the whole book within the 20% stress budget.
+    WHERE TO LOOK: results/paper_trades/status.md (today's summary), account.csv (equity by day),
+    book.csv (every position). Needs the IBKR connector connected in the Claude app.
     Old rule script (26 names): scripts/paper_trade_list.py, kept for the record only.
 [ ] More option history (ThetaData paid tier) to test 2020-2025 too.
 [ ] Re-pull CRWV prices from IBKR.
@@ -243,3 +249,4 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
 2026-10-25  Study 10: exit rules don't add return; risk budget table (8-15%/yr planning for 15-30% stress loss).
 2026-10-25  Paper-trade list v2 built for the chosen rule (20% stress budget): 8 positions on day one,
             more added as they qualify over the next week. Old list #1 marked superseded in the ledger.
+2026-10-25  Automatic paper tracking set up (scripts/paper_tracker.py, PAPER_RUNBOOK.md); first run Mon Oct 26.
