@@ -430,3 +430,35 @@ Account level (cluster cap of 3 per sector per cycle; stress = an unlucky book's
 4. **The top-third ranking (V1)** was the most stable across halves (+2.6% / +2.7%) and gives the most positions, so it
    has the best planning figure (~10%/yr). Choosing it now is a choice among a few disclosed variants.
 5. Still one year of data; the stress test is an estimate; IBKR margin on volatile names may exceed Reg-T.
+
+## Study 10: exit rules and the risk budget (`scripts/exit_rules.py`), 2026-10-25
+
+Hedged 1 sd strangles, top third by IV/RV each day, rule-based 71-stock universe, realistic execution; buy-backs
+at ask + 25% of spread. 3,327 trades. "Per 30 days" assumes freed capital is re-deployed at the same rate.
+
+| rule | days held | per trade (1st / 2nd half) | per 30 days (1st / 2nd half) | worst |
+|---|---|---|---|---|
+| E0 hold to expiry | 32.7 | +2.5% / +2.7% | +2.4% / +2.7% | −110% |
+| E1 take profit at 50% | 21.2 | +0.3% / +0.3% | +2.6% / +2.3% | −105% |
+| E2 stop at 2× credit | 31.1 | +1.8% / +2.3% | −3.0% / −2.0% | −110% |
+| E3 both | 19.9 | −0.4% / 0.0% | −2.4% / −2.1% | −105% |
+| sensitivity: take profit at 25% | 15.3 | −1.2% / −1.1% | +0.5% / −0.4% | −95% |
+| sensitivity: take profit at 75% | 26.6 | +1.6% / +1.4% | +2.9% / +3.0% | −110% |
+| sensitivity: stop at 3× | 32.1 | +2.2% / +2.6% | −0.1% / +1.1% | −110% |
+
+### Conclusions
+
+1. **Stop-losses hurt.** They buy back right after spikes that would mostly have reverted, which matches the
+   weekly-beats-daily hedging result. They also don't reduce the worst trade: gaps jump past the stop.
+2. **Taking profit at 50% doesn't beat holding** once buy-back costs are paid (it isn't better in both halves).
+3. Taking profit at 75% was better per 30 days in both halves (+2.9% vs +2.5%), but it was a sensitivity row, not a
+   pre-selected rule, and it relies on the re-deployment assumption. It's a hint to paper-trade, not an adopted rule.
+4. **The remaining lever is the risk budget, which is a choice, not an edge.** Top-third version, return on margin
+   3.3%/month, 3% on idle cash:
+
+| worst stress week allowed | margin use | backtest annual | planning (÷2) |
+|---|---|---|---|
+| 15% of account | 32% | ~16% | ~8% |
+| 20% (current) | 43% | ~20.5% | ~10% |
+| 25% | 54% | ~25% | ~12.5% |
+| 30% | 65% | ~30% | ~15% |

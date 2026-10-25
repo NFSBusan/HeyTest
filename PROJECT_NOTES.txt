@@ -5,7 +5,7 @@ Updated as we go. Newest results are in section 5. Full technical detail: RETAIL
 
 Repo:   https://github.com/NFSBusan/HeyTest
 Branch: claude/admiring-brown-tol4xd   (all work is here; nothing merged into main yet)
-Last updated: 2026-10-25 (Study 9)
+Last updated: 2026-10-25 (Study 10)
 
 
 1. GOAL
@@ -173,6 +173,18 @@ Study 9 (bigger universe chosen by a RULE: 71 stocks picked from Sept-2025 FINRA
     traded stocks in general.
   - Still one year of data. Planning figures already halve the backtest.
 
+Study 10 (can it go higher? standard exit rules + how much risk to accept):  <-- latest
+  - Stop-losses HURT (they lock in losses right before prices snap back; gaps skip past them anyway).
+  - Taking profit at 50% did not beat holding to expiry once buy-back costs are paid.
+  - Taking profit at 75% looked slightly better (+2.9% vs +2.5% per 30 days) but it wasn't pre-chosen,
+    so it's only a hint to watch during paper trading.
+  - The only remaining lever is HOW MUCH RISK YOU ACCEPT (a choice, not a better strategy):
+      worst stress week 15% of account -> ~8%/yr planning
+      worst stress week 20% (current)   -> ~10%/yr planning
+      worst stress week 25%             -> ~12.5%/yr planning
+      worst stress week 30%             -> ~15%/yr planning
+    In a crash-like week you'd lose about that percentage of the account.
+
 
 6. CURRENT BEST GUESS AT A STRATEGY (NOT proven; do not trade real money yet)
 -----------------------------------------------------------------------------
@@ -219,3 +231,4 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
 2026-10-24  Built rule-based universe on the Mac (first try failed: Theta Terminal session error, 16 names).
 2026-10-25  80-name universe downloaded (71 after removing ETFs). Study 9: out-of-sample confirmed;
             planning figure ~9-10%/yr with 22-45 positions.
+2026-10-25  Study 10: exit rules don't add return; risk budget table (8-15%/yr planning for 15-30% stress loss).
