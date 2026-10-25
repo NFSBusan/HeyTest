@@ -45,7 +45,10 @@ class Ticker:
         op = pd.read_csv(ROOT / "data" / "options" / f"{t}.csv.gz", parse_dates=["date", "expiration"])
         op = op[op.ask > 0].copy()
         op["mid"] = (op.bid + op.ask) / 2
-        px = pd.read_csv(ROOT / "data" / "prices" / f"{t}.csv", parse_dates=["date"]).set_index("date")
+        pfile = ROOT / "data" / "prices" / f"{t}.csv"
+        if not pfile.exists():
+            pfile = ROOT / "data" / "prices_td" / f"{t}.csv"      # ThetaData 1-year prices (universe names)
+        px = pd.read_csv(pfile, parse_dates=["date"]).set_index("date")
         self.close = px.close
         self.days = px.index
         self.rv20 = np.log(px.close).diff().rolling(20, min_periods=15).std() * np.sqrt(252)

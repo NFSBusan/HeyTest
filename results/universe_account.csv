@@ -1,0 +1,5 @@
+group,months,positions_per_month,avg_return_on_margin_month,losing_months,unlucky_worst_week,single_name_squeeze,margin_use,backtest_annual,planning_annual_50pct_haircut,worst_month_account,max_dd
+"ALL, V0",11,22,4.0%,0/11,-67%,-722%,30%,17.7%,8.8%,0.2%,0.0%
+"ALL, top third",11,45,3.3%,1/11,-46%,-722%,43%,20.7%,10.3%,-0.3%,0.3%
+"retail-heavy half, V0",11,12,4.7%,1/11,-98%,-722%,20%,14.8%,7.4%,-0.4%,0.4%
+"NEW names only, V0",10,19,3.2%,0/10,-68%,-722%,30%,14.2%,7.1%,0.3%,0.0%

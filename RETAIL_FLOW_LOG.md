@@ -388,3 +388,45 @@ and it averaged over all 24 names, which understates a single-name squeeze in an
 3. Getting 16 positions needs a bigger universe of retail-heavy names with liquid options, chosen by a rule.
    That also removes the hand-picking bias.
 4. **Updated realistic figures (after the same ~50% haircut as Study 7):** 8 positions ≈ 8%/yr; 16 positions ≈ 11%/yr.
+
+## Study 9: rule-based universe (`scripts/universe_study.py`), 2026-10-25
+
+Universe: top 80 by FINRA off-exchange dollar volume in Sept 2025, optionable, $2–$150, no S&P 100
+(`scripts/build_universe.py`), minus 9 ETFs that slipped through the exclusion list = 71 stocks. Chosen before
+the test year, so there's no hindsight in the stock selection. 54 of the 71 were never part of the hand-picked list:
+a true out-of-sample test. Realistic execution as in Studies 7–8.
+
+| per trade | 1st half | 2nd half | full |
+|---|---|---|---|
+| all 71, V0 (IV/RV ≥ 1.3) | +1.6% | +4.9% | +3.2% (t 4.3) |
+| all 71, no filter | +2.2% | +2.2% | +2.2% (t 5.2) |
+| all 71, top third (V1) | +2.6% | +2.7% | +2.6% (t 4.9) |
+| retail-heavy half / less-retail half (V0) | −0.3% / +3.3% | +6.4% / +3.6% | +2.9% / +3.4% |
+| **NEW names only (out-of-sample)** | +1.5% | +4.7% | **+3.0% (t 4.2)** |
+| original names | +1.9% | +5.7% | +3.6% (t 2.7) |
+
+52 of 71 stocks were positive. Worst: QBTS −17%, LRCX −14%, WDC −12%, HIMS −12%, CRCL −11% per trade.
+
+Account level (cluster cap of 3 per sector per cycle; stress = an unlucky book's worst common week over the last year
++ one position taking the worst single-name squeeze ever seen, −722% of margin; IV +50%; ≤ 20% loss allowed;
+3% on idle cash). The first stress version was distorted by uneven history lengths and was replaced; both runs are disclosed.
+
+| | positions/month | return on margin/month | margin use | backtest annual | planning (÷2) |
+|---|---|---|---|---|---|
+| all 71, V0 | 22 | 4.0% | 30% | 17.7% | **8.8%** |
+| all 71, top third | 45 | 3.3% | 43% | 20.7% | **10.3%** |
+| retail-heavy half, V0 | 12 | 4.7% | 20% | 14.8% | 7.4% |
+| new names only, V0 | 19 | 3.2% | 30% | 14.2% | 7.1% |
+| (before: 26 hand-picked names, 8 positions) | 8 | | 14% | 15.6% | 7.8% |
+
+### Conclusions
+
+1. **The edge holds out of sample:** +3.0% per trade on the 54 stocks that played no part in designing it, and
+   positive in both halves. It's smaller than on the hand-picked names (+5.2%), as you'd expect once hindsight is removed.
+2. **More stocks → much bigger safe share:** margin use rises from 14% to 30–43%, because a single squeeze matters
+   less in a 22–45 position book. That's what lifts the account figure, not a better per-trade edge.
+3. **"Retail-heavy" doesn't add extra premium** within this universe (the more retail half did no better). The edge is
+   the general overpricing of options on high-volatility, heavily traded stocks.
+4. **The top-third ranking (V1)** was the most stable across halves (+2.6% / +2.7%) and gives the most positions, so it
+   has the best planning figure (~10%/yr). Choosing it now is a choice among a few disclosed variants.
+5. Still one year of data; the stress test is an estimate; IBKR margin on volatile names may exceed Reg-T.
