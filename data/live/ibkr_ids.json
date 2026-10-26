@@ -149,5 +149,69 @@
 },
 "TEM": {
 "conid": 709237125
+},
+"AFRM": {
+"conid": 465119069
+},
+"FIG": {
+"conid": 802794976
+},
+"CIFR": {
+"conid": 511470142
+},
+"JD": {
+"conid": 152486141
+},
+"NEM": {
+"conid": 10174
+},
+"NIO": {
+"conid": 332794741
+},
+"GLW": {
+"conid": 7655
+},
+"B": {
+"conid": 780709675
+},
+"KVUE": {
+"conid": 629043863
+},
+"SNDK": {
+"conid": 760250490
+},
+"RKT": {
+"conid": 438058842
+},
+"KDP": {
+"conid": 324057162
+},
+"HPE": {
+"conid": 209411798
+},
+"APLD": {
+"conid": 556067819
+},
+"KGC": {
+"conid": 8823
+},
+"LYFT": {
+"conid": 359130923
+},
+"ASTS": {
+"conid": 480745767
+},
+"CVE": {
+"conid": 70021622
+},
+"KHC": {
+"conid": 199169586
+},
+"WULF": {
+"conid": 532497563
+},
+"SATS": {
+"conid": null,
+"note": "EchoStar not found in IBKR search (US SATS symbol now a Strive preferred); skipped"
 }
 }
