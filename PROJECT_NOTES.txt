@@ -250,3 +250,8 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
 2026-10-25  Paper-trade list v2 built for the chosen rule (20% stress budget): 8 positions on day one,
             more added as they qualify over the next week. Old list #1 marked superseded in the ledger.
 2026-10-25  Automatic paper tracking set up (scripts/paper_tracker.py, PAPER_RUNBOOK.md); first run Mon Oct 26.
+2026-10-26  First automatic paper run (IBKR quotes ~3:30pm ET, 15-min delayed). 18 positions entered (7 of the 8
+            planned + 11 new top-third names), Nov 20 expiry, $16.3k option margin, $3.9k credit. LYFT, HBAN, SMR,
+            FIG, BBAI skipped (legs not traded / spread too wide), SHOP too big per contract. Stress check on the
+            actual book = 20% of equity already at 16% margin (crypto/quantum names move together), so new names
+            were scaled to 0.85x; further additions this cycle will be small. WBD and SATS not in IBKR (skipped).

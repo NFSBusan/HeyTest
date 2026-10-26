@@ -1,0 +1,338 @@
+{
+"RIVN|2026-11-20": {
+"call": {
+"strike": 14.5,
+"bid": 0.19,
+"ask": 0.21,
+"volume": 6
+},
+"put": {
+"strike": 10.0,
+"bid": 0.22,
+"ask": 0.25,
+"volume": 98
+}
+},
+"LYFT|2026-11-20": {
+"put": {
+"strike": 14.0,
+"bid": 0.22,
+"ask": 0.27,
+"volume": 22
+},
+"call": {
+"strike": 20.5,
+"bid": 0.19,
+"ask": 0.34,
+"volume": 0
+}
+},
+"NVO|2026-11-20": {
+"put": {
+"strike": 35.0,
+"bid": 0.37,
+"ask": 0.44,
+"volume": 2588
+},
+"call": {
+"strike": 44.0,
+"bid": 0.32,
+"ask": 0.39,
+"volume": 3
+}
+},
+"TTD|2026-11-20": {
+"put": {
+"strike": 10.5,
+"bid": 0.29,
+"ask": 0.37,
+"volume": 24
+},
+"call": {
+"strike": 16.5,
+"bid": 0.2,
+"ask": 0.25,
+"volume": 1
+}
+},
+"SNAP|2026-11-20": {
+"put": {
+"strike": 5.0,
+"bid": 0.11,
+"ask": 0.13,
+"volume": 38
+},
+"call": {
+"strike": 8.0,
+"bid": 0.14,
+"ask": 0.16,
+"volume": 252
+}
+},
+"HIMS|2026-11-20": {
+"put": {
+"strike": 21.0,
+"bid": 0.31,
+"ask": 0.38,
+"volume": 19
+},
+"call": {
+"strike": 36.0,
+"bid": 0.6,
+"ask": 0.67,
+"volume": 49
+}
+},
+"HOOD|2026-11-20": {
+"put": {
+"strike": 80.0,
+"bid": 1.96,
+"ask": 1.98,
+"volume": 1048
+},
+"call": {
+"strike": 115.0,
+"bid": 1.22,
+"ask": 1.24,
+"volume": 1819
+}
+},
+"CRCL|2026-11-20": {
+"put": {
+"strike": 70.0,
+"bid": 2.94,
+"ask": 3.1,
+"volume": 940
+},
+"call": {
+"strike": 110.0,
+"bid": 0.85,
+"ask": 0.9,
+"volume": 86
+}
+},
+"BSX|2026-11-20": {
+"put": {
+"strike": 40.0,
+"bid": 0.5,
+"ask": 0.65,
+"volume": 22
+},
+"call": {
+"strike": 52.0,
+"bid": 0.5,
+"ask": 0.7,
+"volume": 13
+}
+},
+"BIDU|2026-11-20": {
+"call": {
+"strike": 88.0,
+"bid": 1.05,
+"ask": 1.13,
+"volume": 98
+},
+"put": {
+"strike": 70.0,
+"bid": 0.77,
+"ask": 0.87,
+"volume": 18
+}
+},
+"RBLX|2026-11-20": {
+"call": {
+"strike": 65.0,
+"bid": 1.46,
+"ask": 1.56,
+"volume": 57
+},
+"put": {
+"strike": 44.0,
+"bid": 0.93,
+"ask": 1.22,
+"volume": 4
+}
+},
+"HBAN|2026-11-20": {
+"call": {
+"strike": 17.0,
+"bid": 0.05,
+"ask": 0.1,
+"volume": 14
+},
+"put": {
+"strike": 15.0,
+"bid": 0.1,
+"ask": 0.15,
+"volume": 6
+}
+},
+"SHOP|2026-11-20": {
+"call": {
+"strike": 200.0,
+"bid": 3.45,
+"ask": 3.85,
+"volume": 106
+},
+"put": {
+"strike": 140.0,
+"bid": 2.7,
+"ask": 3.15,
+"volume": 138
+}
+},
+"JOBY|2026-11-20": {
+"call": {
+"strike": 5.5,
+"bid": 0.13,
+"ask": 0.15,
+"volume": 59
+},
+"put": {
+"strike": 4.0,
+"bid": 0.08,
+"ask": 0.12,
+"volume": 60
+}
+},
+"MARA|2026-11-20": {
+"call": {
+"strike": 8.5,
+"bid": 0.22,
+"ask": 0.24,
+"volume": 142
+},
+"put": {
+"strike": 5.5,
+"bid": 0.17,
+"ask": 0.19,
+"volume": 743
+}
+},
+"SMR|2026-11-20": {
+"call": {
+"strike": 6.5,
+"bid": 0.17,
+"ask": 0.21,
+"volume": 17
+},
+"put": {
+"strike": 4.0,
+"bid": 0.07,
+"ask": 0.08,
+"volume": 0
+}
+},
+"CIFR|2026-11-20": {
+"call": {
+"strike": 11.0,
+"bid": 0.28,
+"ask": 0.31,
+"volume": 593
+},
+"put": {
+"strike": 6.0,
+"bid": 0.3,
+"ask": 0.32,
+"volume": 47
+}
+},
+"FIG|2026-11-20": {
+"call": {
+"strike": 29.0,
+"bid": 0.6,
+"ask": 0.65,
+"volume": 58
+},
+"put": {
+"strike": 18.5,
+"bid": 0.37,
+"ask": 0.58,
+"volume": 0
+}
+},
+"JD|2026-11-20": {
+"call": {
+"strike": 28.0,
+"bid": 0.22,
+"ask": 0.25,
+"volume": 162
+},
+"put": {
+"strike": 23.0,
+"bid": 0.27,
+"ask": 0.3,
+"volume": 70
+}
+},
+"BBAI|2026-11-20": {
+"call": {
+"strike": 2.5,
+"bid": 0.08,
+"ask": 0.1,
+"volume": 269
+},
+"put": {
+"strike": 1.5,
+"bid": 0.01,
+"ask": 0.03,
+"volume": 443
+}
+},
+"PDD|2026-11-20": {
+"call": {
+"strike": 86.0,
+"bid": 0.68,
+"ask": 0.95,
+"volume": 1
+},
+"put": {
+"strike": 70.0,
+"bid": 0.64,
+"ask": 0.77,
+"volume": 16
+}
+},
+"QBTS|2026-11-20": {
+"call": {
+"strike": 14.5,
+"bid": 0.25,
+"ask": 0.3,
+"volume": 76
+},
+"put": {
+"strike": 9.0,
+"bid": 0.15,
+"ask": 0.19,
+"volume": 4
+}
+},
+"SOFI|2026-11-20": {
+"call": {
+"strike": 17.0,
+"bid": 0.22,
+"ask": 0.23,
+"volume": 2180
+},
+"put": {
+"strike": 12.5,
+"bid": 0.24,
+"ask": 0.25,
+"volume": 2697
+}
+},
+"RGTI|2026-11-20": {
+"call": {
+"strike": 14.0,
+"bid": 0.26,
+"ask": 0.29,
+"volume": 144
+},
+"put": {
+"strike": 9.0,
+"bid": 0.12,
+"ask": 0.15,
+"volume": 2
+}
+}
+}
