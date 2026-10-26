@@ -1,0 +1,152 @@
+{
+"RIVN": {
+"last": 11.57,
+"prior_close": 11.83,
+"iv": 0.7311
+},
+"CRWV": {
+"last": 56.06,
+"prior_close": 54.24,
+"iv": 1.0908
+},
+"OPEN": {
+"last": 1.9199,
+"prior_close": 1.98,
+"iv": 0.9095
+},
+"BMNR": {
+"last": 21.14,
+"prior_close": null,
+"iv": 0.7489
+},
+"OKLO": {
+"last": 25.95,
+"prior_close": 26.35,
+"iv": 0.8371
+},
+"NBIS": {
+"last": 158.3,
+"prior_close": 158.74,
+"iv": 0.9638
+},
+"SOFI": {
+"last": 14.45,
+"prior_close": 14.61,
+"iv": 0.5827
+},
+"HIMS": {
+"last": 27.47,
+"prior_close": 27.71,
+"iv": 0.8761
+},
+"RGTI": {
+"last": 11.47,
+"prior_close": 11.52,
+"iv": 0.8063
+},
+"SNAP": {
+"last": 6.25,
+"prior_close": 6.34,
+"iv": 0.8618
+},
+"MARA": {
+"last": 6.83,
+"prior_close": 7.02,
+"iv": 0.9381
+},
+"HOOD": {
+"last": 92.69,
+"prior_close": 95.07,
+"iv": 0.6793
+},
+"AAL": {
+"last": 12.22,
+"prior_close": 12.11,
+"iv": 0.4519
+},
+"SOUN": {
+"last": 4.26,
+"prior_close": 4.43,
+"iv": 0.6831
+},
+"MRVL": {
+"last": 235.63,
+"prior_close": 228.51,
+"iv": 0.6764
+},
+"CRCL": {
+"last": 79.31,
+"prior_close": 85.91,
+"iv": 0.8238
+},
+"IREN": {
+"last": 25.74,
+"prior_close": 24.905,
+"iv": 1.1131
+},
+"IONQ": {
+"last": 30.94,
+"prior_close": 31.27,
+"iv": 0.7728
+},
+"QBTS": {
+"last": 11.57,
+"prior_close": 11.66,
+"iv": 0.8699
+},
+"ANET": {
+"last": 178.66,
+"prior_close": 172.37,
+"iv": 0.5843
+},
+"SMCI": {
+"last": 32.91,
+"prior_close": 32.94,
+"iv": 0.8275
+},
+"RKLB": {
+"last": 54.34,
+"prior_close": 52.6,
+"iv": 0.7651
+},
+"RIOT": {
+"last": 12.685,
+"prior_close": 12.53,
+"iv": 0.9851
+},
+"BE": {
+"last": 206.56,
+"prior_close": 193.3,
+"iv": 0.7901
+},
+"APH": {
+"last": 75.66,
+"prior_close": 74.09,
+"iv": 0.4983
+},
+"SHOP": {
+"last": 168.43,
+"prior_close": 168.68,
+"iv": 0.7038
+},
+"FCX": {
+"last": 65.05,
+"prior_close": 65.18,
+"iv": 0.471
+},
+"NU": {
+"last": 12.69,
+"prior_close": 15.16,
+"iv": 0.5086
+},
+"VRT": {
+"last": 200.6,
+"prior_close": 194.32,
+"iv": 0.6707
+},
+"LRCX": {
+"last": 239.01,
+"prior_close": 230.1,
+"iv": 0.5423
+}
+}
