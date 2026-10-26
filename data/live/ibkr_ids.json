@@ -1,0 +1,96 @@
+{
+"RIVN": {
+"conid": 525768800
+},
+"CRWV": {
+"conid": 771759702
+},
+"OPEN": {
+"conid": 460320153
+},
+"BMNR": {
+"conid": 785071865
+},
+"OKLO": {
+"conid": 500073396
+},
+"NBIS": {
+"conid": 88819736
+},
+"SOFI": {
+"conid": 494162724
+},
+"HIMS": {
+"conid": 466188387
+},
+"RGTI": {
+"conid": 547605251
+},
+"SNAP": {
+"conid": 268060148
+},
+"MARA": {
+"conid": 474219659
+},
+"HOOD": {
+"conid": 504546674
+},
+"AAL": {
+"conid": 139673266
+},
+"SOUN": {
+"conid": 558869874
+},
+"MRVL": {
+"conid": 483492393
+},
+"CRCL": {
+"conid": 789044667
+},
+"IREN": {
+"conid": 526906130
+},
+"IONQ": {
+"conid": 517593749
+},
+"QBTS": {
+"conid": 578031277
+},
+"ANET": {
+"conid": 740948854
+},
+"WBD": {
+"conid": null,
+"note": "no US primary listing with options in IBKR search (tender/merger); skipped"
+},
+"SMCI": {
+"conid": 731466419
+},
+"RKLB": {
+"conid": 787273575
+},
+"RIOT": {
+"conid": 292830677
+},
+"BE": {
+"conid": 326398514
+},
+"APH": {
+"conid": 4493
+},
+"SHOP": {
+"conid": 195014116
+},
+"FCX": {
+"conid": 7089
+},
+"NU": {
+"conid": 531212348
+},
+"VRT": {
+"conid": 402783527
+},
+"LRCX": {
+"conid": 732440574
+}
+}

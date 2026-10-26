@@ -1,7 +1,10 @@
 # Daily paper-trading run (automatic, weekdays ~3:40pm ET)
 
 Read-only IBKR market data only. NEVER create orders, order instructions, alerts or watchlists.
-Branch: `claude/admiring-brown-tol4xd`. `D` = today's date (YYYY-MM-DD, New York time).
+Branch: `claude/admiring-brown-tol4xd`.
+IBKR rate limit: 30 requests per minute. Send at most ~25 calls per batch, then wait ~60s with a background
+`sleep 55` (Bash run_in_background) before the next batch. Retry any call that returned a rate-limit error.
+`D` = today's date (YYYY-MM-DD, New York time).
 
 0. `git pull origin claude/admiring-brown-tol4xd`. If `data/live/D/` already has `legs.json` and `status.md`
    shows today's date, stop (already done).
