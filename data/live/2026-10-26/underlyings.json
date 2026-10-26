@@ -148,5 +148,155 @@
 "last": 239.01,
 "prior_close": 230.1,
 "iv": 0.5423
+},
+"WDC": {
+"last": 362.16,
+"prior_close": 343.67,
+"iv": 0.618
+},
+"BSX": {
+"last": 45.58,
+"prior_close": null,
+"iv": 0.4974
+},
+"JOBY": {
+"last": 4.7,
+"prior_close": null,
+"iv": 0.7264
+},
+"BIDU": {
+"last": 78.16,
+"prior_close": null,
+"iv": 0.457
+},
+"TTD": {
+"last": 12.65,
+"prior_close": 13.0,
+"iv": 0.8249
+},
+"CMG": {
+"last": 28.11,
+"prior_close": null,
+"iv": 0.4747
+},
+"NVO": {
+"last": 38.85,
+"prior_close": 39.05,
+"iv": 0.4006
+},
+"RBLX": {
+"last": 53.99,
+"prior_close": 52.89,
+"iv": 0.7998
+},
+"PDD": {
+"last": 77.82,
+"prior_close": 79.04,
+"iv": 0.3945
+},
+"MP": {
+"last": 37.42,
+"prior_close": 38.3,
+"iv": 0.6286
+},
+"BBAI": {
+"last": 2.125,
+"prior_close": 2.14,
+"iv": 0.8932
+},
+"KEY": {
+"last": 21.27,
+"prior_close": 21.08,
+"iv": 0.2338
+},
+"RF": {
+"last": 28.69,
+"prior_close": 28.47,
+"iv": 0.2252
+},
+"CCL": {
+"last": 26.81,
+"prior_close": 26.11,
+"iv": 0.4059
+},
+"SMR": {
+"last": 5.27,
+"prior_close": 5.38,
+"iv": 0.9237
+},
+"HBAN": {
+"last": 15.79,
+"prior_close": 15.73,
+"iv": 0.2425
+},
+"DELL": {
+"last": 470.93,
+"prior_close": 456.44,
+"iv": 0.7011
+},
+"QUBT": {
+"last": 6.435,
+"prior_close": 6.56,
+"iv": 0.665
+},
+"TEM": {
+"last": 66.11,
+"prior_close": 67.61,
+"iv": 0.8457
+},
+"AFRM": {
+"last": 69.47,
+"prior_close": 70.08,
+"iv": 0.6926
+},
+"FIG": {
+"last": 23.35,
+"prior_close": null,
+"iv": 0.8607
+},
+"CIFR": {
+"last": 7.8201,
+"prior_close": 7.94,
+"iv": 1.2471
+},
+"JD": {
+"last": 25.16,
+"prior_close": 25.36,
+"iv": 0.3761
+},
+"NEM": {
+"last": 109.56,
+"prior_close": 108.87,
+"iv": 0.385
+},
+"NIO": {
+"last": 3.25,
+"prior_close": 3.29,
+"iv": 0.5488
+},
+"GLW": {
+"last": 128.44,
+"prior_close": 123.69,
+"iv": 0.6168
+},
+"B": {
+"last": 38.06,
+"prior_close": null,
+"iv": 0.4066
+},
+"KVUE": {
+"last": 19.48,
+"prior_close": null,
+"iv": 0.2116
+},
+"SNDK": {
+"last": 1261.84,
+"prior_close": 1238.03,
+"iv": 0.7654
+},
+"RKT": {
+"last": 11.45,
+"prior_close": 11.73,
+"iv": 0.6521
 }
 }
