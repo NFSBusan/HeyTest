@@ -4,3 +4,8 @@ data/*.csv
 __pycache__/
 *.pyc
 .pytest_cache/
+.env
+data/qrp/
+*.duckdb
+*.duckdb.wal
+reports/

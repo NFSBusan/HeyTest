@@ -1,0 +1,123 @@
+# Quant research platform config. Every number that affects a result lives here, so a study
+# can be reproduced from its stored config (the registry saves a copy with each study).
+#
+# Phase 0 rule: the gates below are written down BEFORE looking at any result. If you change
+# them after seeing results, start a new study so the change is on record.
+
+project:
+  name: etf-daily-mvp
+  seed: 42
+
+storage:
+  # Local folder or an S3-compatible URI (s3://bucket/prefix for Cloudflare R2 / Backblaze B2).
+  root: data/qrp
+  # The research database always lives on local disk (DuckDB file); back it up to the bucket.
+  db_path: data/qrp/research.duckdb
+  paper_db_path: data/qrp/paper.duckdb
+  reports_dir: reports
+
+data:
+  # synthetic | tiingo | alpaca | csv
+  provider: synthetic
+  timeframe: 1d
+  start: "2006-01-01"
+  end: "2026-09-30"
+  benchmark: SPY
+  # Liquid ETFs that cover equities, bonds, credit, commodities, real estate and sectors.
+  # Survivorship note: these funds all still exist today. That is a mild selection bias
+  # (funds that closed are missing); it matters far less for broad ETFs than for single stocks.
+  symbols: [SPY, QQQ, IWM, EFA, EEM, TLT, IEF, SHY, LQD, HYG, GLD, SLV, DBC, VNQ,
+            XLE, XLF, XLK, XLV, XLY, XLP, XLU, XLI, XLB]
+  # Optional CSV with columns symbol,start,end: when each symbol may be traded (point-in-time
+  # universe membership). Leave empty to allow any symbol whenever it has data.
+  universe_file: ""
+  csv_pattern: "data/import/{symbol}.csv"   # used by provider: csv
+  synthetic:
+    # none = pure noise (nothing should pass); trend / reversal = a planted, weak edge.
+    edge: none
+    edge_strength: 1.0
+
+splits:
+  # Final holdout = the most recent part of the data. Nothing touches it until a frozen
+  # candidate list exists; the vault allows one look per holdout window.
+  holdout_fraction: 0.2
+  # Gap between the dev period and the holdout so slow signals can't straddle the boundary.
+  embargo_days: 21
+  # Leading days used only to warm up indicators; no returns are scored there.
+  warmup_days: 252
+  # Walk-forward inside the dev period: anchored (expanding) training, next block is tested.
+  wf_folds: 5
+  wf_min_train_years: 4
+
+execution:
+  # Signals use the close of day t. next_open = trade at the open of t+1 (default);
+  # next_close = trade at the close of t+1 (one extra day of delay, more conservative).
+  fill: next_open
+  allow_short: false
+  max_gross_leverage: 1.0
+  max_weight: 0.25
+
+costs:
+  capital: 10000            # used for market-impact and capacity estimates
+  commission_bps: 0.5       # most US brokers charge $0 for ETFs; this covers regulatory fees
+  half_spread_bps: 1.5      # liquid ETFs trade at ~1-3 bps full spread
+  impact_coef: 0.1          # impact = coef * daily_vol * sqrt(trade_value / avg_daily_dollar_volume)
+  borrow_bps_annual: 50     # short borrow cost (only if allow_short)
+  stress_multipliers: [2.0, 3.0]
+
+search:
+  # Hard cap per family. Every config tried counts toward the multiple-testing correction,
+  # including Optuna trials and Claude-proposed experiments, across all studies on this data.
+  max_trials_per_family: 1500
+  families: [trend, mean_reversion, cross_sectional]
+  n_jobs: 0                 # 0 = all CPU cores
+  batch_size: 100
+  candidates_per_family: 5  # after de-duplication, robustness tests run on the top N
+  dedup_corr: 0.90          # strategies whose daily returns correlate above this are one cluster
+
+gates:
+  # A candidate must pass ALL of these to be allowed near the holdout.
+  min_trades: 50
+  min_wf_oos_sharpe: 0.30       # walk-forward out-of-sample Sharpe of the family's selection procedure
+  min_dev_sharpe: 0.40
+  min_dsr: 0.95                 # deflated Sharpe ratio (probability the edge is real after N trials)
+  max_pbo: 0.50                 # probability of backtest overfitting for the family
+  max_spa_pvalue: 0.10          # Hansen SPA test: does the family's best beat the benchmark at all?
+  max_drawdown: 0.35
+  min_neighbor_ratio: 0.50      # median Sharpe of neighbouring params / candidate Sharpe
+  min_stressed_sharpe: 0.20     # Sharpe at 2x costs
+  min_positive_year_fraction: 0.55
+  min_excess_sharpe_vs_benchmark: -0.10  # dev Sharpe minus buy-and-hold Sharpe of the benchmark
+  max_capacity_cost_drag: 0.02  # annual cost drag at configured capital
+  # Holdout: Sharpe must keep this share of its dev Sharpe and stay positive.
+  holdout_min_sharpe: 0.0
+  holdout_min_sharpe_retention: 0.30
+
+validation:
+  bootstrap_reps: 500
+  block_len: 20               # mean block length (days) for the stationary bootstrap
+  cscv_splits: 10             # even number of blocks for PBO
+  mc_reps: 1000
+
+research:
+  # Claude research loop (phase 3). Off by default; needs ANTHROPIC_API_KEY.
+  model: claude-opus-5-5
+  effort: high
+  max_rounds_per_run: 1
+  max_configs_per_proposal: 300
+  require_approval: true
+  monthly_budget_usd: 10.0
+  # Rough per-million-token prices for the budget check; verify at anthropic.com/pricing.
+  price_in_per_mtok: 4.0
+  price_out_per_mtok: 20.0
+
+paper:
+  starting_cash: 10000
+  max_daily_loss: 0.03          # halt a strategy for the day after a 3% loss
+  kill_drawdown: 0.15           # stop a strategy for good at a 15% drawdown from its paper peak
+  max_stale_days: 4             # refuse to trade on data older than this many business days
+  deterioration_pctile: 0.05    # alert when rolling paper return falls below this backtest percentile
+  deterioration_window: 63
+  kill_switch_file: KILL_SWITCH # if this file exists, no new orders are created
+  # Real-money trading is not implemented. Setting this to true makes the paper trader refuse to start.
+  live_trading_enabled: false
