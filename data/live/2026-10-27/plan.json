@@ -1,0 +1,84 @@
+{
+ "date": "2026-10-27",
+ "expiry_for_new": "2026-11-20",
+ "iv_rv_cutoff": 1.33,
+ "legs": [
+  {
+   "key": "LYFT|2026-11-20",
+   "kind": "new",
+   "ticker": "LYFT",
+   "expiry": "2026-11-20",
+   "spot": 16.87,
+   "iv": 0.6237,
+   "iv_rv": 2.04,
+   "call_target": 19.8,
+   "put_target": 14.38
+  },
+  {
+   "key": "HBAN|2026-11-20",
+   "kind": "new",
+   "ticker": "HBAN",
+   "expiry": "2026-11-20",
+   "spot": 15.72,
+   "iv": 0.2549,
+   "iv_rv": 1.83,
+   "call_target": 16.78,
+   "put_target": 14.73
+  },
+  {
+   "key": "SHOP|2026-11-20",
+   "kind": "new",
+   "ticker": "SHOP",
+   "expiry": "2026-11-20",
+   "spot": 166.29,
+   "iv": 0.705,
+   "iv_rv": 1.7,
+   "call_target": 199.24,
+   "put_target": 138.79
+  },
+  {
+   "key": "FIG|2026-11-20",
+   "kind": "new",
+   "ticker": "FIG",
+   "expiry": "2026-11-20",
+   "spot": 22.85,
+   "iv": 0.8513,
+   "iv_rv": 1.55,
+   "call_target": 28.42,
+   "put_target": 18.37
+  },
+  {
+   "key": "RF|2026-11-20",
+   "kind": "new",
+   "ticker": "RF",
+   "expiry": "2026-11-20",
+   "spot": 28.59,
+   "iv": 0.2293,
+   "iv_rv": 1.52,
+   "call_target": 30.32,
+   "put_target": 26.96
+  },
+  {
+   "key": "SOUN|2026-11-20",
+   "kind": "new",
+   "ticker": "SOUN",
+   "expiry": "2026-11-20",
+   "spot": 4.4186,
+   "iv": 0.8251,
+   "iv_rv": 1.45,
+   "call_target": 5.46,
+   "put_target": 3.58
+  },
+  {
+   "key": "SMR|2026-11-20",
+   "kind": "new",
+   "ticker": "SMR",
+   "expiry": "2026-11-20",
+   "spot": 5.65,
+   "iv": 0.9173,
+   "iv_rv": 1.4,
+   "call_target": 7.15,
+   "put_target": 4.47
+  }
+ ]
+}
