@@ -257,9 +257,15 @@ def apply(d):
         if loss <= STRESS_BUDGET * equity or not any(x["kind"] == "new" for x in entries) or scale < 0.05:
             break
         scale *= 0.85
+    if loss > STRESS_BUDGET * equity and any(x["kind"] == "new" for x in entries):
+        # budget can't be met even at tiny size: add no new names today (planned fills stay)
+        new_keys = {(x["ticker"], x["expiry"]) for x in entries if x["kind"] == "new"}
+        rows = [rw for rw in rows if (rw["ticker"], rw["expiry"]) not in new_keys]
+        trial = trial[~trial.apply(lambda r: (r.ticker, r.expiry) in new_keys and r.status == "open"
+                                   and r.entry_date == str(d), axis=1)]
+        log.append(f"stress {loss / equity:.0%} of equity is over the 20% budget: no new names added today")
+        scale = 1.0
     book = trial
-    log = [x for x in log if "too big" not in x] + [x for x in dict.fromkeys(log) if "too big" in x][:0] + \
-        list(dict.fromkeys(x for x in log if "too big" in x))
     if scale < 1.0:
         log.append(f"new entries scaled to {scale:.2f}x to stay inside the 20% stress budget")
     for rw in rows:

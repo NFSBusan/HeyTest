@@ -1,0 +1,100 @@
+{
+"LYFT|2026-11-20": {
+"call": {
+"strike": 20.0,
+"bid": 0.26,
+"ask": 0.32,
+"volume": 13
+},
+"put": {
+"strike": 14.5,
+"bid": 0.26,
+"ask": 0.33,
+"volume": 11
+}
+},
+"HBAN|2026-11-20": {
+"call": {
+"strike": 17.0,
+"bid": 0.05,
+"ask": 0.1,
+"volume": 4
+},
+"put": {
+"strike": 15.0,
+"bid": 0.1,
+"ask": 0.15,
+"volume": 31
+}
+},
+"SHOP|2026-11-20": {
+"call": {
+"strike": 200.0,
+"bid": 2.9,
+"ask": 3.1,
+"volume": 75
+},
+"put": {
+"strike": 140.0,
+"bid": 2.93,
+"ask": 3.1,
+"volume": 76
+}
+},
+"FIG|2026-11-20": {
+"call": {
+"strike": 28.0,
+"bid": 0.6,
+"ask": 0.7,
+"volume": 118
+},
+"put": {
+"strike": 18.5,
+"bid": 0.36,
+"ask": 0.55,
+"volume": 0
+}
+},
+"RF|2026-11-20": {
+"call": {
+"strike": 30.0,
+"bid": 0.15,
+"ask": 0.3,
+"volume": 11
+},
+"put": {
+"strike": 27.0,
+"bid": 0.15,
+"ask": 0.3,
+"volume": 4
+}
+},
+"SOUN|2026-11-20": {
+"call": {
+"strike": 5.5,
+"bid": 0.09,
+"ask": 0.12,
+"volume": 60
+},
+"put": {
+"strike": 3.5,
+"bid": 0.02,
+"ask": 0.09,
+"volume": 0
+}
+},
+"SMR|2026-11-20": {
+"call": {
+"strike": 7.0,
+"bid": 0.17,
+"ask": 0.18,
+"volume": 604
+},
+"put": {
+"strike": 4.5,
+"bid": 0.1,
+"ask": 0.13,
+"volume": 70
+}
+}
+}
