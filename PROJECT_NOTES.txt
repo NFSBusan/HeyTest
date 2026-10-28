@@ -258,3 +258,5 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
 2026-10-27  Paper run: no new positions (HBAN FIG RF SOUN legs not tradeable, SHOP too big; SMR/LYFT would push
             stress over 20%). Book stress 21% after today's moves (SOFI +14%, crypto names up), so no new names until
             it drops. Equity $100,079. Fixed a bug where 1 tiny contract was still added when over the budget.
+2026-10-28  Paper run: book stress 20.7% (> 20% budget) before any additions, so the 9 top-third candidates
+            were not quoted and nothing was added. Equity row updated; positions unchanged.

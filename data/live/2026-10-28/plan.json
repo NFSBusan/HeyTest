@@ -1,0 +1,106 @@
+{
+ "date": "2026-10-28",
+ "expiry_for_new": "2026-11-20",
+ "iv_rv_cutoff": 1.3,
+ "legs": [
+  {
+   "key": "LYFT|2026-11-20",
+   "kind": "new",
+   "ticker": "LYFT",
+   "expiry": "2026-11-20",
+   "spot": 16.25,
+   "iv": 0.648,
+   "iv_rv": 1.93,
+   "call_target": 19.12,
+   "put_target": 13.81
+  },
+  {
+   "key": "KVUE|2026-11-20",
+   "kind": "new",
+   "ticker": "KVUE",
+   "expiry": "2026-11-20",
+   "spot": 19.33,
+   "iv": 0.4925,
+   "iv_rv": 1.88,
+   "call_target": 21.87,
+   "put_target": 17.08
+  },
+  {
+   "key": "HBAN|2026-11-20",
+   "kind": "new",
+   "ticker": "HBAN",
+   "expiry": "2026-11-20",
+   "spot": 15.67,
+   "iv": 0.2607,
+   "iv_rv": 1.86,
+   "call_target": 16.73,
+   "put_target": 14.68
+  },
+  {
+   "key": "SHOP|2026-11-20",
+   "kind": "new",
+   "ticker": "SHOP",
+   "expiry": "2026-11-20",
+   "spot": 166.92,
+   "iv": 0.6866,
+   "iv_rv": 1.65,
+   "call_target": 198.32,
+   "put_target": 140.49
+  },
+  {
+   "key": "SOUN|2026-11-20",
+   "kind": "new",
+   "ticker": "SOUN",
+   "expiry": "2026-11-20",
+   "spot": 4.31,
+   "iv": 0.7868,
+   "iv_rv": 1.48,
+   "call_target": 5.25,
+   "put_target": 3.54
+  },
+  {
+   "key": "FIG|2026-11-20",
+   "kind": "new",
+   "ticker": "FIG",
+   "expiry": "2026-11-20",
+   "spot": 22.86,
+   "iv": 0.7992,
+   "iv_rv": 1.46,
+   "call_target": 27.94,
+   "put_target": 18.7
+  },
+  {
+   "key": "RF|2026-11-20",
+   "kind": "new",
+   "ticker": "RF",
+   "expiry": "2026-11-20",
+   "spot": 28.37,
+   "iv": 0.2155,
+   "iv_rv": 1.4,
+   "call_target": 29.95,
+   "put_target": 26.88
+  },
+  {
+   "key": "SMR|2026-11-20",
+   "kind": "new",
+   "ticker": "SMR",
+   "expiry": "2026-11-20",
+   "spot": 5.61,
+   "iv": 0.8878,
+   "iv_rv": 1.35,
+   "call_target": 7.01,
+   "put_target": 4.49
+  },
+  {
+   "key": "KDP|2026-11-20",
+   "kind": "new",
+   "ticker": "KDP",
+   "expiry": "2026-11-20",
+   "spot": 34.78,
+   "iv": 0.3035,
+   "iv_rv": 1.33,
+   "call_target": 37.53,
+   "put_target": 32.23
+  }
+ ]
+}
