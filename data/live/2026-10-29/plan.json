@@ -1,0 +1,106 @@
+{
+ "date": "2026-10-29",
+ "expiry_for_new": "2026-11-20",
+ "iv_rv_cutoff": 1.23,
+ "legs": [
+  {
+   "key": "LYFT|2026-11-20",
+   "kind": "new",
+   "ticker": "LYFT",
+   "expiry": "2026-11-20",
+   "spot": 16.44,
+   "iv": 0.6424,
+   "iv_rv": 1.97,
+   "call_target": 19.25,
+   "put_target": 14.04
+  },
+  {
+   "key": "SHOP|2026-11-20",
+   "kind": "new",
+   "ticker": "SHOP",
+   "expiry": "2026-11-20",
+   "spot": 166.82,
+   "iv": 0.7189,
+   "iv_rv": 1.72,
+   "call_target": 199.02,
+   "put_target": 139.83
+  },
+  {
+   "key": "HBAN|2026-11-20",
+   "kind": "new",
+   "ticker": "HBAN",
+   "expiry": "2026-11-20",
+   "spot": 15.9,
+   "iv": 0.2391,
+   "iv_rv": 1.64,
+   "call_target": 16.86,
+   "put_target": 14.99
+  },
+  {
+   "key": "FIG|2026-11-20",
+   "kind": "new",
+   "ticker": "FIG",
+   "expiry": "2026-11-20",
+   "spot": 22.12,
+   "iv": 0.8435,
+   "iv_rv": 1.47,
+   "call_target": 27.21,
+   "put_target": 17.98
+  },
+  {
+   "key": "RF|2026-11-20",
+   "kind": "new",
+   "ticker": "RF",
+   "expiry": "2026-11-20",
+   "spot": 28.82,
+   "iv": 0.219,
+   "iv_rv": 1.37,
+   "call_target": 30.41,
+   "put_target": 27.31
+  },
+  {
+   "key": "SMR|2026-11-20",
+   "kind": "new",
+   "ticker": "SMR",
+   "expiry": "2026-11-20",
+   "spot": 5.9099,
+   "iv": 0.9033,
+   "iv_rv": 1.31,
+   "call_target": 7.38,
+   "put_target": 4.73
+  },
+  {
+   "key": "KDP|2026-11-20",
+   "kind": "new",
+   "ticker": "KDP",
+   "expiry": "2026-11-20",
+   "spot": 35.23,
+   "iv": 0.2971,
+   "iv_rv": 1.3,
+   "call_target": 37.9,
+   "put_target": 32.75
+  },
+  {
+   "key": "OKLO|2026-11-20",
+   "kind": "new",
+   "ticker": "OKLO",
+   "expiry": "2026-11-20",
+   "spot": 26.86,
+   "iv": 0.8338,
+   "iv_rv": 1.29,
+   "call_target": 32.96,
+   "put_target": 21.89
+  },
+  {
+   "key": "RKT|2026-11-20",
+   "kind": "new",
+   "ticker": "RKT",
+   "expiry": "2026-11-20",
+   "spot": 11.96,
+   "iv": 0.6277,
+   "iv_rv": 1.25,
+   "call_target": 13.95,
+   "put_target": 10.25
+  }
+ ]
+}

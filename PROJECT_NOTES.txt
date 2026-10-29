@@ -260,3 +260,5 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
             it drops. Equity $100,079. Fixed a bug where 1 tiny contract was still added when over the budget.
 2026-10-28  Paper run: book stress 20.7% (> 20% budget) before any additions, so the 9 top-third candidates
             were not quoted and nothing was added. Equity row updated; positions unchanged.
+2026-10-29  Paper run: book stress 20.4% (> 20%), no candidates quoted, nothing added. Tomorrow (Oct 30) is the
+            last entry day for Nov 20 and the first Friday mark + hedge reset.
