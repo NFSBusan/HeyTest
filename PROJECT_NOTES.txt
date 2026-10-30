@@ -262,3 +262,7 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
             were not quoted and nothing was added. Equity row updated; positions unchanged.
 2026-10-29  Paper run: book stress 20.4% (> 20%), no candidates quoted, nothing added. Tomorrow (Oct 30) is the
             last entry day for Nov 20 and the first Friday mark + hedge reset.
+2026-10-30  First Friday mark + hedge reset (worked). Broad sell-off week: equity $98,954 (-1.05%), open P&L
+            -$1,046; biggest losers RBLX (-$193, stock fell below the 44 put), SNAP (-$181), QBTS (-$110).
+            Stress after the hedge reset 18.5%, but adding SOUN or SMR would exceed 20%, so nothing added.
+            Last entry day for Nov 20; from Nov 2 new entries use the Dec 18 expiry.

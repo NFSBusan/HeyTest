@@ -1,0 +1,324 @@
+{
+"RIVN|2026-11-20": {
+"call": {
+"strike": 14.5,
+"bid": 0.12,
+"ask": 0.15,
+"volume": null
+},
+"put": {
+"strike": 10.0,
+"bid": 0.1,
+"ask": 0.12,
+"volume": null
+}
+},
+"NVO|2026-11-20": {
+"call": {
+"strike": 44.0,
+"bid": 0.51,
+"ask": 0.55,
+"volume": null
+},
+"put": {
+"strike": 35.0,
+"bid": 0.24,
+"ask": 0.27,
+"volume": null
+}
+},
+"TTD|2026-11-20": {
+"call": {
+"strike": 16.5,
+"bid": 0.14,
+"ask": 0.22,
+"volume": null
+},
+"put": {
+"strike": 10.5,
+"bid": 0.35,
+"ask": 0.39,
+"volume": null
+}
+},
+"SNAP|2026-11-20": {
+"call": {
+"strike": 8.0,
+"bid": 0.04,
+"ask": 0.05,
+"volume": null
+},
+"put": {
+"strike": 5.0,
+"bid": 0.28,
+"ask": 0.35,
+"volume": null
+}
+},
+"HIMS|2026-11-20": {
+"call": {
+"strike": 36.0,
+"bid": 0.5,
+"ask": 0.6,
+"volume": null
+},
+"put": {
+"strike": 21.0,
+"bid": 0.34,
+"ask": 0.39,
+"volume": null
+}
+},
+"HOOD|2026-11-20": {
+"call": {
+"strike": 115.0,
+"bid": 0.19,
+"ask": 0.21,
+"volume": null
+},
+"put": {
+"strike": 80.0,
+"bid": 3.5,
+"ask": 3.6,
+"volume": null
+}
+},
+"CRCL|2026-11-20": {
+"call": {
+"strike": 110.0,
+"bid": 0.25,
+"ask": 0.29,
+"volume": null
+},
+"put": {
+"strike": 70.0,
+"bid": 5.1,
+"ask": 5.45,
+"volume": null
+}
+},
+"BSX|2026-11-20": {
+"call": {
+"strike": 52.0,
+"bid": 0.0,
+"ask": 0.25,
+"volume": null
+},
+"put": {
+"strike": 40.0,
+"bid": 0.75,
+"ask": 0.9,
+"volume": null
+}
+},
+"BIDU|2026-11-20": {
+"call": {
+"strike": 88.0,
+"bid": 0.65,
+"ask": 0.82,
+"volume": null
+},
+"put": {
+"strike": 70.0,
+"bid": 0.98,
+"ask": 1.49,
+"volume": null
+}
+},
+"RBLX|2026-11-20": {
+"call": {
+"strike": 65.0,
+"bid": 0.06,
+"ask": 0.15,
+"volume": null
+},
+"put": {
+"strike": 44.0,
+"bid": 2.96,
+"ask": 3.5,
+"volume": null
+}
+},
+"JOBY|2026-11-20": {
+"call": {
+"strike": 5.5,
+"bid": 0.16,
+"ask": 0.19,
+"volume": null
+},
+"put": {
+"strike": 4.0,
+"bid": 0.05,
+"ask": 0.09,
+"volume": null
+}
+},
+"MARA|2026-11-20": {
+"call": {
+"strike": 8.5,
+"bid": 0.21,
+"ask": 0.22,
+"volume": null
+},
+"put": {
+"strike": 5.5,
+"bid": 0.23,
+"ask": 0.25,
+"volume": null
+}
+},
+"CIFR|2026-11-20": {
+"call": {
+"strike": 11.0,
+"bid": 0.16,
+"ask": 0.21,
+"volume": null
+},
+"put": {
+"strike": 6.0,
+"bid": 0.45,
+"ask": 0.49,
+"volume": null
+}
+},
+"JD|2026-11-20": {
+"call": {
+"strike": 28.0,
+"bid": 0.28,
+"ask": 0.31,
+"volume": null
+},
+"put": {
+"strike": 23.0,
+"bid": 0.18,
+"ask": 0.19,
+"volume": null
+}
+},
+"PDD|2026-11-20": {
+"call": {
+"strike": 86.0,
+"bid": 0.85,
+"ask": 1.01,
+"volume": null
+},
+"put": {
+"strike": 70.0,
+"bid": 0.5,
+"ask": 0.6,
+"volume": null
+}
+},
+"QBTS|2026-11-20": {
+"call": {
+"strike": 14.5,
+"bid": 0.12,
+"ask": 0.17,
+"volume": null
+},
+"put": {
+"strike": 9.0,
+"bid": 0.32,
+"ask": 0.4,
+"volume": null
+}
+},
+"SOFI|2026-11-20": {
+"call": {
+"strike": 17.0,
+"bid": 0.66,
+"ask": 0.69,
+"volume": null
+},
+"put": {
+"strike": 12.5,
+"bid": 0.04,
+"ask": 0.05,
+"volume": null
+}
+},
+"RGTI|2026-11-20": {
+"call": {
+"strike": 14.0,
+"bid": 0.18,
+"ask": 0.22,
+"volume": null
+},
+"put": {
+"strike": 9.0,
+"bid": 0.2,
+"ask": 0.24,
+"volume": null
+}
+},
+"SOUN|2026-11-20": {
+"call": {
+"strike": 5.0,
+"bid": 0.11,
+"ask": 0.15,
+"volume": 324
+},
+"put": {
+"strike": 3.5,
+"bid": 0.09,
+"ask": 0.11,
+"volume": 2
+}
+},
+"SMR|2026-11-20": {
+"call": {
+"strike": 7.0,
+"bid": 0.11,
+"ask": 0.14,
+"volume": 350
+},
+"put": {
+"strike": 4.5,
+"bid": 0.09,
+"ask": 0.12,
+"volume": 5
+}
+},
+"LYFT|2026-11-20": {
+"call": {
+"strike": 19.0,
+"bid": 0.26,
+"ask": 0.37,
+"volume": 3
+},
+"put": {
+"strike": 13.5,
+"bid": 0.18,
+"ask": 0.75,
+"volume": 0
+}
+},
+"HBAN|2026-11-20": {
+"call": {
+"strike": 17.0,
+"bid": 0.0,
+"ask": 0.1,
+"volume": 2
+},
+"put": {
+"strike": 15.0,
+"bid": 0.1,
+"ask": 0.15,
+"volume": 12
+}
+},
+"RF|2026-11-20": {
+"call": {
+"strike": 30.0,
+"bid": 0.1,
+"ask": 0.25,
+"volume": 5
+},
+"put": {
+"strike": 27.0,
+"bid": 0.15,
+"ask": 0.25,
+"volume": 4
+}
+}
+}
