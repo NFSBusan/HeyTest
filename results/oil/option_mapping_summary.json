@@ -1,0 +1,27 @@
+{
+  "world": {
+    "w0": 70.0,
+    "mu": 4.0,
+    "s0_sigmas": 2.0,
+    "half_life_days": 30,
+    "spread_daily_sd": 0.6,
+    "wti_ann_vol": 0.35,
+    "phi": 0.5,
+    "rho": 0.0,
+    "horizon_days": 21,
+    "cost_frac": 0.05,
+    "priced_in": 0.0,
+    "s0": 9.582312503183749,
+    "stationary_sd": 2.7911562515918744
+  },
+  "futures_spread_benchmark_not_tradeable": {
+    "exp_pnl": 2.145996077263675,
+    "pnl_sd": 2.1996557858079466,
+    "trades_for_t2": 4.202537471831418
+  },
+  "share_of_sweep_cells_with_positive_ev": {
+    "spread_put_atm": 0.515625,
+    "wti_call_atm": 0.21484375,
+    "wti_call_plus_brent_put": 0.296875
+  }
+}

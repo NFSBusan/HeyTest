@@ -1,0 +1,28 @@
+[A] skipped: data/oil/DCOILBRENTEU.csv / data/oil/DCOILWTICO.csv not found. Download FRED series DCOILBRENTEU and DCOILWTICO as CSV and rerun.
+[B] base world: {'w0': 70.0, 'mu': 4.0, 's0_sigmas': 2.0, 'half_life_days': 30, 'spread_daily_sd': 0.6, 'wti_ann_vol': 0.35, 'phi': 0.5, 'rho': 0.0, 'horizon_days': 21, 'cost_frac': 0.05, 'priced_in': 0.0}
+              structure  premium  exp_pnl  exp_pnl_pct_of_debit  max_loss  pnl_sd  p_profit  trades_for_t2
+           wti_call_atm    2.855    0.426                 0.149     2.998   4.558     0.395        433.554
+    wti_call_spread_0_1    2.259    0.205                 0.091     2.432   2.970     0.425        798.067
+          brent_put_atm    2.855    0.426                 0.149     2.998   4.538     0.395        453.657
+   brent_put_spread_0_1    2.259    0.205                 0.091     2.432   2.963     0.426        817.776
+wti_call_plus_brent_put    5.711    0.852                 0.149     5.996   4.314     0.505         99.744
+         spread_put_atm    0.878    1.417                 1.614     0.921   1.901     0.710          7.198
+  spread_put_spread_0_1    0.694    0.740                 1.065     0.747   0.882     0.737          5.715
+[B] futures spread reference: {'exp_pnl': 2.146, 'pnl_sd': 2.2, 'trades_for_t2': 4.203}
+[B] EV % of debit at 2-sd entry, by phi (rows) and half-life days (cols):
+half_life_days                 10    30    90    250
+structure               phi                         
+wti_call_atm            0.00  -5.0  -5.0  -5.0  -5.0
+                        0.25   6.3   4.8   1.5  -0.9
+                        0.50  18.3  14.9   8.1   3.1
+                        1.00  43.5  35.5  20.9  10.8
+wti_call_plus_brent_put 0.00  19.5  15.7   8.4   3.2
+                        0.25  18.6  15.1   8.2   3.1
+                        0.50  18.3  14.9   8.1   3.1
+                        1.00  19.5  15.7   8.4   3.2
+[B] EV % of debit vs share of convergence already priced in (2-sd entry, phi=0.5, HL=30d):
+priced_in                  0.0   0.5  0.9  1.0
+structure                                     
+spread_put_atm           161.4  67.8  7.7 -5.0
+wti_call_atm              14.9   4.7 -3.1 -5.0
+wti_call_plus_brent_put   14.9   4.7 -3.1 -5.0
