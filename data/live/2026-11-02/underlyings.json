@@ -293,5 +293,50 @@
 "last": 13.73,
 "prior_close": null,
 "iv": 0.5881
+},
+"KDP": {
+"last": 36.47,
+"prior_close": null,
+"iv": 0.3381
+},
+"HPE": {
+"last": 51.32,
+"prior_close": 55.09,
+"iv": 0.8
+},
+"APLD": {
+"last": 16.395,
+"prior_close": null,
+"iv": 1.0138
+},
+"KGC": {
+"last": 20.58,
+"prior_close": 20.13,
+"iv": 0.4591
+},
+"LYFT": {
+"last": 16.62,
+"prior_close": null,
+"iv": 0.6486
+},
+"ASTS": {
+"last": 36.675,
+"prior_close": 40.97,
+"iv": 0.976
+},
+"CVE": {
+"last": 30.885,
+"prior_close": 32.73,
+"iv": 0.4484
+},
+"KHC": {
+"last": 24.82,
+"prior_close": null,
+"iv": 0.3258
+},
+"WULF": {
+"last": 11.035,
+"prior_close": 11.73,
+"iv": 1.2371
 }
 }
