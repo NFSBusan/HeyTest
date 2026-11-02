@@ -266,3 +266,6 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
             -$1,046; biggest losers RBLX (-$193, stock fell below the 44 put), SNAP (-$181), QBTS (-$110).
             Stress after the hedge reset 18.5%, but adding SOUN or SMR would exceed 20%, so nothing added.
             Last entry day for Nov 20; from Nov 2 new entries use the Dec 18 expiry.
+2026-11-02  First Dec 18 entries: NVO, LYFT, MARA, JD, TTD, SOUN (scaled to 0.44x to stay under the 20% stress
+            budget; BIDU rounded to 0 contracts, HBAN not tradeable; only the top 8 candidates were quoted).
+            24 open positions, option margin $18.9k, equity $98,787 (-1.2%), stress 19%.
