@@ -269,3 +269,5 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
 2026-11-02  First Dec 18 entries: NVO, LYFT, MARA, JD, TTD, SOUN (scaled to 0.44x to stay under the 20% stress
             budget; BIDU rounded to 0 contracts, HBAN not tradeable; only the top 8 candidates were quoted).
             24 open positions, option margin $18.9k, equity $98,787 (-1.2%), stress 19%.
+2026-11-03  Paper run: book stress 19.6% (budget 20%), no candidates quoted, nothing added. Equity $98,489
+            (-1.5%, hedge P&L only until Friday's option mark). KVUE returned no IBKR data two days running.
