@@ -1,0 +1,102 @@
+{
+"RIVN": {
+"last": 13.28,
+"prior_close": 13.19,
+"iv": 0.5973
+},
+"CRWV": {
+"last": 53.1,
+"prior_close": null,
+"iv": 1.1236
+},
+"OPEN": {
+"last": 1.75,
+"prior_close": null,
+"iv": 1.1376
+},
+"BMNR": {
+"last": 20.45,
+"prior_close": null,
+"iv": 0.7767
+},
+"OKLO": {
+"last": 23.31,
+"prior_close": null,
+"iv": 0.9103
+},
+"NBIS": {
+"last": 151.33,
+"prior_close": 141.39,
+"iv": 1.0874
+},
+"SOFI": {
+"last": 16.71,
+"prior_close": 16.6,
+"iv": 0.4966
+},
+"HIMS": {
+"last": 25.57,
+"prior_close": 25.24,
+"iv": 0.9245
+},
+"RGTI": {
+"last": 11.025,
+"prior_close": 10.67,
+"iv": 0.838
+},
+"SNAP": {
+"last": 5.54,
+"prior_close": null,
+"iv": 0.8723
+},
+"MARA": {
+"last": 7.09,
+"prior_close": 6.43,
+"iv": 1.069
+},
+"HOOD": {
+"last": 85.07,
+"prior_close": 83.84,
+"iv": 0.6758
+},
+"AAL": {
+"last": 12.82,
+"prior_close": 13.08,
+"iv": 0.487
+},
+"SOUN": {
+"last": 4.125,
+"prior_close": null,
+"iv": 0.8231
+},
+"MRVL": {
+"last": 170.53,
+"prior_close": 171.41,
+"iv": 0.7536
+},
+"CRCL": {
+"last": 75.62,
+"prior_close": null,
+"iv": 0.8282
+},
+"IREN": {
+"last": 24.295,
+"prior_close": null,
+"iv": 1.2591
+},
+"IONQ": {
+"last": 29.81,
+"prior_close": null,
+"iv": 0.8476
+},
+"QBTS": {
+"last": 10.27,
+"prior_close": 10.09,
+"iv": 0.925
+},
+"ANET": {
+"last": 169.07,
+"prior_close": null,
+"iv": 0.6255
+}
+}
