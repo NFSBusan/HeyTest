@@ -272,3 +272,5 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
 2026-11-03  Paper run: book stress 19.6% (budget 20%), no candidates quoted, nothing added. Equity $98,489
             (-1.5%, hedge P&L only until Friday's option mark). KVUE returned no IBKR data two days running.
 2026-11-04  Paper run: book stress 21.5% (> 20%), no candidates quoted, nothing added.
+2026-11-05  Paper run: broad sell-off (HOOD below its 80 put, QBTS near its 9 put, SNDK -20%, DELL -13%).
+            Book stress 19.3% (budget 20%), no room, nothing added.
