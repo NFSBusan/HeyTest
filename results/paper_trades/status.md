@@ -1,9 +1,9 @@
 # Paper account status, 2026-11-06
 
 Equity $99,133 (start $100,000; -0.87%). Realized $0, open P&L $-867 (options marked at mid on Fridays).
-Open positions 24; option margin $18,861 (19%), stock-hedge margin $19,310. Stress loss $18,167 (18% of equity; budget 20%).
+Open positions 25; option margin $19,245 (19%), stock-hedge margin $19,400. Stress loss $18,779 (19% of equity; budget 20%).
 
-Today: no quote for BIDU|2026-12-18: skipped today; no quote for HBAN|2026-12-18: skipped today; no quote for PDD|2026-12-18: skipped today; no quote for RF|2026-12-18: skipped today; no quote for HIMS|2026-12-18: skipped today; no quote for HPE|2026-12-18: skipped today; no quote for FCX|2026-12-18: skipped today; no quote for CRWV|2026-12-18: skipped today; no quote for RIVN|2026-12-18: skipped today; no quote for HOOD|2026-12-18: skipped today; no quote for KEY|2026-12-18: skipped today; no quote for ASTS|2026-12-18: skipped today; no quote for GLW|2026-12-18: skipped today; no quote for BMNR|2026-12-18: skipped today; no quote for NBIS|2026-12-18: skipped today; no quote for JOBY|2026-12-18: skipped today; no quote for MP|2026-12-18: skipped today
+Today: no quote for HBAN|2026-12-18: skipped today; no quote for RF|2026-12-18: skipped today; no quote for HPE|2026-12-18: skipped today; no quote for FCX|2026-12-18: skipped today; no quote for CRWV|2026-12-18: skipped today; no quote for RIVN|2026-12-18: skipped today; no quote for HOOD|2026-12-18: skipped today; no quote for KEY|2026-12-18: skipped today; no quote for ASTS|2026-12-18: skipped today; no quote for GLW|2026-12-18: skipped today; no quote for BMNR|2026-12-18: skipped today; no quote for NBIS|2026-12-18: skipped today; no quote for JOBY|2026-12-18: skipped today; no quote for MP|2026-12-18: skipped today; new entries scaled to 0.44x to stay inside the 20% stress budget; entered HIMS 2026-12-18: 1x  sell 36C/19P, credit $125, margin $384, hedge +7 sh
 
 | stock | expiry | entered | contracts | call/put sold | credit | margin | hedge shares | open P&L |
 |---|---|---|---|---|---|---|---|---|
@@ -25,6 +25,7 @@ Today: no quote for BIDU|2026-12-18: skipped today; no quote for HBAN|2026-12-18
 | SNAP | 2026-11-20 | 2026-10-26 | 11 | 8C / 5P | $250 | $937 | -540 | $24 |
 | SOFI | 2026-11-20 | 2026-10-26 | 4 | 17C / 12.5P | $177 | $747 | +135 | $-71 |
 | TTD | 2026-11-20 | 2026-10-26 | 5 | 16.5C / 10.5P | $222 | $814 | -6 | $-33 |
+| HIMS | 2026-12-18 | 2026-11-06 | 1 | 36C / 19P | $125 | $384 | +7 | $-0 |
 | JD | 2026-12-18 | 2026-11-02 | 1 | 30C / 23P | $63 | $327 | +42 | $-50 |
 | LYFT | 2026-12-18 | 2026-11-02 | 2 | 21C / 13P | $78 | $410 | +14 | $27 |
 | MARA | 2026-12-18 | 2026-11-02 | 4 | 10C / 4P | $105 | $364 | +32 | $-5 |

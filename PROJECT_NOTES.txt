@@ -274,3 +274,7 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
 2026-11-04  Paper run: book stress 21.5% (> 20%), no candidates quoted, nothing added.
 2026-11-05  Paper run: broad sell-off (HOOD below its 80 put, QBTS near its 9 put, SNDK -20%, DELL -13%).
             Book stress 19.3% (budget 20%), no room, nothing added.
+2026-11-06  Second Friday mark + hedge reset. Equity $99,133 (-0.87%; week improved from -1.21% on Monday).
+            Worst: JD Nov (-$309, stock rallied above the 28 call), RBLX (-$224), JOBY (-$215); best CRCL (+$123),
+            NVO Nov (+$98). Stress 18.2% after the reset -> quoted BIDU/PDD/HIMS for Dec; only HIMS fit (1 contract).
+            25 open positions. Two weeks to Nov 20 expiry.

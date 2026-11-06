@@ -334,5 +334,47 @@
 "ask": 0.1,
 "volume": null
 }
+},
+"BIDU|2026-12-18": {
+"call": {
+"strike": 95,
+"bid": 1.23,
+"ask": 1.54,
+"volume": 149
+},
+"put": {
+"strike": 70,
+"bid": 1.27,
+"ask": 1.44,
+"volume": 427
+}
+},
+"PDD|2026-12-18": {
+"call": {
+"strike": 95,
+"bid": 0.93,
+"ask": 1.14,
+"volume": 80
+},
+"put": {
+"strike": 70,
+"bid": 0.6,
+"ask": 0.8,
+"volume": 52
+}
+},
+"HIMS|2026-12-18": {
+"call": {
+"strike": 36,
+"bid": 0.73,
+"ask": 0.81,
+"volume": 50
+},
+"put": {
+"strike": 19,
+"bid": 0.57,
+"ask": 0.63,
+"volume": 59
+}
 }
 }
