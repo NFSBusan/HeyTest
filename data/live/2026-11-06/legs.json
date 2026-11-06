@@ -1,0 +1,338 @@
+{
+"RIVN|2026-11-20": {
+"call": {
+"strike": 14.5,
+"bid": 0.26,
+"ask": 0.27,
+"volume": null
+},
+"put": {
+"strike": 10.0,
+"bid": 0.02,
+"ask": 0.03,
+"volume": null
+}
+},
+"NVO|2026-11-20": {
+"call": {
+"strike": 44.0,
+"bid": 0.12,
+"ask": 0.14,
+"volume": null
+},
+"put": {
+"strike": 35.0,
+"bid": 0.04,
+"ask": 0.07,
+"volume": null
+}
+},
+"TTD|2026-11-20": {
+"call": {
+"strike": 16.5,
+"bid": 0.17,
+"ask": 0.23,
+"volume": null
+},
+"put": {
+"strike": 10.5,
+"bid": 0.22,
+"ask": 0.3,
+"volume": null
+}
+},
+"SNAP|2026-11-20": {
+"call": {
+"strike": 8.0,
+"bid": 0.0,
+"ask": 0.06,
+"volume": null
+},
+"put": {
+"strike": 5.0,
+"bid": 0.24,
+"ask": 0.27,
+"volume": null
+}
+},
+"HIMS|2026-11-20": {
+"call": {
+"strike": 36.0,
+"bid": 0.25,
+"ask": 0.29,
+"volume": null
+},
+"put": {
+"strike": 21.0,
+"bid": 0.54,
+"ask": 0.6,
+"volume": null
+}
+},
+"HOOD|2026-11-20": {
+"call": {
+"strike": 115.0,
+"bid": 0.03,
+"ask": 0.05,
+"volume": null
+},
+"put": {
+"strike": 80.0,
+"bid": 4.1,
+"ask": 4.15,
+"volume": null
+}
+},
+"CRCL|2026-11-20": {
+"call": {
+"strike": 110.0,
+"bid": 0.0,
+"ask": 0.06,
+"volume": null
+},
+"put": {
+"strike": 70.0,
+"bid": 5.15,
+"ask": 5.45,
+"volume": null
+}
+},
+"BSX|2026-11-20": {
+"call": {
+"strike": 52.0,
+"bid": 0.0,
+"ask": 0.25,
+"volume": null
+},
+"put": {
+"strike": 40.0,
+"bid": 0.25,
+"ask": 0.45,
+"volume": null
+}
+},
+"BIDU|2026-11-20": {
+"call": {
+"strike": 88.0,
+"bid": 1.37,
+"ask": 1.57,
+"volume": null
+},
+"put": {
+"strike": 70.0,
+"bid": 0.44,
+"ask": 0.57,
+"volume": null
+}
+},
+"RBLX|2026-11-20": {
+"call": {
+"strike": 65.0,
+"bid": 0.02,
+"ask": 0.05,
+"volume": null
+},
+"put": {
+"strike": 44.0,
+"bid": 0.63,
+"ask": 0.74,
+"volume": null
+}
+},
+"JOBY|2026-11-20": {
+"call": {
+"strike": 5.5,
+"bid": 0.5,
+"ask": 0.55,
+"volume": null
+},
+"put": {
+"strike": 4.0,
+"bid": 0.0,
+"ask": 0.03,
+"volume": null
+}
+},
+"MARA|2026-11-20": {
+"call": {
+"strike": 8.5,
+"bid": 0.09,
+"ask": 0.1,
+"volume": null
+},
+"put": {
+"strike": 5.5,
+"bid": 0.26,
+"ask": 0.27,
+"volume": null
+}
+},
+"CIFR|2026-11-20": {
+"call": {
+"strike": 11.0,
+"bid": 0.04,
+"ask": 0.06,
+"volume": null
+},
+"put": {
+"strike": 6.0,
+"bid": 0.48,
+"ask": 0.54,
+"volume": null
+}
+},
+"JD|2026-11-20": {
+"call": {
+"strike": 28.0,
+"bid": 1.64,
+"ask": 1.85,
+"volume": null
+},
+"put": {
+"strike": 23.0,
+"bid": 0.01,
+"ask": 0.04,
+"volume": null
+}
+},
+"PDD|2026-11-20": {
+"call": {
+"strike": 86.0,
+"bid": 1.64,
+"ask": 2.06,
+"volume": null
+},
+"put": {
+"strike": 70.0,
+"bid": 0.14,
+"ask": 0.72,
+"volume": null
+}
+},
+"QBTS|2026-11-20": {
+"call": {
+"strike": 14.5,
+"bid": 0.13,
+"ask": 0.18,
+"volume": null
+},
+"put": {
+"strike": 9.0,
+"bid": 0.29,
+"ask": 0.33,
+"volume": null
+}
+},
+"SOFI|2026-11-20": {
+"call": {
+"strike": 17.0,
+"bid": 0.37,
+"ask": 0.38,
+"volume": null
+},
+"put": {
+"strike": 12.5,
+"bid": 0.04,
+"ask": 0.06,
+"volume": null
+}
+},
+"RGTI|2026-11-20": {
+"call": {
+"strike": 14.0,
+"bid": 0.29,
+"ask": 0.39,
+"volume": null
+},
+"put": {
+"strike": 9.0,
+"bid": 0.16,
+"ask": 0.19,
+"volume": null
+}
+},
+"NVO|2026-12-18": {
+"call": {
+"strike": 47.5,
+"bid": 0.15,
+"ask": 0.17,
+"volume": null
+},
+"put": {
+"strike": 35.0,
+"bid": 0.2,
+"ask": 0.22,
+"volume": null
+}
+},
+"LYFT|2026-12-18": {
+"call": {
+"strike": 21.0,
+"bid": 0.12,
+"ask": 0.2,
+"volume": null
+},
+"put": {
+"strike": 13.0,
+"bid": 0.08,
+"ask": 0.15,
+"volume": null
+}
+},
+"MARA|2026-12-18": {
+"call": {
+"strike": 10.0,
+"bid": 0.12,
+"ask": 0.13,
+"volume": null
+},
+"put": {
+"strike": 4.0,
+"bid": 0.13,
+"ask": 0.14,
+"volume": null
+}
+},
+"JD|2026-12-18": {
+"call": {
+"strike": 30.0,
+"bid": 1.21,
+"ask": 1.28,
+"volume": null
+},
+"put": {
+"strike": 23.0,
+"bid": 0.03,
+"ask": 0.13,
+"volume": null
+}
+},
+"TTD|2026-12-18": {
+"call": {
+"strike": 17.5,
+"bid": 0.2,
+"ask": 0.35,
+"volume": null
+},
+"put": {
+"strike": 10.0,
+"bid": 0.25,
+"ask": 0.28,
+"volume": null
+}
+},
+"SOUN|2026-12-18": {
+"call": {
+"strike": 6.0,
+"bid": 0.05,
+"ask": 0.07,
+"volume": null
+},
+"put": {
+"strike": 3.0,
+"bid": 0.05,
+"ask": 0.1,
+"volume": null
+}
+}
+}
