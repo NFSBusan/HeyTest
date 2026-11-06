@@ -198,5 +198,100 @@
 "last": 35.53,
 "prior_close": null,
 "iv": 0.6487
+},
+"BBAI": {
+"last": 2.185,
+"prior_close": null,
+"iv": 0.7728
+},
+"KEY": {
+"last": 20.98,
+"prior_close": null,
+"iv": 0.2679
+},
+"RF": {
+"last": 28.43,
+"prior_close": null,
+"iv": 0.2708
+},
+"CCL": {
+"last": 29.65,
+"prior_close": 29.44,
+"iv": 0.4398
+},
+"SMR": {
+"last": 4.93,
+"prior_close": null,
+"iv": 0.8971
+},
+"HBAN": {
+"last": 15.56,
+"prior_close": null,
+"iv": 0.2837
+},
+"DELL": {
+"last": 332.44,
+"prior_close": 316.91,
+"iv": 0.9668
+},
+"QUBT": {
+"last": 6.395,
+"prior_close": null,
+"iv": 0.8222
+},
+"TEM": {
+"last": 75.81,
+"prior_close": null,
+"iv": 0.7054
+},
+"AFRM": {
+"last": 67.4,
+"prior_close": null,
+"iv": 0.6314
+},
+"FIG": {
+"last": 18.66,
+"prior_close": null,
+"iv": 0.6806
+},
+"CIFR": {
+"last": 6.51,
+"prior_close": null,
+"iv": 1.2456
+},
+"JD": {
+"last": 29.16,
+"prior_close": null,
+"iv": 0.4071
+},
+"NEM": {
+"last": 121.04,
+"prior_close": null,
+"iv": 0.421
+},
+"NIO": {
+"last": 3.37,
+"prior_close": 3.2,
+"iv": 0.5506
+},
+"GLW": {
+"last": 106.62,
+"prior_close": null,
+"iv": 0.7234
+},
+"B": {
+"last": 40.41,
+"prior_close": null,
+"iv": 0.4555
+},
+"SNDK": {
+"last": 836.55,
+"prior_close": 806.43,
+"iv": 1.0228
+},
+"RKT": {
+"last": 15.12,
+"prior_close": null,
+"iv": 0.5269
 }
 }
