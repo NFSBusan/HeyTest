@@ -1,0 +1,183 @@
+{
+ "date": "2026-11-09",
+ "expiry_for_new": "2026-12-18",
+ "iv_rv_cutoff": 0.91,
+ "legs": [
+  {
+   "key": "BIDU|2026-12-18",
+   "kind": "new",
+   "ticker": "BIDU",
+   "expiry": "2026-12-18",
+   "spot": 81.35,
+   "iv": 0.4959,
+   "iv_rv": 1.71,
+   "call_target": 95.67,
+   "put_target": 69.18
+  },
+  {
+   "key": "NIO|2026-12-18",
+   "kind": "new",
+   "ticker": "NIO",
+   "expiry": "2026-12-18",
+   "spot": 3.43,
+   "iv": 0.5403,
+   "iv_rv": 1.42,
+   "call_target": 4.09,
+   "put_target": 2.87
+  },
+  {
+   "key": "RF|2026-12-18",
+   "kind": "new",
+   "ticker": "RF",
+   "expiry": "2026-12-18",
+   "spot": 29.12,
+   "iv": 0.2399,
+   "iv_rv": 1.13,
+   "call_target": 31.5,
+   "put_target": 26.92
+  },
+  {
+   "key": "HBAN|2026-12-18",
+   "kind": "new",
+   "ticker": "HBAN",
+   "expiry": "2026-12-18",
+   "spot": 15.98,
+   "iv": 0.2577,
+   "iv_rv": 1.12,
+   "call_target": 17.38,
+   "put_target": 14.69
+  },
+  {
+   "key": "RIVN|2026-12-18",
+   "kind": "new",
+   "ticker": "RIVN",
+   "expiry": "2026-12-18",
+   "spot": 14.11,
+   "iv": 0.561,
+   "iv_rv": 1.04,
+   "call_target": 16.95,
+   "put_target": 11.75
+  },
+  {
+   "key": "HPE|2026-12-18",
+   "kind": "new",
+   "ticker": "HPE",
+   "expiry": "2026-12-18",
+   "spot": 48.07,
+   "iv": 0.8172,
+   "iv_rv": 1.01,
+   "call_target": 62.79,
+   "put_target": 36.8
+  },
+  {
+   "key": "CRWV|2026-12-18",
+   "kind": "new",
+   "ticker": "CRWV",
+   "expiry": "2026-12-18",
+   "spot": 49.24,
+   "iv": 1.1792,
+   "iv_rv": 0.99,
+   "call_target": 72.4,
+   "put_target": 33.49
+  },
+  {
+   "key": "HOOD|2026-12-18",
+   "kind": "new",
+   "ticker": "HOOD",
+   "expiry": "2026-12-18",
+   "spot": 84.44,
+   "iv": 0.6785,
+   "iv_rv": 0.98,
+   "call_target": 105.41,
+   "put_target": 67.64
+  },
+  {
+   "key": "FCX|2026-12-18",
+   "kind": "new",
+   "ticker": "FCX",
+   "expiry": "2026-12-18",
+   "spot": 63.05,
+   "iv": 0.4917,
+   "iv_rv": 0.98,
+   "call_target": 74.04,
+   "put_target": 53.69
+  },
+  {
+   "key": "JOBY|2026-12-18",
+   "kind": "new",
+   "ticker": "JOBY",
+   "expiry": "2026-12-18",
+   "spot": 6.34,
+   "iv": 0.6598,
+   "iv_rv": 0.96,
+   "call_target": 7.87,
+   "put_target": 5.11
+  },
+  {
+   "key": "BMNR|2026-12-18",
+   "kind": "new",
+   "ticker": "BMNR",
+   "expiry": "2026-12-18",
+   "spot": 18.98,
+   "iv": 0.8063,
+   "iv_rv": 0.96,
+   "call_target": 24.7,
+   "put_target": 14.58
+  },
+  {
+   "key": "KEY|2026-12-18",
+   "kind": "new",
+   "ticker": "KEY",
+   "expiry": "2026-12-18",
+   "spot": 21.51,
+   "iv": 0.2513,
+   "iv_rv": 0.96,
+   "call_target": 23.35,
+   "put_target": 19.81
+  },
+  {
+   "key": "MP|2026-12-18",
+   "kind": "new",
+   "ticker": "MP",
+   "expiry": "2026-12-18",
+   "spot": 37.96,
+   "iv": 0.6525,
+   "iv_rv": 0.95,
+   "call_target": 46.98,
+   "put_target": 30.67
+  },
+  {
+   "key": "CRCL|2026-12-18",
+   "kind": "new",
+   "ticker": "CRCL",
+   "expiry": "2026-12-18",
+   "spot": 68.08,
+   "iv": 0.7306,
+   "iv_rv": 0.92,
+   "call_target": 86.44,
+   "put_target": 53.62
+  },
+  {
+   "key": "SHOP|2026-12-18",
+   "kind": "new",
+   "ticker": "SHOP",
+   "expiry": "2026-12-18",
+   "spot": 152.07,
+   "iv": 0.5222,
+   "iv_rv": 0.91,
+   "call_target": 180.37,
+   "put_target": 128.21
+  },
+  {
+   "key": "NBIS|2026-12-18",
+   "kind": "new",
+   "ticker": "NBIS",
+   "expiry": "2026-12-18",
+   "spot": 142.86,
+   "iv": 1.1406,
+   "iv_rv": 0.91,
+   "call_target": 207.41,
+   "put_target": 98.4
+  }
+ ]
+}
