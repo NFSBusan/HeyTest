@@ -278,3 +278,8 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
             Worst: JD Nov (-$309, stock rallied above the 28 call), RBLX (-$224), JOBY (-$215); best CRCL (+$123),
             NVO Nov (+$98). Stress 18.2% after the reset -> quoted BIDU/PDD/HIMS for Dec; only HIMS fit (1 contract).
             25 open positions. Two weeks to Nov 20 expiry.
+2026-11-09  Paper run: book stress 20.1% (at budget), no candidates quoted, nothing added. Equity $99,197.
+2026-11-10  Paper run: stress 17.5% -> quoted top 5 for Dec 18. Entered BIDU 1x 95C/70P ($201 credit) and
+            RIVN 5x 16C/11P ($248). NIO put had no quote, RF zero volume, HBAN call spread too wide.
+            HIMS fell ~20% today (18.84; Dec short put is 19, Nov 21). 27 open positions, equity $98,974
+            (-1.0%), stress 18.3%.
