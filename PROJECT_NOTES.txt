@@ -283,3 +283,7 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
             RIVN 5x 16C/11P ($248). NIO put had no quote, RF zero volume, HBAN call spread too wide.
             HIMS fell ~20% today (18.84; Dec short put is 19, Nov 21). 27 open positions, equity $98,974
             (-1.0%), stress 18.3%.
+2026-11-11  Paper run: stress 18.3% -> quoted Dec 18 legs for RF/HBAN/HPE/KEY/JOBY/MP. Entered HBAN 4x 17C/15P ($100),
+            HPE 1x 65C/39P ($160), JOBY 11x 7C/5P ($269), MP 2x 45C/30P ($205), scaled to fit the budget.
+            RF and KEY were not tradeable (wide spreads / no volume). Big moves today: CRWV +24% (two days),
+            SNDK +15%, WDC +8%. 31 open positions, equity $98,070 (-1.9%, hedge P&L only until Friday), stress 19.8%.
