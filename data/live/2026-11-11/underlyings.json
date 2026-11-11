@@ -238,5 +238,105 @@
 "last": 6.155,
 "prior_close": null,
 "iv": 0.7086
+},
+"TEM": {
+"last": 79.59,
+"prior_close": 80.54,
+"iv": 0.8057
+},
+"AFRM": {
+"last": 68.26,
+"prior_close": null,
+"iv": 0.5501
+},
+"FIG": {
+"last": 18.95,
+"prior_close": null,
+"iv": 0.617
+},
+"CIFR": {
+"last": 7.105,
+"prior_close": null,
+"iv": 1.1513
+},
+"JD": {
+"last": 27.84,
+"prior_close": 28.31,
+"iv": 0.3914
+},
+"NEM": {
+"last": 118.68,
+"prior_close": null,
+"iv": 0.4113
+},
+"NIO": {
+"last": 3.25,
+"prior_close": null,
+"iv": 0.5837
+},
+"GLW": {
+"last": 120.89,
+"prior_close": null,
+"iv": 0.6024
+},
+"B": {
+"last": 39.12,
+"prior_close": null,
+"iv": 0.4039
+},
+"SNDK": {
+"last": 988.89,
+"prior_close": 859.99,
+"iv": 0.7274
+},
+"RKT": {
+"last": 14.36,
+"prior_close": null,
+"iv": 0.5013
+},
+"KDP": {
+"last": 38.13,
+"prior_close": 37.59,
+"iv": 0.2543
+},
+"HPE": {
+"last": 50.53,
+"prior_close": 47.93,
+"iv": 0.7855
+},
+"APLD": {
+"last": 17.865,
+"prior_close": 16.68,
+"iv": 0.8694
+},
+"KGC": {
+"last": 21.395,
+"prior_close": null,
+"iv": 0.4731
+},
+"LYFT": {
+"last": 17.33,
+"prior_close": 17.02,
+"iv": 0.4444
+},
+"ASTS": {
+"last": 35.63,
+"prior_close": 33.69,
+"iv": 0.9107
+},
+"CVE": {
+"last": 28.32,
+"prior_close": 27.67,
+"iv": 0.3599
+},
+"KHC": {
+"last": 24.25,
+"prior_close": 24.24,
+"iv": 0.2853
+},
+"WULF": {
+"last": 13.365,
+"prior_close": 12.56,
+"iv": 0.9777
 }
 }
