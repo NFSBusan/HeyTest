@@ -88,5 +88,95 @@
 "last": 30.93,
 "prior_close": 34.06,
 "iv": 0.7954
+},
+"QBTS": {
+"last": 9.93,
+"prior_close": null,
+"iv": 0.7977
+},
+"ANET": {
+"last": 205.5,
+"prior_close": 196.68,
+"iv": 0.5355
+},
+"SMCI": {
+"last": 27.28,
+"prior_close": 30.43,
+"iv": 0.742
+},
+"RKLB": {
+"last": 64.49,
+"prior_close": null,
+"iv": 0.7248
+},
+"RIOT": {
+"last": 17.885,
+"prior_close": 18.28,
+"iv": 0.9272
+},
+"BE": {
+"last": 202.11,
+"prior_close": 209.47,
+"iv": 0.8825
+},
+"APH": {
+"last": 80.31,
+"prior_close": null,
+"iv": 0.4702
+},
+"SHOP": {
+"last": 146.94,
+"prior_close": null,
+"iv": 0.5313
+},
+"FCX": {
+"last": 60.83,
+"prior_close": null,
+"iv": 0.4667
+},
+"NU": {
+"last": 11.86,
+"prior_close": null,
+"iv": 0.5396
+},
+"VRT": {
+"last": 208.86,
+"prior_close": 206.51,
+"iv": 0.6219
+},
+"LRCX": {
+"last": 232.05,
+"prior_close": 235.88,
+"iv": 0.6154
+},
+"WDC": {
+"last": 309.33,
+"prior_close": 313.31,
+"iv": 0.7094
+},
+"BSX": {
+"last": 44.19,
+"prior_close": 45.13,
+"iv": 0.3778
+},
+"JOBY": {
+"last": 5.36,
+"prior_close": null,
+"iv": 0.6499
+},
+"BIDU": {
+"last": 77.65,
+"prior_close": 79.76,
+"iv": 0.4946
+},
+"TTD": {
+"last": 15.61,
+"prior_close": 15.98,
+"iv": 0.5549
+},
+"CMG": {
+"last": 35.27,
+"prior_close": 36.64,
+"iv": 0.3424
 }
 }
