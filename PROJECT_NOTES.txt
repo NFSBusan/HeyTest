@@ -287,3 +287,6 @@ The capped-risk iron condor version did not work, so the hedge is what controls 
             HPE 1x 65C/39P ($160), JOBY 11x 7C/5P ($269), MP 2x 45C/30P ($205), scaled to fit the budget.
             RF and KEY were not tradeable (wide spreads / no volume). Big moves today: CRWV +24% (two days),
             SNDK +15%, WDC +8%. 31 open positions, equity $98,070 (-1.9%, hedge P&L only until Friday), stress 19.8%.
+2026-11-12  Paper run: broad down day (NBIS -18%, IONQ/SMCI -9%, CRWV -8%). Book stress 21.1% (> 20%), no
+            candidates quoted, nothing added. Equity $97,541 (-2.5%, hedge P&L only until Friday's mark).
+            JD Nov now -$687 on a $139 credit (~4.9x) and JOBY Nov -$678 on $237 (~2.9x).
