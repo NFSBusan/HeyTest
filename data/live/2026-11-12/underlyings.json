@@ -178,5 +178,95 @@
 "last": 35.27,
 "prior_close": 36.64,
 "iv": 0.3424
+},
+"NVO": {
+"last": 40.51,
+"prior_close": 41.09,
+"iv": 0.3118
+},
+"RBLX": {
+"last": 51.46,
+"prior_close": 52.61,
+"iv": 0.5965
+},
+"PDD": {
+"last": 77.3,
+"prior_close": 79.01,
+"iv": 0.4267
+},
+"MP": {
+"last": 38.03,
+"prior_close": null,
+"iv": 0.6368
+},
+"BBAI": {
+"last": 2.105,
+"prior_close": null,
+"iv": 0.7351
+},
+"KEY": {
+"last": 21.3,
+"prior_close": null,
+"iv": 0.2494
+},
+"RF": {
+"last": 28.53,
+"prior_close": null,
+"iv": 0.232
+},
+"CCL": {
+"last": 29.4,
+"prior_close": null,
+"iv": 0.4163
+},
+"SMR": {
+"last": 4.915,
+"prior_close": null,
+"iv": 0.8696
+},
+"HBAN": {
+"last": 15.73,
+"prior_close": null,
+"iv": 0.2538
+},
+"DELL": {
+"last": 369.17,
+"prior_close": 373.68,
+"iv": 0.8697
+},
+"QUBT": {
+"last": 5.815,
+"prior_close": 6.17,
+"iv": 0.6857
+},
+"TEM": {
+"last": 75.54,
+"prior_close": null,
+"iv": 0.7996
+},
+"AFRM": {
+"last": 65.75,
+"prior_close": 67.84,
+"iv": 0.5573
+},
+"FIG": {
+"last": 18.73,
+"prior_close": null,
+"iv": 0.6204
+},
+"CIFR": {
+"last": 7.07,
+"prior_close": 7.11,
+"iv": 1.2182
+},
+"JD": {
+"last": 27.39,
+"prior_close": 27.85,
+"iv": 0.3951
+},
+"NEM": {
+"last": 113.44,
+"prior_close": null,
+"iv": 0.4029
 }
 }
